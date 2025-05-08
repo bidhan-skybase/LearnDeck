@@ -1,0 +1,130 @@
+﻿@model IEnumerable<Ghayal_Bhaag.Models.Book>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+@using (Html.BeginForm())
+{
+    <p>
+
+        @Html.TextBox("searchTitle") : Book name 
+        <br />
+        @Html.TextBox("searchDescription") : Book descriptin
+        <br />
+        @Html.TextBox("searchISBN") : Book ISBN
+        <br />
+        <input type = "submit" value ="Search" />
+    </p>
+}
+
+@if (User.IsInRole("Admin"))
+{
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.title)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ISBN)
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">@Html.DisplayNameFor(model => model.DateReleased)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParm"]">@Html.DisplayNameFor(model => model.price)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.publisher)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.genre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.physical_access)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.on_sale)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.new_arrival)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.stock)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.language)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.format)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ISBN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateReleased)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.publisher)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.genre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.physical_access)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.on_sale)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.new_arrival)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.stock)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.language)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.format)
+                </td>
+                <td>
+                    @if (User.IsInRole("Admin"))
+                    {
+					<a asp-action="Edit" asp-route-id="@item.BookId">Edit |</a> 
+                    }
+                <a asp-action="Details" asp-route-id="@item.BookId">Details</a> |
+                    @if (User.IsInRole("Admin"))
+                    {
+                <a asp-action="Delete" asp-route-id="@item.BookId">Delete</a>
+                    }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
