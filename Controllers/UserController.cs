@@ -70,7 +70,7 @@ namespace Ghayal_Bhaag.Controllers
                     return View(model);
                 }
 
-                var user = CreateUser();
+                var user = CreateUserRecord();
 
                 await _userStore.SetUserNameAsync(user, model.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, model.Email, CancellationToken.None);
@@ -92,7 +92,7 @@ namespace Ghayal_Bhaag.Controllers
         }
 
 
-        public IActionResult Edit(string id)
+        public IActionResult EditUser(string id)
         {
 
             var user = _context.Users.FirstOrDefault(u => u.Id == id);
@@ -114,7 +114,7 @@ namespace Ghayal_Bhaag.Controllers
             return View(editUser);
         }
 
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> DeleteUser(string id)
         {
 
             var user = _context.Users.FirstOrDefault(u => u.Id == id);
@@ -158,10 +158,10 @@ namespace Ghayal_Bhaag.Controllers
                 return RedirectToAction("Index");
             }
 
-            return RedirectToAction("Edit", new { id = user.Id });
+            return RedirectToAction("EditUser", new { id = user.Id });
         }
 
-        private ApplicationUser CreateUser()
+        private ApplicationUser CreateUserRecord()
         {
             try
             {

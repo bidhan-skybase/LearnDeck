@@ -19,13 +19,13 @@ namespace Ghayal_Bhaag.Controllers
         }
 
         // GET: Anouncements
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> GetAnnouncements()
         {
             return View(await _context.Anouncement.ToListAsync());
         }
 
         // GET: Anouncements/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> GetAnnouncementDetails(int? id)
         {
             if (id == null)
             {
@@ -43,7 +43,7 @@ namespace Ghayal_Bhaag.Controllers
         }
 
         // GET: Anouncements/Create
-        public IActionResult Create()
+        public IActionResult CreateAnnouncement()
         {
             return View();
         }
@@ -53,19 +53,19 @@ namespace Ghayal_Bhaag.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AnouncementId,title,description,StartDate,EndDate")] Anouncement anouncement)
+        public async Task<IActionResult> CreateAnnouncement([Bind("AnouncementId,title,description,StartDate,EndDate")] Anouncement anouncement)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(anouncement);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(GetAnnouncements));
             }
             return View(anouncement);
         }
 
         // GET: Anouncements/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> EditAnnouncement(int? id)
         {
             if (id == null)
             {
@@ -85,7 +85,7 @@ namespace Ghayal_Bhaag.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AnouncementId,title,description,StartDate,EndDate")] Anouncement anouncement)
+        public async Task<IActionResult> EditAnnouncement(int id, [Bind("AnouncementId,title,description,StartDate,EndDate")] Anouncement anouncement)
         {
             if (id != anouncement.AnouncementId)
             {
@@ -101,7 +101,7 @@ namespace Ghayal_Bhaag.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AnouncementExists(anouncement.AnouncementId))
+                    if (!CheckAnnouncementExists(anouncement.AnouncementId))
                     {
                         return NotFound();
                     }
@@ -110,13 +110,13 @@ namespace Ghayal_Bhaag.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(GetAnnouncements));
             }
             return View(anouncement);
         }
 
         // GET: Anouncements/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> DeleteAnnouncement(int? id)
         {
             if (id == null)
             {
@@ -136,7 +136,7 @@ namespace Ghayal_Bhaag.Controllers
         // POST: Anouncements/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> ConfirmDeletion(int id)
         {
             var anouncement = await _context.Anouncement.FindAsync(id);
             if (anouncement != null)
@@ -145,10 +145,10 @@ namespace Ghayal_Bhaag.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(GetAnnouncements));
         }
 
-        private bool AnouncementExists(int id)
+        private bool CheckAnnouncementExists(int id)
         {
             return _context.Anouncement.Any(e => e.AnouncementId == id);
         }

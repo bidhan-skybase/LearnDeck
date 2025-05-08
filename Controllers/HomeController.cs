@@ -15,7 +15,7 @@ namespace Ghayal_Bhaag.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult List()
         {
             return View();
         }

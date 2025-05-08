@@ -20,7 +20,7 @@ namespace Ghayal_Bhaag.Controllers
         }
 
         // GET: Books
-        public async Task<IActionResult> Index(string searchTitle, string searchDescription, string searchISBN, string sortOrder)
+        public async Task<IActionResult> ListBooks(string searchTitle, string searchDescription, string searchISBN, string sortOrder)
         {
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title" : "title_desc";
             ViewData["DateSortParm"] = sortOrder == "date" ? "date_desc" : "date";
@@ -77,7 +77,7 @@ namespace Ghayal_Bhaag.Controllers
         }
 
         // GET: Books/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> GetBookDetail(int? id)
         {
 
             //Check if the user has purchased this book
@@ -114,7 +114,7 @@ namespace Ghayal_Bhaag.Controllers
         }
 
         // GET: Books/Create
-        public IActionResult Create()
+        public IActionResult CreateBook()
         {
             return View();
         }
@@ -124,19 +124,19 @@ namespace Ghayal_Bhaag.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookId,title,ISBN,DateReleased,description,discount,publisher,genre,physical_access,on_sale,new_arrival,stock,price,language,format")] Book book)
+        public async Task<IActionResult> CreateBook([Bind("BookId,title,ISBN,DateReleased,description,discount,publisher,genre,physical_access,on_sale,new_arrival,stock,price,language,format")] Book book)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(book);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ListBooks));
             }
             return View(book);
         }
 
         // GET: Books/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> EditBook(int? id)
         {
             if (id == null)
             {
@@ -156,7 +156,7 @@ namespace Ghayal_Bhaag.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BookId,title,ISBN,DateReleased,description,discount,publisher,genre,physical_access,on_sale,new_arrival,stock,price,language,format")] Book book)
+        public async Task<IActionResult> EditBook(int id, [Bind("BookId,title,ISBN,DateReleased,description,discount,publisher,genre,physical_access,on_sale,new_arrival,stock,price,language,format")] Book book)
         {
             if (id != book.BookId)
             {
@@ -172,7 +172,7 @@ namespace Ghayal_Bhaag.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BookExists(book.BookId))
+                    if (!CheckBookExists(book.BookId))
                     {
                         return NotFound();
                     }
@@ -181,13 +181,13 @@ namespace Ghayal_Bhaag.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ListBooks));
             }
             return View(book);
         }
 
         // GET: Books/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> DeletBook(int? id)
         {
             if (id == null)
             {
@@ -207,7 +207,7 @@ namespace Ghayal_Bhaag.Controllers
         // POST: Books/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> ConfirmDeletion(int id)
         {
             var book = await _context.Book.FindAsync(id);
             if (book != null)
@@ -216,10 +216,10 @@ namespace Ghayal_Bhaag.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(ListBooks));
         }
 
-        private bool BookExists(int id)
+        private bool CheckBookExists(int id)
         {
             return _context.Book.Any(e => e.BookId == id);
         }

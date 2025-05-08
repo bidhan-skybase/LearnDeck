@@ -12,19 +12,19 @@ namespace Ghayal_Bhaag.Controllers
         {
             _roleManager = roleManager;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> ListRoles()
         {
             var roles = await _roleManager.Roles.ToListAsync();
             return View(roles);
         }
         [HttpPost]
-        public async Task<IActionResult> AddRole(string roleName)
+        public async Task<IActionResult> AddNewRole(string roleName)
         {
             if (roleName != null)
             {
                 await _roleManager.CreateAsync(new IdentityRole(roleName.Trim()));
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("ListRoles");
         }
     }
 }

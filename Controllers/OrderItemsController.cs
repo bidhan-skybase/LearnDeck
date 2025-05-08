@@ -19,14 +19,14 @@ namespace Ghayal_Bhaag.Controllers
         }
 
         // GET: OrderItems
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> GetOrderItems()
         {
             var applicationDbContext = _context.OrderItem.Include(o => o.Book).Include(o => o.Order);
             return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: OrderItems/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> GetOrderItemDetail(int? id)
         {
             if (id == null)
             {
@@ -46,7 +46,7 @@ namespace Ghayal_Bhaag.Controllers
         }
 
         // GET: OrderItems/Create
-        public IActionResult Create()
+        public IActionResult CreateOrderItem()
         {
             ViewData["BookId"] = new SelectList(_context.Book, "BookId", "BookId");
             ViewData["OrderId"] = new SelectList(_context.Set<Order>(), "OrderId", "OrderId");
@@ -58,13 +58,13 @@ namespace Ghayal_Bhaag.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OrderItemId,OrderId,BookId,Quantity,UnitPrice")] OrderItem orderItem)
+        public async Task<IActionResult> CreateOrderItem([Bind("OrderItemId,OrderId,BookId,Quantity,UnitPrice")] OrderItem orderItem)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(orderItem);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(GetOrderItems));
             }
             ViewData["BookId"] = new SelectList(_context.Book, "BookId", "BookId", orderItem.BookId);
             ViewData["OrderId"] = new SelectList(_context.Set<Order>(), "OrderId", "OrderId", orderItem.OrderId);
@@ -72,7 +72,7 @@ namespace Ghayal_Bhaag.Controllers
         }
 
         // GET: OrderItems/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> EditOrderItem(int? id)
         {
             if (id == null)
             {
@@ -94,7 +94,7 @@ namespace Ghayal_Bhaag.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("OrderItemId,OrderId,BookId,Quantity,UnitPrice")] OrderItem orderItem)
+        public async Task<IActionResult> EditOrderItem(int id, [Bind("OrderItemId,OrderId,BookId,Quantity,UnitPrice")] OrderItem orderItem)
         {
             if (id != orderItem.OrderItemId)
             {
@@ -110,7 +110,7 @@ namespace Ghayal_Bhaag.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OrderItemExists(orderItem.OrderItemId))
+                    if (!CheckOrderItemExists(orderItem.OrderItemId))
                     {
                         return NotFound();
                     }
@@ -119,7 +119,7 @@ namespace Ghayal_Bhaag.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(GetOrderItems));
             }
             ViewData["BookId"] = new SelectList(_context.Book, "BookId", "BookId", orderItem.BookId);
             ViewData["OrderId"] = new SelectList(_context.Set<Order>(), "OrderId", "OrderId", orderItem.OrderId);
@@ -127,7 +127,7 @@ namespace Ghayal_Bhaag.Controllers
         }
 
         // GET: OrderItems/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> DeleteOrderItem(int? id)
         {
             if (id == null)
             {
@@ -149,7 +149,7 @@ namespace Ghayal_Bhaag.Controllers
         // POST: OrderItems/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> ConfirmOrderItemDeletion(int id)
         {
             var orderItem = await _context.OrderItem.FindAsync(id);
             if (orderItem != null)
@@ -158,10 +158,10 @@ namespace Ghayal_Bhaag.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(GetOrderItems));
         }
 
-        private bool OrderItemExists(int id)
+        private bool CheckOrderItemExists(int id)
         {
             return _context.OrderItem.Any(e => e.OrderItemId == id);
         }

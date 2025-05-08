@@ -19,14 +19,14 @@ namespace Ghayal_Bhaag.Controllers
         }
 
         // GET: Bookmarks
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> ListBookMarks()
         {
             var applicationDbContext = _context.Bookmark.Include(b => b.User).Include(b => b.Book);
             return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Bookmarks/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> GetBookMarkDetails(int? id)
         {
             if (id == null)
             {
@@ -45,7 +45,7 @@ namespace Ghayal_Bhaag.Controllers
         }
 
         // GET: Bookmarks/Create
-        public IActionResult Create(int? id)
+        public IActionResult CreateBookMark(int? id)
         {
             if ( id != null)
             {
@@ -64,16 +64,16 @@ namespace Ghayal_Bhaag.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookmarkId,BookId,UserId")] Bookmark bookmark)
+        public async Task<IActionResult> CreateBookMark([Bind("BookmarkId,BookId,UserId")] Bookmark bookmark)
         {
             bookmark.CreatedDate = DateTime.Now;
             _context.Add(bookmark);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(ListBookMarks));
         }
 
         // GET: Bookmarks/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> EditBookMark(int? id)
         {
             if (id == null)
             {
@@ -94,7 +94,7 @@ namespace Ghayal_Bhaag.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BookmarkId,UserId,CreatedDate")] Bookmark bookmark)
+        public async Task<IActionResult> EditBookMark(int id, [Bind("BookmarkId,UserId,CreatedDate")] Bookmark bookmark)
         {
             if (id != bookmark.BookmarkId)
             {
@@ -110,7 +110,7 @@ namespace Ghayal_Bhaag.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BookmarkExists(bookmark.BookmarkId))
+                    if (!CheckBookMarkExists(bookmark.BookmarkId))
                     {
                         return NotFound();
                     }
@@ -119,14 +119,14 @@ namespace Ghayal_Bhaag.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ListBookMarks));
             }
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", bookmark.UserId);
             return View(bookmark);
         }
 
         // GET: Bookmarks/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> DeleteBookMark(int? id)
         {
             if (id == null)
             {
@@ -147,7 +147,7 @@ namespace Ghayal_Bhaag.Controllers
         // POST: Bookmarks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> ConfirmDeletion(int id)
         {
             var bookmark = await _context.Bookmark.FindAsync(id);
             if (bookmark != null)
@@ -156,10 +156,10 @@ namespace Ghayal_Bhaag.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(ListBookMarks));
         }
 
-        private bool BookmarkExists(int id)
+        private bool CheckBookMarkExists(int id)
         {
             return _context.Bookmark.Any(e => e.BookmarkId == id);
         }

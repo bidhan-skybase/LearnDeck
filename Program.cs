@@ -52,7 +52,7 @@ app.UseAuthorization();
 app.MapStaticAssets(); // Note: MapStaticAssets might be a typo or custom extension; ensure it's correct
 app.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}")
+        pattern: "{controller=Home}/{action=List}/{id?}")
     .WithStaticAssets(); // WithStaticAssets might be a typo or custom; verify its usage
 app.MapRazorPages();
 app.Run();

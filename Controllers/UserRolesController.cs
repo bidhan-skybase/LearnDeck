@@ -20,7 +20,7 @@ namespace Ghayal_Bhaag.Controllers
                 _roleManager = roleManager;
                 _userManager = userManager;
             }
-            public async Task<IActionResult> Index()
+            public async Task<IActionResult> GetRoles()
             {
                 var users = await _userManager.Users.ToListAsync();
                 var userRolesViewModel = new List<ApplicationUser>();
@@ -40,7 +40,7 @@ namespace Ghayal_Bhaag.Controllers
             {
                 return new List<string>(await _userManager.GetRolesAsync(user));
             }
-            public async Task<IActionResult> Manage(string userId)
+            public async Task<IActionResult> ManageRoles(string userId)
             {
                 ViewBag.userId = userId;
                 var user = await _userManager.FindByIdAsync(userId);
@@ -71,7 +71,7 @@ namespace Ghayal_Bhaag.Controllers
                 return View(model);
             }
             [HttpPost]
-            public async Task<IActionResult> Manage(List<ManageUserRolesViewModel> model, string userId)
+            public async Task<IActionResult> ManageRoles(List<ManageUserRolesViewModel> model, string userId)
             {
                 var user = await _userManager.FindByIdAsync(userId);
                 if (user == null)

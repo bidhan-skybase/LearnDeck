@@ -19,14 +19,14 @@ namespace Ghayal_Bhaag.Controllers
         }
 
         // GET: Reviews
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> GetReviews()
         {
             var applicationDbContext = _context.Review.Include(r => r.Book).Include(r => r.User);
             return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Reviews/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> GetReviewDetail(int? id)
         {
             if (id == null)
             {
@@ -46,7 +46,7 @@ namespace Ghayal_Bhaag.Controllers
         }
 
         // GET: Reviews/Create
-        public IActionResult Create(int? id)
+        public IActionResult CreateReview(int? id)
         {
             if ( id != null)
             {
@@ -67,15 +67,15 @@ namespace Ghayal_Bhaag.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ReviewId,UserId,BookId,description,CreatedDate")] Review review)
+        public async Task<IActionResult> CreateReview([Bind("ReviewId,UserId,BookId,description,CreatedDate")] Review review)
         {
             _context.Add(review);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(GetReviews));
         }
 
         // GET: Reviews/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> EditReview(int? id)
         {
             if (id == null)
             {
@@ -97,7 +97,7 @@ namespace Ghayal_Bhaag.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ReviewId,UserId,BookId,description,CreatedDate")] Review review)
+        public async Task<IActionResult> EditReview(int id, [Bind("ReviewId,UserId,BookId,description,CreatedDate")] Review review)
         {
             if (id != review.ReviewId)
             {
@@ -111,7 +111,7 @@ namespace Ghayal_Bhaag.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ReviewExists(review.ReviewId))
+                    if (!CheckReviewExists(review.ReviewId))
                     {
                         return NotFound();
                     }
@@ -120,11 +120,11 @@ namespace Ghayal_Bhaag.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(GetReviews));
         }
 
         // GET: Reviews/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> DeleteReview(int? id)
         {
             if (id == null)
             {
@@ -146,7 +146,7 @@ namespace Ghayal_Bhaag.Controllers
         // POST: Reviews/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> ConfirmReviewDeletion(int id)
         {
             var review = await _context.Review.FindAsync(id);
             if (review != null)
@@ -155,10 +155,10 @@ namespace Ghayal_Bhaag.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(GetReviews));
         }
 
-        private bool ReviewExists(int id)
+        private bool CheckReviewExists(int id)
         {
             return _context.Review.Any(e => e.ReviewId == id);
         }

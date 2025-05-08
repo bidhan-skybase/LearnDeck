@@ -19,14 +19,14 @@ namespace Ghayal_Bhaag.Controllers
         }
 
         // GET: CartItems
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> ListCartItems()
         {
             var applicationDbContext = _context.CartItem.Include(c => c.User).Where(item=>item.status == Enums.OrderStatus.PENDING);
             return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: CartItems/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> GetCartDetails(int? id)
         {
             if (id == null)
             {
@@ -45,7 +45,7 @@ namespace Ghayal_Bhaag.Controllers
         }
 
         // GET: CartItems/Create
-        public IActionResult Create(int? id)
+        public IActionResult CreateCartItem(int? id)
         {
 
             if ( id != null)
@@ -70,16 +70,16 @@ namespace Ghayal_Bhaag.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CartItemId,UserId,BookId,Quantity,UnitPrice")] CartItem cartItem)
+        public async Task<IActionResult> CreateCartItem([Bind("CartItemId,UserId,BookId,Quantity,UnitPrice")] CartItem cartItem)
         {
             cartItem.status = Enums.OrderStatus.PENDING;
                 _context.Add(cartItem);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ListCartItems));
         }
 
         // GET: CartItems/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> EditCartItem(int? id)
         {
             if (id == null)
             {
@@ -100,7 +100,7 @@ namespace Ghayal_Bhaag.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CartItemId,UserId,BookId,Quantity,UnitPrice")] CartItem cartItem)
+        public async Task<IActionResult> EditCartItem(int id, [Bind("CartItemId,UserId,BookId,Quantity,UnitPrice")] CartItem cartItem)
         {
             if (id != cartItem.CartItemId)
             {
@@ -116,7 +116,7 @@ namespace Ghayal_Bhaag.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CartItemExists(cartItem.CartItemId))
+                    if (!CheckCartItemExists(cartItem.CartItemId))
                     {
                         return NotFound();
                     }
@@ -125,14 +125,14 @@ namespace Ghayal_Bhaag.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ListCartItems));
             }
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", cartItem.UserId);
             return View(cartItem);
         }
 
         // GET: CartItems/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> DeleteCartItem(int? id)
         {
             if (id == null)
             {
@@ -153,7 +153,7 @@ namespace Ghayal_Bhaag.Controllers
         // POST: CartItems/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> ConfirmCartItemDeletion(int id)
         {
             var cartItem = await _context.CartItem.FindAsync(id);
             if (cartItem != null)
@@ -162,10 +162,10 @@ namespace Ghayal_Bhaag.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(ListCartItems));
         }
 
-        private bool CartItemExists(int id)
+        private bool CheckCartItemExists(int id)
         {
             return _context.CartItem.Any(e => e.CartItemId == id);
         }
