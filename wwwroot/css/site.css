@@ -29,3 +29,47 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+.hover-effect {
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.hover-effect:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: red;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+
+.hover-effect:hover:after {
+  width: 70%;
+}
+
+.hover-effect:hover {
+  transform: translateY(-2px);
+}
+
+.dropdown-item {
+  transition: background-color 0.2s ease;
+  padding: 8px 16px;
+}
+
+.dropdown-menu {
+  border: none;
+  border-radius: 8px;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+.navbar {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}

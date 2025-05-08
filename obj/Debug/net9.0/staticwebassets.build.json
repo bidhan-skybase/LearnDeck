@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "HcdDVJrxeBSjfCBVn4uYULEnxKHveDKr3SBYblG30WA=",
+  "Hash": "DSmyhWDO1abbJYx6cZgkkdbcLxz8e6kn8nb8GmwOIao=",
   "Source": "LearnDeck",
   "BasePath": "_content/LearnDeck",
   "Mode": "Default",
@@ -2894,12 +2894,12 @@
       "OriginalItemSpec": "/Users/bidhan/.nuget/packages/microsoft.aspnetcore.identity.ui/9.0.0/staticwebassets/V5/lib/jquery/dist/jquery.slim.min.js"
     },
     {
-      "Identity": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/obj/Debug/net9.0/compressed/nfh28vegyp-b9sayid5wm.gz",
+      "Identity": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/obj/Debug/net9.0/compressed/nfh28vegyp-ic46tz3vgm.gz",
       "SourceId": "LearnDeck",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/obj/Debug/net9.0/compressed/",
       "BasePath": "_content/LearnDeck",
-      "RelativePath": "css/site#[.{fingerprint=b9sayid5wm}]?.css.gz",
+      "RelativePath": "css/site#[.{fingerprint=ic46tz3vgm}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -2908,8 +2908,8 @@
       "RelatedAsset": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/css/site.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "pw5l7j5n1s",
-      "Integrity": "KbRAtTdCZlkPQMEP8615MCQRMWQsaAwQYpxvPAoetmA=",
+      "Fingerprint": "0npm42655m",
+      "Integrity": "TJf6kiw24GRENC6H6WUw/v8BJzYn6RVyv6tO9SLnflY=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/css/site.css"
@@ -4168,8 +4168,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "b9sayid5wm",
-      "Integrity": "j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg=",
+      "Fingerprint": "ic46tz3vgm",
+      "Integrity": "gvQ+qg8elJtOoUFUr620Kw0JLzugM9/b/mXnC+mmF10=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/css/site.css"
@@ -6403,167 +6403,6 @@
   ],
   "Endpoints": [
     {
-      "Route": "css/site.b9sayid5wm.css",
-      "AssetFile": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/obj/Debug/net9.0/compressed/nfh28vegyp-b9sayid5wm.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.003134796238"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "318"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"KbRAtTdCZlkPQMEP8615MCQRMWQsaAwQYpxvPAoetmA=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 13:41:05 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "b9sayid5wm"
-        },
-        {
-          "Name": "label",
-          "Value": "css/site.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg="
-        }
-      ]
-    },
-    {
-      "Route": "css/site.b9sayid5wm.css",
-      "AssetFile": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/css/site.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "667"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 13:41:05 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "b9sayid5wm"
-        },
-        {
-          "Name": "label",
-          "Value": "css/site.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg="
-        }
-      ]
-    },
-    {
-      "Route": "css/site.b9sayid5wm.css.gz",
-      "AssetFile": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/obj/Debug/net9.0/compressed/nfh28vegyp-b9sayid5wm.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "318"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"KbRAtTdCZlkPQMEP8615MCQRMWQsaAwQYpxvPAoetmA=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 13:41:05 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "b9sayid5wm"
-        },
-        {
-          "Name": "label",
-          "Value": "css/site.css.gz"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-KbRAtTdCZlkPQMEP8615MCQRMWQsaAwQYpxvPAoetmA="
-        }
-      ]
-    },
-    {
       "Route": "css/site.css",
       "AssetFile": "/Users/bidhan/.nuget/packages/microsoft.aspnetcore.identity.ui/9.0.0/staticwebassets/css/site.css",
       "Selectors": [],
@@ -6602,12 +6441,12 @@
     },
     {
       "Route": "css/site.css",
-      "AssetFile": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/obj/Debug/net9.0/compressed/nfh28vegyp-b9sayid5wm.gz",
+      "AssetFile": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/obj/Debug/net9.0/compressed/nfh28vegyp-ic46tz3vgm.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.003134796238"
+          "Quality": "0.001848428835"
         }
       ],
       "ResponseHeaders": [
@@ -6617,15 +6456,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "318"
+          "Value": "540"
         },
         {
           "Name": "ETag",
-          "Value": "\"KbRAtTdCZlkPQMEP8615MCQRMWQsaAwQYpxvPAoetmA=\""
+          "Value": "\"TJf6kiw24GRENC6H6WUw/v8BJzYn6RVyv6tO9SLnflY=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 13:41:05 GMT"
+          "Value": "Thu, 08 May 2025 14:15:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6645,13 +6484,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg=\""
+          "Value": "W/\"gvQ+qg8elJtOoUFUr620Kw0JLzugM9/b/mXnC+mmF10=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg="
+          "Value": "sha256-gvQ+qg8elJtOoUFUr620Kw0JLzugM9/b/mXnC+mmF10="
         }
       ]
     },
@@ -6666,7 +6505,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "667"
+          "Value": "1328"
         },
         {
           "Name": "Content-Type",
@@ -6674,11 +6513,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg=\""
+          "Value": "\"gvQ+qg8elJtOoUFUr620Kw0JLzugM9/b/mXnC+mmF10=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 13:41:05 GMT"
+          "Value": "Thu, 08 May 2025 14:15:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6688,13 +6527,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg="
+          "Value": "sha256-gvQ+qg8elJtOoUFUr620Kw0JLzugM9/b/mXnC+mmF10="
         }
       ]
     },
     {
       "Route": "css/site.css.gz",
-      "AssetFile": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/obj/Debug/net9.0/compressed/nfh28vegyp-b9sayid5wm.gz",
+      "AssetFile": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/obj/Debug/net9.0/compressed/nfh28vegyp-ic46tz3vgm.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6703,7 +6542,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "318"
+          "Value": "540"
         },
         {
           "Name": "Content-Type",
@@ -6711,11 +6550,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"KbRAtTdCZlkPQMEP8615MCQRMWQsaAwQYpxvPAoetmA=\""
+          "Value": "\"TJf6kiw24GRENC6H6WUw/v8BJzYn6RVyv6tO9SLnflY=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 13:41:05 GMT"
+          "Value": "Thu, 08 May 2025 14:15:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6733,7 +6572,168 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-KbRAtTdCZlkPQMEP8615MCQRMWQsaAwQYpxvPAoetmA="
+          "Value": "sha256-TJf6kiw24GRENC6H6WUw/v8BJzYn6RVyv6tO9SLnflY="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.ic46tz3vgm.css",
+      "AssetFile": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/obj/Debug/net9.0/compressed/nfh28vegyp-ic46tz3vgm.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001848428835"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "540"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"TJf6kiw24GRENC6H6WUw/v8BJzYn6RVyv6tO9SLnflY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 08 May 2025 14:15:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"gvQ+qg8elJtOoUFUr620Kw0JLzugM9/b/mXnC+mmF10=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ic46tz3vgm"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-gvQ+qg8elJtOoUFUr620Kw0JLzugM9/b/mXnC+mmF10="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.ic46tz3vgm.css",
+      "AssetFile": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/css/site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1328"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"gvQ+qg8elJtOoUFUr620Kw0JLzugM9/b/mXnC+mmF10=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 08 May 2025 14:15:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ic46tz3vgm"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-gvQ+qg8elJtOoUFUr620Kw0JLzugM9/b/mXnC+mmF10="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.ic46tz3vgm.css.gz",
+      "AssetFile": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/obj/Debug/net9.0/compressed/nfh28vegyp-ic46tz3vgm.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "540"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"TJf6kiw24GRENC6H6WUw/v8BJzYn6RVyv6tO9SLnflY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 08 May 2025 14:15:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ic46tz3vgm"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-TJf6kiw24GRENC6H6WUw/v8BJzYn6RVyv6tO9SLnflY="
         }
       ]
     },
