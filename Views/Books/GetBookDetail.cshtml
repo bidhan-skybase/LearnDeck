@@ -9,16 +9,16 @@
         <!-- Book Cover Image -->
         <div class="col-md-4">
             <div class="text-center">
-                <img src="@(Model.imageUrl ?? "https://via.placeholder.com/250x350")" alt="@Model.title"
+                <img src="@(Model.Image ?? "https://via.placeholder.com/250x350")" alt="@Model.BookTitle"
                      class="img-fluid rounded shadow-sm" style="max-width: 250px;">
             </div>
         </div>
 
         <!-- Book Details -->
         <div class="col-md-8">
-            <h2 class="mb-3">@Html.DisplayFor(model => model.title)</h2>
+            <h2 class="mb-3">@Html.DisplayFor(model => model.BookTitle)</h2>
             <p class="text-muted mb-2">
-                by @Html.DisplayFor(model => model.author) <!-- Assuming 'author' is a property; add if missing --></p>
+                by @Html.DisplayFor(model => model.Author) <!-- Assuming 'author' is a property; add if missing --></p>
             <div class="mb-3">
                 <span class="badge bg-secondary">Paper Back</span>
                 <!-- Assuming format; adjust if using model.format -->
@@ -28,18 +28,18 @@
 
             <!-- Synopsis -->
             <h4 class="mt-4">Synopsis</h4>
-            <p class="text-secondary">@Html.DisplayFor(model => model.description)</p>
+            <p class="text-secondary">@Html.DisplayFor(model => model.Description)</p>
 
             <!-- Price and Quantity -->
             <div class="d-flex align-items-center mb-3">
-                <h4 class="me-3 mb-0">Rs. @Html.DisplayFor(model => model.price)</h4>
+                <h4 class="me-3 mb-0">Rs. @Html.DisplayFor(model => model.Price)</h4>
                 <div class="input-group w-25">
                     <button class="btn btn-outline-secondary" type="button" id="quantityDown">-</button>
                     <input type="number" class="form-control text-center" value="1" min="1" id="quantity"
-                           style="max-width: 70px;" data-stock="@Model.stock">
+                           style="max-width: 70px;" data-stock="@Model.Stock">
                     <button class="btn btn-outline-secondary" type="button" id="quantityUp">+</button>
                 </div>
-                <span class="ms-3 text-muted">Available Stock: @Model.stock</span>
+                <span class="ms-3 text-muted">Available Stock: @Model.Stock</span>
             </div>
             <a asp-controller="CartItems" asp-action="CreateCartItem" asp-route-id="@Model?.BookId"
                class="btn btn-primary mb-3">Add to Cart</a>
@@ -49,7 +49,7 @@
             <!-- Genres -->
             <h5>Genres:</h5>
             <div class="mb-3">
-                @foreach (var genre in Model.genre.Split(',').Select(g => g.Trim()))
+                @foreach (var genre in Model.Genre.Split(',').Select(g => g.Trim()))
                 {
                     <span class="badge bg-light text-dark me-1">@genre</span>
                 }

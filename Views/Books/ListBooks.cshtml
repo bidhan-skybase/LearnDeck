@@ -55,14 +55,14 @@
                 <div class="card h-100 shadow-sm hover-shadow">
                     <div class="position-relative">
                        
-                        <img src=" @(string.IsNullOrEmpty(item.imageUrl) ? Url.Content("~/images/book_holder.png") : item.imageUrl)" class="card-img-top p-3" alt="@item.title"/>
+                        <img src=" @(string.IsNullOrEmpty(item.Image) ? Url.Content("~/images/book_holder.png") : item.Image)" class="card-img-top p-3" alt="@item.BookTitle"/>
                         <span class="position-absolute top-0 end-0 badge bg-secondary m-3">
-                            $@item.price
+                            $@item.Price
                         </span>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">@item.title</h5>
-                        <p class="card-text text-muted small">@(item.description?.Length > 100 ? item.description.Substring(0, 97) + "..." : item.description)</p>
+                        <h5 class="card-title">@item.BookTitle</h5>
+                        <p class="card-text text-muted small">@(item.Description?.Length > 100 ? item.Description.Substring(0, 97) + "..." : item.Description)</p>
                     </div>
                     <div class="card-footer bg-white">
                         <div class="d-flex justify-content-between align-items-center">

@@ -18,7 +18,7 @@ namespace Ghayal_Bhaag.Models
         [ForeignKey("Book")]
         public int BookId { get; set; }
 
-        public OrderStatus? status { get; set; }
+        public OrderStatus? Status { get; set; }
 
         public int? Quantity { get; set; }
         public float? UnitPrice { get; set; }

@@ -1,42 +1,68 @@
 ﻿@model Ghayal_Bhaag.Models.Anouncement
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Announcement Details";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Anouncement</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EndDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="EditAnnouncement" asp-route-id="@Model?.AnouncementId">Edit</a> |
-    <a asp-action="GetAnnouncements">Back to List</a>
+<div class="announcement-container">
+    <div class="announcement-header">
+        <h2>Announcement Details</h2>
+        <div class="announcement-badge">
+            @{
+                var isActive = DateTime.Now >= Model.StartDate && DateTime.Now <= Model.EndDate;
+                <span class="badge @(isActive ? "badge-active" : "badge-inactive")">
+                    @(isActive ? "Active" : "Inactive")
+                </span>
+            }
+        </div>
+    </div>
+    
+    <div class="announcement-card">
+        <div class="announcement-title">
+            <h3>@Html.DisplayFor(model => model.Title)</h3>
+        </div>
+        
+        <div class="announcement-content">
+            <div class="announcement-info">
+                <div class="info-item">
+                    <div class="info-label">
+                        <i class="fa fa-calendar-alt"></i>
+                        Start Date
+                    </div>
+                    <div class="info-value">
+                        @Model.StartDate.ToString("MMMM dd, yyyy")
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-label">
+                        <i class="fa fa-calendar-check"></i>
+                        End Date
+                    </div>
+                    <div class="info-value">
+                        @Model.EndDate.ToString("MMMM dd, yyyy")
+                    </div>
+                </div>
+            </div>
+            
+            <div class="announcement-description">
+                <h4>Description</h4>
+                <div class="description-content">
+                    @Html.DisplayFor(model => model.Description)
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="announcement-actions">
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-action="EditAnnouncement" asp-route-id="@Model?.AnouncementId" class="btn btn-primary">
+                <i class="fa fa-edit"></i> Edit
+            </a>
+        }
+        <a asp-action="GetAnnouncements" class="btn btn-secondary">
+            <i class="fa fa-arrow-left"></i> Back to List
+        </a>
+    </div>
 </div>

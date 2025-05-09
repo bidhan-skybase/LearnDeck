@@ -80,7 +80,7 @@ namespace Ghayal_Bhaag.Controllers
         //Convert all the cart item to order items in a loop and add to the database
         public async Task<IActionResult> AddOrdertoCart()
         {
-            List<CartItem> cartItems = _context.CartItem.Where(item => item.status == Enums.OrderStatus.PENDING).ToList();
+            List<CartItem> cartItems = _context.CartItem.Where(item => item.Status == Enums.OrderStatus.PENDING).ToList();
 
             if (cartItems.Count > 0)
             {
@@ -114,14 +114,14 @@ namespace Ghayal_Bhaag.Controllers
 
                         if (book != null)
                         {
-                            if (book.on_sale)
+                            if (book.Sale)
                             {
-                                total_book_price -= book.discount * order_item.Quantity;
+                                total_book_price -= book.DiscountAmount * order_item.Quantity;
                             }
                             total_amount += total_book_price;
                         }
 
-                        cart_item.status = Enums.OrderStatus.COMPLETED;
+                        cart_item.Status = Enums.OrderStatus.COMPLETED;
                         _context.CartItem.Update(cart_item);
                         _context.OrderItem.Add(order_item);
                     }

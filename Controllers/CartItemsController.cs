@@ -21,7 +21,7 @@ namespace Ghayal_Bhaag.Controllers
         // GET: CartItems
         public async Task<IActionResult> ListCartItems()
         {
-            var applicationDbContext = _context.CartItem.Include(c => c.User).Where(item=>item.status == Enums.OrderStatus.PENDING);
+            var applicationDbContext = _context.CartItem.Include(c => c.User).Where(item=>item.Status == Enums.OrderStatus.PENDING);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -53,7 +53,7 @@ namespace Ghayal_Bhaag.Controllers
                 Book? book = _context.Book.Find(id);
                 if(book != null)
                 {
-                    ViewData["UnitPrice"] = book.price;
+                    ViewData["UnitPrice"] = book.Price;
                 }
                 ViewData["BookId"] = id;
             }
@@ -72,7 +72,7 @@ namespace Ghayal_Bhaag.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateCartItem([Bind("CartItemId,UserId,BookId,Quantity,UnitPrice")] CartItem cartItem)
         {
-            cartItem.status = Enums.OrderStatus.PENDING;
+            cartItem.Status = Enums.OrderStatus.PENDING;
                 _context.Add(cartItem);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(ListCartItems));

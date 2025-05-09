@@ -4,22 +4,25 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
 <p>
     @if (User.IsInRole("Admin"))
     {
-        <a asp-action="CreateAnnouncement">Create New</a>
+        <div class="mb-4">
+            <a asp-action="CreateAnnouncement" class="btn btn-success">
+                <i class="bi bi-plus-circle me-2"></i>Add New Announcement
+            </a>
+        </div>
     }
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.title)
+                @Html.DisplayNameFor(model => model.Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.description)
+                @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.StartDate)
@@ -34,10 +37,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.title)
+                @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.description)
+                @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.StartDate)
@@ -46,14 +49,21 @@
                 @Html.DisplayFor(modelItem => item.EndDate)
             </td>
             <td>
-    @if (User.IsInRole("Admin"))
-    {
-                <a asp-action="EditAnnouncement" asp-route-id="@item.AnouncementId">Edit |</a> 
-                <a asp-action="DeleteAnnouncement" asp-route-id="@item.AnouncementId">Delete</a>
-    }
-                <a asp-action="GetAnnouncementDetails" asp-route-id="@item.AnouncementId">Details</a> |
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-action="EditAnnouncement" asp-route-id="@item.AnouncementId" class="btn btn-primary btn-sm">
+                        <i class="fa fa-edit"></i> Edit
+                    </a>
+                    <a asp-action="DeleteAnnouncement" asp-route-id="@item.AnouncementId" class="btn btn-danger btn-sm">
+                        <i class="fa fa-trash"></i> Delete
+                    </a>
+                }
+                <a asp-action="GetAnnouncementDetails" asp-route-id="@item.AnouncementId" class="btn btn-info btn-sm">
+                    <i class="fa fa-info-circle"></i> Details
+                </a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+

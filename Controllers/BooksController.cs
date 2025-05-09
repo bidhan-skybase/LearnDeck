@@ -20,7 +20,8 @@ namespace Ghayal_Bhaag.Controllers
         }
 
         // GET: Books
-        public async Task<IActionResult> ListBooks(string searchTitle, string searchDescription, string searchISBN, string sortOrder)
+        public async Task<IActionResult> ListBooks(string searchTitle, string searchDescription, string searchISBN,
+            string sortOrder)
         {
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title" : "title_desc";
             ViewData["DateSortParm"] = sortOrder == "date" ? "date_desc" : "date";
@@ -34,12 +35,12 @@ namespace Ghayal_Bhaag.Controllers
 
             if (!String.IsNullOrEmpty(searchTitle))
             {
-                books = books.Where(d => d.title.Contains(searchTitle));
+                books = books.Where(d => d.BookTitle.Contains(searchTitle));
             }
 
             if (!String.IsNullOrEmpty(searchDescription))
             {
-                books = books.Where(d => d.description.Contains(searchDescription));
+                books = books.Where(d => d.Description.Contains(searchDescription));
             }
 
             if (!String.IsNullOrEmpty(searchISBN))
@@ -50,10 +51,10 @@ namespace Ghayal_Bhaag.Controllers
             switch (sortOrder)
             {
                 case "title":
-                    books = books.OrderBy(s => s.title);
+                    books = books.OrderBy(s => s.BookTitle);
                     break;
                 case "title_desc":
-                    books = books.OrderByDescending(s => s.title);
+                    books = books.OrderByDescending(s => s.BookTitle);
                     break;
                 case "date":
                     books = books.OrderBy(s => s.DateReleased);
@@ -62,10 +63,10 @@ namespace Ghayal_Bhaag.Controllers
                     books = books.OrderByDescending(s => s.DateReleased);
                     break;
                 case "price_desc":
-                    books = books.OrderByDescending(s => s.price);
+                    books = books.OrderByDescending(s => s.Price);
                     break;
                 case "price":
-                    books = books.OrderBy(s => s.price);
+                    books = books.OrderBy(s => s.Price);
                     break;
                 case "popularity":
                     books = books.OrderByDescending(s => s.ISBN);
@@ -73,30 +74,32 @@ namespace Ghayal_Bhaag.Controllers
                 default:
                     break;
             }
+
             return View(await books.ToListAsync());
         }
 
         // GET: Books/Details/5
         public async Task<IActionResult> GetBookDetail(int? id)
         {
-
             //Check if the user has purchased this book
-            List<Order> orders = _context.Order.Where(o=>o.UserId == User.Identity.GetUserId()).ToList();
+            List<Order> orders = _context.Order.Where(o => o.UserId == User.Identity.GetUserId()).ToList();
 
             bool has_purchased = false;
 
 
             foreach (Order order in orders)
             {
-                List<OrderItem> order_items = _context.OrderItem.Where(o=>o.OrderId == order.OrderId).ToList();
+                List<OrderItem> order_items = _context.OrderItem.Where(o => o.OrderId == order.OrderId).ToList();
 
                 foreach (OrderItem item in order_items)
                 {
-                    if (item.BookId == id){
+                    if (item.BookId == id)
+                    {
                         has_purchased = true;
                     }
                 }
             }
+
             ViewData["has_purchased"] = has_purchased.ToString();
             if (id == null)
             {
@@ -124,7 +127,10 @@ namespace Ghayal_Bhaag.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateBook([Bind("BookId,title,ISBN,DateReleased,description,publisher,genre,physical_access,on_sale,new_arrival,stock,price,discount,language,format,author,imageUrl")] Book book)
+        public async Task<IActionResult> CreateBook(
+            [Bind(
+                "BookId,BookTitle,ISBN,DateReleased,Description,Publisher,Genre,PhysicalAccess,Sale,NewArrival,Stock,Price,Discount,Language,Format,Author,Image")]
+            Book book)
         {
             if (ModelState.IsValid)
             {
@@ -137,13 +143,15 @@ namespace Ghayal_Bhaag.Controllers
                 }
                 catch (DbUpdateException ex)
                 {
-                    ModelState.AddModelError("", "Database error occurred while saving the book: " + ex.InnerException?.Message);
+                    ModelState.AddModelError("",
+                        "Database error occurred while saving the book: " + ex.InnerException?.Message);
                 }
                 catch (Exception ex)
                 {
                     ModelState.AddModelError("", "An unexpected error occurred: " + ex.Message);
                 }
             }
+
             // If ModelState is invalid or save fails, return the view with errors
             return View(book);
         }
@@ -161,6 +169,7 @@ namespace Ghayal_Bhaag.Controllers
             {
                 return NotFound();
             }
+
             return View(book);
         }
 
@@ -169,7 +178,10 @@ namespace Ghayal_Bhaag.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditBook(int id, [Bind("BookId,title,ISBN,DateReleased,description,discount,publisher,genre,physical_access,on_sale,new_arrival,stock,price,language,format,author,imageUrl")] Book book)
+        public async Task<IActionResult> EditBook(int id,
+            [Bind(
+                "BookId,BookTitle,ISBN,DateReleased,Description,Publisher,Genre,PhysicalAccess,Sale,NewArrival,Stock,Price,Discount,Language,Format,Author,Image")]
+            Book book)
         {
             if (id != book.BookId)
             {
@@ -194,15 +206,16 @@ namespace Ghayal_Bhaag.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(ListBooks));
             }
+
             return View(book);
         }
 
         // GET: Books/Delete/5
         public async Task<IActionResult> DeleteBook(int? id)
         {
-            
             Console.WriteLine("this is the deletebook title");
             Console.WriteLine(id);
 

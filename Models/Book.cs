@@ -13,38 +13,38 @@ namespace Ghayal_Bhaag.Models
         [Key]
         public int BookId { get; set; }
 
-        public string title { get; set; }
+        public string BookTitle { get; set; }
 
         public string ISBN { get; set; }
 
         [Column(TypeName = "Date")]
         public DateTime? DateReleased { get; set; }
 
-        public string description { get; set; }
+        public string Description { get; set; }
 
-        public string publisher { get; set; }
+        public string Publisher { get; set; }
 
-        public string genre { get; set; }
+        public string Genre { get; set; }
 
-        public bool physical_access { get; set; }
+        public bool PhysicalAccess { get; set; }
 
-        public bool on_sale { get; set; }
+        public bool Sale { get; set; }
 
-        public bool new_arrival { get; set; }
+        public bool NewArrival { get; set; }
 
-        public int stock { get; set; }
+        public int Stock { get; set; }
 
-        public float price { get; set; }
+        public float Price { get; set; }
 
-        public float discount { get; set; }
+        public float DiscountAmount { get; set; }
 
-        public string language { get; set; }
+        public string Language { get; set; }
 
-        public Format format { get; set; }
+        public Format Format { get; set; }
 
         // New properties
-        public string author { get; set; }
+        public string Author { get; set; }
 
-        public string imageUrl { get; set; }
+        public string Image { get; set; }
     }
 }

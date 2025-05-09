@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "GMiIRIGLKT4R/aoCR5YIPi98ebfGpQghErP1i20KN0w=",
+  "Hash": "fjiqHaduGKBVbv9TQJt4DU75v4+aik9so7OlrreWZgE=",
   "Source": "LearnDeck",
   "BasePath": "_content/LearnDeck",
   "Mode": "Default",
@@ -4028,12 +4028,12 @@
       "OriginalItemSpec": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/jquery/dist/jquery.slim.min.js"
     },
     {
-      "Identity": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/obj/Debug/net9.0/compressed/wmf6ok9m30-2zlr90bzn5.gz",
+      "Identity": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/obj/Debug/net9.0/compressed/wmf6ok9m30-m7hntq4j7l.gz",
       "SourceId": "LearnDeck",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/obj/Debug/net9.0/compressed/",
       "BasePath": "_content/LearnDeck",
-      "RelativePath": "css/style#[.{fingerprint=2zlr90bzn5}]?.css.gz",
+      "RelativePath": "css/style#[.{fingerprint=m7hntq4j7l}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -4042,8 +4042,8 @@
       "RelatedAsset": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/css/style.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "rl3uzmwhsf",
-      "Integrity": "v8g8uCddb3AJf/nKMhOkzC13hBxJX9Pwxao10dm7RYk=",
+      "Fingerprint": "bclqtf0y73",
+      "Integrity": "i0cBiPShWO5e4YRRxBzwgnA/eHWwjQTkYvkxTjfnsZc=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/css/style.css"
@@ -4504,8 +4504,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "2zlr90bzn5",
-      "Integrity": "/sDNaKiIKdZBRFnUt7kRQGomvennrEpQepr0kKDmAJw=",
+      "Fingerprint": "m7hntq4j7l",
+      "Integrity": "4pvy8cK1Y4tyHZ6BQon1kG4jMAETtbZ/cO76dazmgm0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/css/style.css"
@@ -7538,13 +7538,13 @@
       ]
     },
     {
-      "Route": "css/style.2zlr90bzn5.css",
-      "AssetFile": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/obj/Debug/net9.0/compressed/wmf6ok9m30-2zlr90bzn5.gz",
+      "Route": "css/style.css",
+      "AssetFile": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/obj/Debug/net9.0/compressed/wmf6ok9m30-m7hntq4j7l.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000242541838"
+          "Quality": "0.000228990153"
         }
       ],
       "ResponseHeaders": [
@@ -7554,19 +7554,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4122"
+          "Value": "4366"
         },
         {
           "Name": "ETag",
-          "Value": "\"v8g8uCddb3AJf/nKMhOkzC13hBxJX9Pwxao10dm7RYk=\""
+          "Value": "\"i0cBiPShWO5e4YRRxBzwgnA/eHWwjQTkYvkxTjfnsZc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 14:27:37 GMT"
+          "Value": "Fri, 09 May 2025 02:57:56 GMT"
         },
         {
           "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
+          "Value": "no-cache"
         },
         {
           "Name": "Content-Encoding",
@@ -7582,26 +7582,18 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"/sDNaKiIKdZBRFnUt7kRQGomvennrEpQepr0kKDmAJw=\""
+          "Value": "W/\"4pvy8cK1Y4tyHZ6BQon1kG4jMAETtbZ/cO76dazmgm0=\""
         }
       ],
       "EndpointProperties": [
         {
-          "Name": "fingerprint",
-          "Value": "2zlr90bzn5"
-        },
-        {
-          "Name": "label",
-          "Value": "css/style.css"
-        },
-        {
           "Name": "integrity",
-          "Value": "sha256-/sDNaKiIKdZBRFnUt7kRQGomvennrEpQepr0kKDmAJw="
+          "Value": "sha256-4pvy8cK1Y4tyHZ6BQon1kG4jMAETtbZ/cO76dazmgm0="
         }
       ]
     },
     {
-      "Route": "css/style.2zlr90bzn5.css",
+      "Route": "css/style.css",
       "AssetFile": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/css/style.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -7611,7 +7603,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "17986"
+          "Value": "18908"
         },
         {
           "Name": "Content-Type",
@@ -7619,11 +7611,156 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"/sDNaKiIKdZBRFnUt7kRQGomvennrEpQepr0kKDmAJw=\""
+          "Value": "\"4pvy8cK1Y4tyHZ6BQon1kG4jMAETtbZ/cO76dazmgm0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 14:27:37 GMT"
+          "Value": "Fri, 09 May 2025 02:57:56 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-4pvy8cK1Y4tyHZ6BQon1kG4jMAETtbZ/cO76dazmgm0="
+        }
+      ]
+    },
+    {
+      "Route": "css/style.css.gz",
+      "AssetFile": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/obj/Debug/net9.0/compressed/wmf6ok9m30-m7hntq4j7l.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4366"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"i0cBiPShWO5e4YRRxBzwgnA/eHWwjQTkYvkxTjfnsZc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 09 May 2025 02:57:56 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-i0cBiPShWO5e4YRRxBzwgnA/eHWwjQTkYvkxTjfnsZc="
+        }
+      ]
+    },
+    {
+      "Route": "css/style.m7hntq4j7l.css",
+      "AssetFile": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/obj/Debug/net9.0/compressed/wmf6ok9m30-m7hntq4j7l.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000228990153"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4366"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"i0cBiPShWO5e4YRRxBzwgnA/eHWwjQTkYvkxTjfnsZc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 09 May 2025 02:57:56 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"4pvy8cK1Y4tyHZ6BQon1kG4jMAETtbZ/cO76dazmgm0=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "m7hntq4j7l"
+        },
+        {
+          "Name": "label",
+          "Value": "css/style.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-4pvy8cK1Y4tyHZ6BQon1kG4jMAETtbZ/cO76dazmgm0="
+        }
+      ]
+    },
+    {
+      "Route": "css/style.m7hntq4j7l.css",
+      "AssetFile": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/css/style.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "18908"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4pvy8cK1Y4tyHZ6BQon1kG4jMAETtbZ/cO76dazmgm0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 09 May 2025 02:57:56 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7633,7 +7770,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "2zlr90bzn5"
+          "Value": "m7hntq4j7l"
         },
         {
           "Name": "label",
@@ -7641,13 +7778,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-/sDNaKiIKdZBRFnUt7kRQGomvennrEpQepr0kKDmAJw="
+          "Value": "sha256-4pvy8cK1Y4tyHZ6BQon1kG4jMAETtbZ/cO76dazmgm0="
         }
       ]
     },
     {
-      "Route": "css/style.2zlr90bzn5.css.gz",
-      "AssetFile": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/obj/Debug/net9.0/compressed/wmf6ok9m30-2zlr90bzn5.gz",
+      "Route": "css/style.m7hntq4j7l.css.gz",
+      "AssetFile": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/obj/Debug/net9.0/compressed/wmf6ok9m30-m7hntq4j7l.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7656,7 +7793,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4122"
+          "Value": "4366"
         },
         {
           "Name": "Content-Type",
@@ -7664,11 +7801,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"v8g8uCddb3AJf/nKMhOkzC13hBxJX9Pwxao10dm7RYk=\""
+          "Value": "\"i0cBiPShWO5e4YRRxBzwgnA/eHWwjQTkYvkxTjfnsZc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 14:27:37 GMT"
+          "Value": "Fri, 09 May 2025 02:57:56 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7686,7 +7823,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "2zlr90bzn5"
+          "Value": "m7hntq4j7l"
         },
         {
           "Name": "label",
@@ -7694,144 +7831,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-v8g8uCddb3AJf/nKMhOkzC13hBxJX9Pwxao10dm7RYk="
-        }
-      ]
-    },
-    {
-      "Route": "css/style.css",
-      "AssetFile": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/obj/Debug/net9.0/compressed/wmf6ok9m30-2zlr90bzn5.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000242541838"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "4122"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"v8g8uCddb3AJf/nKMhOkzC13hBxJX9Pwxao10dm7RYk=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 14:27:37 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"/sDNaKiIKdZBRFnUt7kRQGomvennrEpQepr0kKDmAJw=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-/sDNaKiIKdZBRFnUt7kRQGomvennrEpQepr0kKDmAJw="
-        }
-      ]
-    },
-    {
-      "Route": "css/style.css",
-      "AssetFile": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/css/style.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "17986"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"/sDNaKiIKdZBRFnUt7kRQGomvennrEpQepr0kKDmAJw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 14:27:37 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-/sDNaKiIKdZBRFnUt7kRQGomvennrEpQepr0kKDmAJw="
-        }
-      ]
-    },
-    {
-      "Route": "css/style.css.gz",
-      "AssetFile": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/obj/Debug/net9.0/compressed/wmf6ok9m30-2zlr90bzn5.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "4122"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"v8g8uCddb3AJf/nKMhOkzC13hBxJX9Pwxao10dm7RYk=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 14:27:37 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-v8g8uCddb3AJf/nKMhOkzC13hBxJX9Pwxao10dm7RYk="
+          "Value": "sha256-i0cBiPShWO5e4YRRxBzwgnA/eHWwjQTkYvkxTjfnsZc="
         }
       ]
     },

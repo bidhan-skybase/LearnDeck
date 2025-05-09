@@ -8,8 +8,8 @@ namespace Ghayal_Bhaag.Models
         [Key]
         public int AnouncementId { get; set; }
 
-        public string? title { get; set; }
-        public string? description { get; set; }
+        public string? Title { get; set; }
+        public string? Description { get; set; }
 
         [Column(TypeName = "Date")]
         public DateTime StartDate { get; set; }

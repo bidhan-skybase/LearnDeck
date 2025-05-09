@@ -53,7 +53,7 @@ namespace Ghayal_Bhaag.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateAnnouncement([Bind("AnouncementId,title,description,StartDate,EndDate")] Anouncement anouncement)
+        public async Task<IActionResult> CreateAnnouncement([Bind("AnouncementId,Title,Description,StartDate,EndDate")] Anouncement anouncement)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace Ghayal_Bhaag.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditAnnouncement(int id, [Bind("AnouncementId,title,description,StartDate,EndDate")] Anouncement anouncement)
+        public async Task<IActionResult> EditAnnouncement(int id, [Bind("AnouncementId,Title,Description,StartDate,EndDate")] Anouncement anouncement)
         {
             if (id != anouncement.AnouncementId)
             {
@@ -134,7 +134,7 @@ namespace Ghayal_Bhaag.Controllers
         }
 
         // POST: Anouncements/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("DeleteAnnouncement")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ConfirmDeletion(int id)
         {

@@ -4,40 +4,52 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
 
-<h4>Anouncement</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="EditAnnouncement">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="AnouncementId" />
-            <div class="form-group">
-                <label asp-for="title" class="control-label"></label>
-                <input asp-for="title" class="form-control" />
-                <span asp-validation-for="title" class="text-danger"></span>
+
+<div class="container py-4">
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-light">
+                <h4 class="mb-12">Edit Announcement</h4>
+                <form asp-action="EditAnnouncement">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    <input type="hidden" asp-for="AnouncementId" />
+
+                    <div class="form-floating mb-4">
+                        <input asp-for="Title" class="form-control" placeholder=" "/>
+                        <label asp-for="Title"></label>
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-4">
+                        <input asp-for="Description" class="form-control" placeholder=" "/>
+                        <label asp-for="Description"></label>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-4">
+                        <input asp-for="StartDate" class="form-control" placeholder=" "/>
+                        <label asp-for="StartDate"></label>
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-4">
+                        <input asp-for="EndDate" class="form-control" placeholder=" "/>
+                        <label asp-for="EndDate"></label>
+                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <a asp-action="GetAnnouncements" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left me-1"></i> Back to List
+                        </a>
+                        <button type="submit" class="btn btn-success">
+                            <i class="bi bi-plus-circle me-1"></i> Edit Announcement
+                        </button>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="description" class="control-label"></label>
-                <input asp-for="description" class="form-control" />
-                <span asp-validation-for="description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="StartDate" class="control-label"></label>
-                <input asp-for="StartDate" class="form-control" />
-                <span asp-validation-for="StartDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EndDate" class="control-label"></label>
-                <input asp-for="EndDate" class="form-control" />
-                <span asp-validation-for="EndDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
+</div>
 </div>
 
 <div>

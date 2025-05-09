@@ -29,9 +29,9 @@
                             <!-- Book Basic Info -->
                             <div class="col-md-6 mb-3">
                                 <div class="form-floating">
-                                    <input asp-for="title" class="form-control" placeholder=" "/>
-                                    <label asp-for="title"></label>
-                                    <span asp-validation-for="title" class="text-danger"></span>
+                                    <input asp-for="BookTitle" class="form-control" placeholder=" "/>
+                                    <label asp-for="BookTitle"></label>
+                                    <span asp-validation-for="BookTitle" class="text-danger"></span>
                                 </div>
                             </div>
 
@@ -53,34 +53,34 @@
 
                             <div class="col-md-6 mb-3">
                                 <div class="form-floating">
-                                    <input asp-for="publisher" class="form-control" placeholder=" "/>
-                                    <label asp-for="publisher"></label>
-                                    <span asp-validation-for="publisher" class="text-danger"></span>
+                                    <input asp-for="Publisher" class="form-control" placeholder=" "/>
+                                    <label asp-for="Publisher"></label>
+                                    <span asp-validation-for="Publisher" class="text-danger"></span>
                                 </div>
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <div class="form-floating">
-                                    <input asp-for="genre" class="form-control" placeholder=" "/>
-                                    <label asp-for="genre"></label>
-                                    <span asp-validation-for="genre" class="text-danger"></span>
+                                    <input asp-for="Genre" class="form-control" placeholder=" "/>
+                                    <label asp-for="Genre"></label>
+                                    <span asp-validation-for="Genre" class="text-danger"></span>
                                 </div>
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <div class="form-floating">
-                                    <input asp-for="language" class="form-control" placeholder=" "/>
-                                    <label asp-for="language"></label>
-                                    <span asp-validation-for="language" class="text-danger"></span>
+                                    <input asp-for="Language" class="form-control" placeholder=" "/>
+                                    <label asp-for="Language"></label>
+                                    <span asp-validation-for="Language" class="text-danger"></span>
                                 </div>
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <div class="form-floating">
-                                    <select asp-for="format" class="form-select"
+                                    <select asp-for="Format" class="form-select"
                                             asp-items="@Html.GetEnumSelectList(typeof(Ghayal_Bhaag.Enums.Format))"></select>
-                                    <label asp-for="format"></label>
-                                    <span asp-validation-for="format" class="text-danger"></span>
+                                    <label asp-for="Format"></label>
+                                    <span asp-validation-for="Format" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
@@ -88,22 +88,22 @@
                         <!-- Description Field -->
                         <div class="mb-4">
                             <div class="form-floating">
-                                <textarea asp-for="description" class="form-control" style="height: 100px"
+                                <textarea asp-for="Description" class="form-control" style="height: 100px"
                                           placeholder=" "></textarea>
-                                <label asp-for="description"></label>
-                                <span asp-validation-for="description" class="text-danger"></span>
+                                <label asp-for="Description"></label>
+                                <span asp-validation-for="Description" class="text-danger"></span>
                             </div>
                         </div>
                         
                         <div class="form-floating mb-4">
-                            <input asp-for="author" class="form-control" placeholder=" "/>
-                            <label asp-for="author"></label>
-                            <span asp-validation-for="author" class="text-danger"></span>
+                            <input asp-for="Author" class="form-control" placeholder=" "/>
+                            <label asp-for="Author"></label>
+                            <span asp-validation-for="Author" class="text-danger"></span>
                         </div>
                         <div class="form-floating mb-7">
-                            <input asp-for="imageUrl" class="form-control" placeholder=" "/>
-                            <label asp-for="imageUrl"></label>
-                            <span asp-validation-for="imageUrl" class="text-danger"></span>
+                            <input asp-for="Image" class="form-control" placeholder=" "/>
+                            <label asp-for="Image"></label>
+                            <span asp-validation-for="Image" class="text-danger"></span>
                         </div>
 
                         <!-- Pricing & Stock -->
@@ -115,25 +115,25 @@
                                 <div class="row">
                                     <div class="col-md-4 mb-3">
                                         <div class="form-floating">
-                                            <input asp-for="price" class="form-control" placeholder=" "/>
-                                            <label asp-for="price"></label>
-                                            <span asp-validation-for="price" class="text-danger"></span>
+                                            <input asp-for="Price" class="form-control" placeholder=" "/>
+                                            <label asp-for="Price"></label>
+                                            <span asp-validation-for="Price" class="text-danger"></span>
                                         </div>
                                     </div>
 
                                     <div class="col-md-4 mb-3">
                                         <div class="form-floating">
-                                            <input asp-for="discount" class="form-control" placeholder=" "/>
-                                            <label asp-for="discount"></label>
-                                            <span asp-validation-for="discount" class="text-danger"></span>
+                                            <input asp-for="DiscountAmount" class="form-control" placeholder=" "/>
+                                            <label asp-for="DiscountAmount"></label>
+                                            <span asp-validation-for="DiscountAmount" class="text-danger"></span>
                                         </div>
                                     </div>
 
                                     <div class="col-md-4 mb-3">
                                         <div class="form-floating">
-                                            <input asp-for="stock" class="form-control" placeholder=" "/>
-                                            <label asp-for="stock"></label>
-                                            <span asp-validation-for="stock" class="text-danger"></span>
+                                            <input asp-for="Stock" class="form-control" placeholder=" "/>
+                                            <label asp-for="Stock"></label>
+                                            <span asp-validation-for="Stock" class="text-danger"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -142,22 +142,22 @@
                                 <div class="row mt-2">
                                     <div class="col-md-4 mb-2">
                                         <div class="form-check">
-                                            <input class="form-check-input" asp-for="physical_access"/>
-                                            <label class="form-check-label" asp-for="physical_access"></label>
+                                            <input class="form-check-input" asp-for="PhysicalAccess"/>
+                                            <label class="form-check-label" asp-for="PhysicalAccess"></label>
                                         </div>
                                     </div>
 
                                     <div class="col-md-4 mb-2">
                                         <div class="form-check">
-                                            <input class="form-check-input" asp-for="on_sale"/>
-                                            <label class="form-check-label" asp-for="on_sale"></label>
+                                            <input class="form-check-input" asp-for="Sale"/>
+                                            <label class="form-check-label" asp-for="Sale"></label>
                                         </div>
                                     </div>
 
                                     <div class="col-md-4 mb-2">
                                         <div class="form-check">
-                                            <input class="form-check-input" asp-for="new_arrival"/>
-                                            <label class="form-check-label" asp-for="new_arrival"></label>
+                                            <input class="form-check-input" asp-for="NewArrival"/>
+                                            <label class="form-check-label" asp-for="NewArrival"></label>
                                         </div>
                                     </div>
                                 </div>
