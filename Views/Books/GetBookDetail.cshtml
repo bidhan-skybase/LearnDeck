@@ -41,9 +41,13 @@
                 </div>
                 <span class="ms-3 text-muted">Available Stock: @Model.Stock</span>
             </div>
-            <a asp-controller="CartItems" asp-action="CreateCartItem" asp-route-id="@Model?.BookId"
-               class="btn btn-primary mb-3">Add to Cart</a>
 
+            <form asp-controller="CartItems" asp-action="AddToCart" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="id" value="@Model.BookId" />
+                <input type="hidden" name="quantity" id="quantityInput" value="1" />
+                <button type="submit" class="btn btn-primary mb-3">Add to Cart</button>
+            </form>
             <!-- Delivery Information -->
 
             <!-- Genres -->
@@ -74,19 +78,39 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         const quantityInput = document.getElementById('quantity');
-        document.getElementById('quantityUp').addEventListener('click', function () {
-            quantityInput.value = parseInt(quantityInput.value) + 1;
+        const hiddenQuantityInput = document.getElementById('quantityInput');
+        const quantityUp = document.getElementById('quantityUp');
+        const quantityDown = document.getElementById('quantityDown');
+        const maxStock = parseInt(quantityInput.getAttribute('data-stock'));
+        
+        // Update the hidden input when the visible one changes
+        quantityInput.addEventListener('change', function() {
+            let value = parseInt(this.value);
+            if (value < 1) value = 1;
+            if (value > maxStock) value = maxStock;
+            this.value = value;
+            hiddenQuantityInput.value = value;
         });
-        document.getElementById('quantityDown').addEventListener('click', function () {
-            if (parseInt(quantityInput.value) > 1) {
-                quantityInput.value = parseInt(quantityInput.value) - 1;
+        
+        quantityUp.addEventListener('click', function() {
+            let currentVal = parseInt(quantityInput.value);
+            if (currentVal < maxStock) {
+                quantityInput.value = currentVal + 1;
+                hiddenQuantityInput.value = currentVal + 1;
+            }
+        });
+        
+        quantityDown.addEventListener('click', function() {
+            let currentVal = parseInt(quantityInput.value);
+            if (currentVal > 1) {
+                quantityInput.value = currentVal - 1;
+                hiddenQuantityInput.value = currentVal - 1;
             }
         });
     });
 </script>
-
 <style>
     .badge {
         margin-right: 5px;
