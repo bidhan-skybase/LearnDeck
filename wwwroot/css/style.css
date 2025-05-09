@@ -513,6 +513,7 @@ input{
   bottom: 120px;
   left: 0;
   right: 0;
+  right: 0;
   text-align: center;
   cursor: pointer;
   transition: 0.5s ease-out;

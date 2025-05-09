@@ -2,6 +2,7 @@ using System.Diagnostics;
 using Ghayal_Bhaag.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Ghayal_Bhaag.Controllers
 {
@@ -9,16 +10,23 @@ namespace Ghayal_Bhaag.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
-        public IActionResult List()
+        public async Task<IActionResult> List()
         {
-            return View();
+            var books = await _context.Book
+                .Where(b => b.NewArrival == true)
+                .ToListAsync();
+
+            return View(books);
         }
+        
 
         public IActionResult About()
         {
