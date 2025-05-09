@@ -5,88 +5,96 @@
       "PackagePath": "staticwebassets/LearnDeck.7kx1bps29p.bundle.scp.css"
     },
     {
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/css/ajax-loader.gif",
+      "PackagePath": "staticwebassets/css/ajax-loader.gif"
+    },
+    {
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/css/bootstrap.min.css",
+      "PackagePath": "staticwebassets/css/bootstrap.min.css"
+    },
+    {
       "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
+    },
+    {
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/css/style.css",
+      "PackagePath": "staticwebassets/css/style.css"
+    },
+    {
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/css/vendor.css",
+      "PackagePath": "staticwebassets/css/vendor.css"
     },
     {
       "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/favicon.ico",
       "PackagePath": "staticwebassets/favicon.ico"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/banner-image-bg-1.jpg",
-      "PackagePath": "staticwebassets/images/banner-image-bg-1.jpg"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/BOOKMART.png",
+      "PackagePath": "staticwebassets/images/BOOKMART.png"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/banner-image-bg.jpg",
-      "PackagePath": "staticwebassets/images/banner-image-bg.jpg"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/ajax-loader.gif",
+      "PackagePath": "staticwebassets/images/ajax-loader.gif"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/banner-image.png",
-      "PackagePath": "staticwebassets/images/banner-image.png"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/banner-img1.png",
+      "PackagePath": "staticwebassets/images/banner-img1.png"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/banner-image1.png",
-      "PackagePath": "staticwebassets/images/banner-image1.png"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/banner-img2.png",
+      "PackagePath": "staticwebassets/images/banner-img2.png"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/banner-image2.png",
-      "PackagePath": "staticwebassets/images/banner-image2.png"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/banner-img3.png",
+      "PackagePath": "staticwebassets/images/banner-img3.png"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/banner-image3.png",
-      "PackagePath": "staticwebassets/images/banner-image3.png"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/banner-img4.png",
+      "PackagePath": "staticwebassets/images/banner-img4.png"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/category1.jpg",
-      "PackagePath": "staticwebassets/images/category1.jpg"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/book1.png",
+      "PackagePath": "staticwebassets/images/book1.png"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/category2.jpg",
-      "PackagePath": "staticwebassets/images/category2.jpg"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/book2.png",
+      "PackagePath": "staticwebassets/images/book2.png"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/category3.jpg",
-      "PackagePath": "staticwebassets/images/category3.jpg"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/book3.png",
+      "PackagePath": "staticwebassets/images/book3.png"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/dhl.png",
-      "PackagePath": "staticwebassets/images/dhl.png"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/book_holder.png",
+      "PackagePath": "staticwebassets/images/book_holder.png"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/insta-item1.jpg",
-      "PackagePath": "staticwebassets/images/insta-item1.jpg"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets/images/bootstrap.bundle.min.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/insta-item2.jpg",
-      "PackagePath": "staticwebassets/images/insta-item2.jpg"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/cart-img1.jpg",
+      "PackagePath": "staticwebassets/images/cart-img1.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/insta-item3.jpg",
-      "PackagePath": "staticwebassets/images/insta-item3.jpg"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/cart-img2.jpg",
+      "PackagePath": "staticwebassets/images/cart-img2.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/insta-item4.jpg",
-      "PackagePath": "staticwebassets/images/insta-item4.jpg"
-    },
-    {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/insta-item5.jpg",
-      "PackagePath": "staticwebassets/images/insta-item5.jpg"
-    },
-    {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/insta-item6.jpg",
-      "PackagePath": "staticwebassets/images/insta-item6.jpg"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/jquery-1.11.0.min.js",
+      "PackagePath": "staticwebassets/images/jquery-1.11.0.min.js"
     },
     {
       "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/main-logo.png",
       "PackagePath": "staticwebassets/images/main-logo.png"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/mastercard.jpg",
-      "PackagePath": "staticwebassets/images/mastercard.jpg"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/modernizr.js",
+      "PackagePath": "staticwebassets/images/modernizr.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/paypal.jpg",
-      "PackagePath": "staticwebassets/images/paypal.jpg"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/plugins.js",
+      "PackagePath": "staticwebassets/images/plugins.js"
     },
     {
       "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/post-item1.jpg",
@@ -105,64 +113,84 @@
       "PackagePath": "staticwebassets/images/post-item4.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item1.png",
-      "PackagePath": "staticwebassets/images/product-item1.png"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item1.jpg",
+      "PackagePath": "staticwebassets/images/product-item1.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item10.png",
-      "PackagePath": "staticwebassets/images/product-item10.png"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item10.jpg",
+      "PackagePath": "staticwebassets/images/product-item10.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item11.png",
-      "PackagePath": "staticwebassets/images/product-item11.png"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item2.jpg",
+      "PackagePath": "staticwebassets/images/product-item2.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item12.png",
-      "PackagePath": "staticwebassets/images/product-item12.png"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item3.jpg",
+      "PackagePath": "staticwebassets/images/product-item3.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item2.png",
-      "PackagePath": "staticwebassets/images/product-item2.png"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item4.jpg",
+      "PackagePath": "staticwebassets/images/product-item4.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item3.png",
-      "PackagePath": "staticwebassets/images/product-item3.png"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item5.jpg",
+      "PackagePath": "staticwebassets/images/product-item5.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item4.png",
-      "PackagePath": "staticwebassets/images/product-item4.png"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item6.jpg",
+      "PackagePath": "staticwebassets/images/product-item6.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item5.png",
-      "PackagePath": "staticwebassets/images/product-item5.png"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item7.jpg",
+      "PackagePath": "staticwebassets/images/product-item7.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item6.png",
-      "PackagePath": "staticwebassets/images/product-item6.png"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item8.jpg",
+      "PackagePath": "staticwebassets/images/product-item8.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item7.png",
-      "PackagePath": "staticwebassets/images/product-item7.png"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item9.jpg",
+      "PackagePath": "staticwebassets/images/product-item9.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item8.png",
-      "PackagePath": "staticwebassets/images/product-item8.png"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/script.js",
+      "PackagePath": "staticwebassets/images/script.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item9.png",
-      "PackagePath": "staticwebassets/images/product-item9.png"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/single-image3.jpg",
+      "PackagePath": "staticwebassets/images/single-image3.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/search-icon.png",
-      "PackagePath": "staticwebassets/images/search-icon.png"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/single-post.jpg",
+      "PackagePath": "staticwebassets/images/single-post.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/shippingcard.png",
-      "PackagePath": "staticwebassets/images/shippingcard.png"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/video-image.jpg",
+      "PackagePath": "staticwebassets/images/video-image.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/visa.jpg",
-      "PackagePath": "staticwebassets/images/visa.jpg"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/js/ajax-loader.gif",
+      "PackagePath": "staticwebassets/js/ajax-loader.gif"
+    },
+    {
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/js/bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets/js/bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/js/jquery-1.11.0.min.js",
+      "PackagePath": "staticwebassets/js/jquery-1.11.0.min.js"
+    },
+    {
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/js/modernizr.js",
+      "PackagePath": "staticwebassets/js/modernizr.js"
+    },
+    {
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/js/plugins.js",
+      "PackagePath": "staticwebassets/js/plugins.js"
+    },
+    {
+      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/js/script.js",
+      "PackagePath": "staticwebassets/js/script.js"
     },
     {
       "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/js/site.js",

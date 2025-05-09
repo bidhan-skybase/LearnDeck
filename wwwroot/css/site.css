@@ -1,75 +1,50 @@
-html {
-  font-size: 14px;
+
+/* 
+   Add this to your site.css or custom.css file 
+   (typically located in wwwroot/css/ in ASP.NET Core projects)
+*/
+
+/* Basic form controls with custom borders */
+.form-control, .form-select {
+  border: 2px solid #dee2e6;  /* Light gray border */
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.form-control:focus, .form-select:focus {
+  border-color: #6c757d;  /* Darker gray border on focus */
+  box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, 0.25);  /* Custom focus shadow */
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+/* Floating label adjustments */
+.form-floating > .form-control,
+.form-floating > .form-select {
+  border: 2px solid #dee2e6;  /* Light gray border */
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+.form-floating > .form-control:focus,
+.form-floating > .form-select:focus {
+  border-color: #6c757d;  /* Darker gray border on focus */
 }
 
-body {
-  margin-bottom: 60px;
+/* Custom styling for checkboxes */
+.form-check-input {
+  border: 2px solid #dee2e6;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+.form-check-input:checked {
+  background-color: #6c757d;
+  border-color: #6c757d;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+/* Optional: Custom validation styles */
+.form-control.is-invalid,
+.was-validated .form-control:invalid {
+  border-color: #dc3545;  /* Red border for invalid */
+  border-width: 2px;      /* Keep consistent border width */
 }
 
-.hover-effect {
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.hover-effect:after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  background: red;
-  bottom: 5px;
-  left: 50%;
-  transform: translateX(-50%);
-  transition: width 0.3s ease;
-}
-
-.hover-effect:hover:after {
-  width: 70%;
-}
-
-.hover-effect:hover {
-  transform: translateY(-2px);
-}
-
-.dropdown-item {
-  transition: background-color 0.2s ease;
-  padding: 8px 16px;
-}
-
-.dropdown-menu {
-  border: none;
-  border-radius: 8px;
-}
-
-.navbar-toggler:focus {
-  box-shadow: none;
-}
-
-.navbar {
-  padding-top: 12px;
-  padding-bottom: 12px;
+.form-control.is-valid,
+.was-validated .form-control:valid {
+  border-color: #198754;  /* Green border for valid */
+  border-width: 2px;      /* Keep consistent border width */
 }

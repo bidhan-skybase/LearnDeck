@@ -1,98 +1,164 @@
 ﻿@model Ghayal_Bhaag.Models.Book
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Add New Book";
 }
 
-<h1>Create</h1>
-
-<h4>Book</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateBook">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="title" class="control-label"></label>
-                <input asp-for="title" class="form-control" />
-                <span asp-validation-for="title" class="text-danger"></span>
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-light">
+                    <h4 class="mb-0">Add New Book</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="CreateBook">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        
+                        <div class="row">
+                            <!-- Book Basic Info -->
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <input asp-for="title" class="form-control" placeholder=" " />
+                                    <label asp-for="title"></label>
+                                    <span asp-validation-for="title" class="text-danger"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <input asp-for="ISBN" class="form-control" placeholder=" " />
+                                    <label asp-for="ISBN"></label>
+                                    <span asp-validation-for="ISBN" class="text-danger"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <input asp-for="DateReleased" class="form-control" placeholder=" " />
+                                    <label asp-for="DateReleased"></label>
+                                    <span asp-validation-for="DateReleased" class="text-danger"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <input asp-for="publisher" class="form-control" placeholder=" " />
+                                    <label asp-for="publisher"></label>
+                                    <span asp-validation-for="publisher" class="text-danger"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <input asp-for="genre" class="form-control" placeholder=" " />
+                                    <label asp-for="genre"></label>
+                                    <span asp-validation-for="genre" class="text-danger"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <input asp-for="language" class="form-control" placeholder=" " />
+                                    <label asp-for="language"></label>
+                                    <span asp-validation-for="language" class="text-danger"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <select asp-for="format" class="form-select" asp-items="@Html.GetEnumSelectList(typeof(Ghayal_Bhaag.Enums.Format))"></select>
+                                    <label asp-for="format"></label>
+                                    <span asp-validation-for="format" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Description Field -->
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <textarea asp-for="description" class="form-control" style="height: 100px" placeholder=" "></textarea>
+                                <label asp-for="description"></label>
+                                <span asp-validation-for="description" class="text-danger"></span>
+                            </div>
+                        </div>
+                        
+                        <!-- Pricing & Stock -->
+                        <div class="card mb-3">
+                            <div class="card-header bg-light">
+                                <h6 class="mb-0">Pricing & Availability</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="form-floating">
+                                            <input asp-for="price" class="form-control" placeholder=" " />
+                                            <label asp-for="price"></label>
+                                            <span asp-validation-for="price" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-4 mb-3">
+                                        <div class="form-floating">
+                                            <input asp-for="discount" class="form-control" placeholder=" " />
+                                            <label asp-for="discount"></label>
+                                            <span asp-validation-for="discount" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-4 mb-3">
+                                        <div class="form-floating">
+                                            <input asp-for="stock" class="form-control" placeholder=" " />
+                                            <label asp-for="stock"></label>
+                                            <span asp-validation-for="stock" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Checkboxes -->
+                                <div class="row mt-2">
+                                    <div class="col-md-4 mb-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" asp-for="physical_access" />
+                                            <label class="form-check-label" asp-for="physical_access"></label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-4 mb-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" asp-for="on_sale" />
+                                            <label class="form-check-label" asp-for="on_sale"></label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-4 mb-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" asp-for="new_arrival" />
+                                            <label class="form-check-label" asp-for="new_arrival"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Action Buttons -->
+                        <div class="d-flex justify-content-between mt-4">
+                            <a asp-action="ListBooks" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left me-1"></i> Back to List
+                            </a>
+                            <button type="submit" class="btn btn-success">
+                                <i class="bi bi-plus-circle me-1"></i> Create Book
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="ISBN" class="control-label"></label>
-                <input asp-for="ISBN" class="form-control" />
-                <span asp-validation-for="ISBN" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateReleased" class="control-label"></label>
-                <input asp-for="DateReleased" class="form-control" />
-                <span asp-validation-for="DateReleased" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="description" class="control-label"></label>
-                <input asp-for="description" class="form-control" />
-                <span asp-validation-for="description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="publisher" class="control-label"></label>
-                <input asp-for="publisher" class="form-control" />
-                <span asp-validation-for="publisher" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="genre" class="control-label"></label>
-                <input asp-for="genre" class="form-control" />
-                <span asp-validation-for="genre" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="physical_access" /> @Html.DisplayNameFor(model => model.physical_access)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="on_sale" /> @Html.DisplayNameFor(model => model.on_sale)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="new_arrival" /> @Html.DisplayNameFor(model => model.new_arrival)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="stock" class="control-label"></label>
-                <input asp-for="stock" class="form-control" />
-                <span asp-validation-for="stock" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="price" class="control-label"></label>
-                <input asp-for="price" class="form-control" />
-                <span asp-validation-for="price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="discount" class="control-label"></label>
-                <input asp-for="discount" class="form-control" />
-                <span asp-validation-for="discount" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="language" class="control-label"></label>
-                <input asp-for="language" class="form-control" />
-                <span asp-validation-for="language" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="format" class="control-label"></label>
-                <select asp-for="format" class="form-control" asp-items="@Html.GetEnumSelectList(typeof(Ghayal_Bhaag.Enums.Format))"></select>
-                <span asp-validation-for="format" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="ListBooks">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 }

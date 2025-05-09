@@ -187,7 +187,7 @@ namespace Ghayal_Bhaag.Controllers
         }
 
         // GET: Books/Delete/5
-        public async Task<IActionResult> DeletBook(int? id)
+        public async Task<IActionResult> DeleteBook(int? id)
         {
             if (id == null)
             {

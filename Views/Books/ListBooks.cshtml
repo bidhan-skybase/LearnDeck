@@ -1,130 +1,107 @@
 ﻿@model IEnumerable<Ghayal_Bhaag.Models.Book>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Books";
 }
 
-<h1>Index</h1>
+<div class="container py-4">
+    <!-- Search Form -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body bg-light">
+            @using (Html.BeginForm(FormMethod.Get))
+            {
+                <div class="row g-3 align-items-center">
+                    <div class="col-md-3">
+                        <div class="form-floating">
+                            @Html.TextBox("searchTitle", null, new { @class = "form-control", placeholder = " " })
+                            <label for="searchTitle">Book Title</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-floating">
+                            @Html.TextBox("searchDescription", null, new { @class = "form-control", placeholder = " " })
+                            <label for="searchDescription">Description</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-floating">
+                            @Html.TextBox("searchISBN", null, new { @class = "form-control", placeholder = " " })
+                            <label for="searchISBN">ISBN</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-secondary w-100 h-100">
+                            <i class="bi bi-search me-2"></i>Search
+                        </button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 
-@using (Html.BeginForm())
-{
-    <p>
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="mb-4">
+            <a asp-action="CreateBook" class="btn btn-success">
+                <i class="bi bi-plus-circle me-2"></i>Add New Book
+            </a>
+        </div>
+    }
 
-        @Html.TextBox("searchTitle") : Book name 
-        <br />
-        @Html.TextBox("searchDescription") : Book descriptin
-        <br />
-        @Html.TextBox("searchISBN") : Book ISBN
-        <br />
-        <input type = "submit" value ="Search" />
-    </p>
-}
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col">
+                <div class="card h-100 shadow-sm hover-shadow">
+                    <div class="position-relative">
+                        <img src="~/images/book_holder.png" class="card-img-top p-3" alt="@item.title"/>
+                        <span class="position-absolute top-0 end-0 badge bg-secondary m-3">
+                            $@item.price
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">@item.title</h5>
+                        <p class="card-text text-muted small">@(item.description?.Length > 100 ? item.description.Substring(0, 97) + "..." : item.description)</p>
+                    </div>
+                    <div class="card-footer bg-white">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a asp-action="GetBookDetail" asp-route-id="@item.BookId" class="btn btn-sm btn-outline-secondary">
+                                View Details
+                            </a>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <div>
+                                    <a asp-action="EditBook" asp-route-id="@item.BookId" class="btn btn-sm btn-outline-secondary">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a asp-action="DeleteBook" asp-route-id="@item.BookId" class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
 
-@if (User.IsInRole("Admin"))
-{
-<p>
-    <a asp-action="CreateBook">Create New</a>
-</p>
+<style>
+    .hover-shadow:hover {
+        transition: all 0.3s;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+    
+    .form-floating label {
+        z-index: 3;
+    }
+    
+   
+   
+</style>
+
+@section Scripts {
+    <!-- Add Bootstrap Icons if not already included in your project -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 }
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                <a asp-action="ListBooks" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.title)</a>
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ISBN)
-            </th>
-            <th>
-                <a asp-action="ListBooks" asp-route-sortOrder="@ViewData["DateSortParm"]">@Html.DisplayNameFor(model => model.DateReleased)</a>
-            </th>
-            <th>
-                <a asp-action="ListBooks" asp-route-sortOrder="@ViewData["PriceSortParm"]">@Html.DisplayNameFor(model => model.price)</a>
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.publisher)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.genre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.physical_access)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.on_sale)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.new_arrival)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.stock)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.language)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.format)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ISBN)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateReleased)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.publisher)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.genre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.physical_access)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.on_sale)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.new_arrival)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.stock)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.language)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.format)
-                </td>
-                <td>
-                    @if (User.IsInRole("Admin"))
-                    {
-					<a asp-action="EditBook" asp-route-id="@item.BookId">Edit |</a> 
-                    }
-                <a asp-action="GetBookDetail" asp-route-id="@item.BookId">Details</a> |
-                    @if (User.IsInRole("Admin"))
-                    {
-                <a asp-action="DeletBook" asp-route-id="@item.BookId">Delete</a>
-                    }
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
