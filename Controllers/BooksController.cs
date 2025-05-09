@@ -124,14 +124,27 @@ namespace Ghayal_Bhaag.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateBook([Bind("BookId,title,ISBN,DateReleased,description,discount,publisher,genre,physical_access,on_sale,new_arrival,stock,price,language,format")] Book book)
+        public async Task<IActionResult> CreateBook([Bind("BookId,title,ISBN,DateReleased,description,publisher,genre,physical_access,on_sale,new_arrival,stock,price,discount,language,format,author,imageUrl")] Book book)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(book);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(ListBooks));
+                try
+                {
+                    _context.Add(book);
+                    await _context.SaveChangesAsync();
+                    TempData["SuccessMessage"] = "Book created successfully!";
+                    return RedirectToAction(nameof(ListBooks));
+                }
+                catch (DbUpdateException ex)
+                {
+                    ModelState.AddModelError("", "Database error occurred while saving the book: " + ex.InnerException?.Message);
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "An unexpected error occurred: " + ex.Message);
+                }
             }
+            // If ModelState is invalid or save fails, return the view with errors
             return View(book);
         }
 
@@ -156,7 +169,7 @@ namespace Ghayal_Bhaag.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditBook(int id, [Bind("BookId,title,ISBN,DateReleased,description,discount,publisher,genre,physical_access,on_sale,new_arrival,stock,price,language,format")] Book book)
+        public async Task<IActionResult> EditBook(int id, [Bind("BookId,title,ISBN,DateReleased,description,discount,publisher,genre,physical_access,on_sale,new_arrival,stock,price,language,format,author,imageUrl")] Book book)
         {
             if (id != book.BookId)
             {
@@ -189,6 +202,10 @@ namespace Ghayal_Bhaag.Controllers
         // GET: Books/Delete/5
         public async Task<IActionResult> DeleteBook(int? id)
         {
+            
+            Console.WriteLine("this is the deletebook title");
+            Console.WriteLine(id);
+
             if (id == null)
             {
                 return NotFound();
@@ -205,7 +222,7 @@ namespace Ghayal_Bhaag.Controllers
         }
 
         // POST: Books/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("DeleteBook")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ConfirmDeletion(int id)
         {

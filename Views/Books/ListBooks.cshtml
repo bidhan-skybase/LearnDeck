@@ -54,7 +54,8 @@
             <div class="col">
                 <div class="card h-100 shadow-sm hover-shadow">
                     <div class="position-relative">
-                        <img src="~/images/book_holder.png" class="card-img-top p-3" alt="@item.title"/>
+                       
+                        <img src=" @(string.IsNullOrEmpty(item.imageUrl) ? Url.Content("~/images/book_holder.png") : item.imageUrl)" class="card-img-top p-3" alt="@item.title"/>
                         <span class="position-absolute top-0 end-0 badge bg-secondary m-3">
                             $@item.price
                         </span>

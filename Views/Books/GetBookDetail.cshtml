@@ -1,115 +1,112 @@
 ﻿@model Ghayal_Bhaag.Models.Book
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Book Details";
 }
 
-<h1>Details</h1>
+<div class="container py-5">
+    <div class="row">
+        <!-- Book Cover Image -->
+        <div class="col-md-4">
+            <div class="text-center">
+                <img src="@(Model.imageUrl ?? "https://via.placeholder.com/250x350")" alt="@Model.title"
+                     class="img-fluid rounded shadow-sm" style="max-width: 250px;">
+            </div>
+        </div>
 
-<div>
-    <h4>Book</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ISBN)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ISBN)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateReleased)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateReleased)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.publisher)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.publisher)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.genre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.genre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.physical_access)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.physical_access)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.on_sale)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.on_sale)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.new_arrival)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.new_arrival)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.stock)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.stock)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.price)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.discount)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.discount)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.language)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.language)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.format)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.format)
-        </dd>
-    </dl>
+        <!-- Book Details -->
+        <div class="col-md-8">
+            <h2 class="mb-3">@Html.DisplayFor(model => model.title)</h2>
+            <p class="text-muted mb-2">
+                by @Html.DisplayFor(model => model.author) <!-- Assuming 'author' is a property; add if missing --></p>
+            <div class="mb-3">
+                <span class="badge bg-secondary">Paper Back</span>
+                <!-- Assuming format; adjust if using model.format -->
+                <span class="text-warning">★ N/A</span> <span class="text-muted">(0 Book Reviews)</span>
+            </div>
+            <p class="text-muted mb-2">Sold by BookMart Nepal</p>
+
+            <!-- Synopsis -->
+            <h4 class="mt-4">Synopsis</h4>
+            <p class="text-secondary">@Html.DisplayFor(model => model.description)</p>
+
+            <!-- Price and Quantity -->
+            <div class="d-flex align-items-center mb-3">
+                <h4 class="me-3 mb-0">Rs. @Html.DisplayFor(model => model.price)</h4>
+                <div class="input-group w-25">
+                    <button class="btn btn-outline-secondary" type="button" id="quantityDown">-</button>
+                    <input type="number" class="form-control text-center" value="1" min="1" id="quantity"
+                           style="max-width: 70px;" data-stock="@Model.stock">
+                    <button class="btn btn-outline-secondary" type="button" id="quantityUp">+</button>
+                </div>
+                <span class="ms-3 text-muted">Available Stock: @Model.stock</span>
+            </div>
+            <a asp-controller="CartItems" asp-action="CreateCartItem" asp-route-id="@Model?.BookId"
+               class="btn btn-primary mb-3">Add to Cart</a>
+
+            <!-- Delivery Information -->
+
+            <!-- Genres -->
+            <h5>Genres:</h5>
+            <div class="mb-3">
+                @foreach (var genre in Model.genre.Split(',').Select(g => g.Trim()))
+                {
+                    <span class="badge bg-light text-dark me-1">@genre</span>
+                }
+            </div>
+            @if (User.IsInRole("User"))
+            {
+                <div class="mt-4">
+                    <a asp-action="ListBooks" class="btn btn-outline-secondary me-2">Back to List</a>
+                    @if (ViewData["has_purchased"].Equals("True"))
+                    {
+                        <a asp-controller="Reviews" asp-action="CreateReview" asp-route-id="@Model?.BookId"
+                           class="btn btn-outline-primary me-2">Review</a>
+                    }
+                    <a asp-controller="Bookmarks" asp-action="CreateBookMark" asp-route-id="@Model?.BookId"
+                       class="btn btn-outline-success me-2">Add to Wishlist</a>
+                </div>
+            }
+            <!-- Actions -->
+
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-action="EditBook" asp-route-id="@Model?.BookId">Edit</a> |
-    <a asp-action="ListBooks">Back to List</a>
-    <a asp-controller="CartItems" asp-action="CreateCartItem" asp-route-id="@Model?.BookId">Add To Cart</a> |
 
-    @if (ViewData["has_purchased"].Equals("True"))
-    {
-    <a asp-controller="Reviews" asp-action="CreateReview" asp-route-id="@Model?.BookId">Review | </a> 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const quantityInput = document.getElementById('quantity');
+        document.getElementById('quantityUp').addEventListener('click', function () {
+            quantityInput.value = parseInt(quantityInput.value) + 1;
+        });
+        document.getElementById('quantityDown').addEventListener('click', function () {
+            if (parseInt(quantityInput.value) > 1) {
+                quantityInput.value = parseInt(quantityInput.value) - 1;
+            }
+        });
+    });
+</script>
+
+<style>
+    .badge {
+        margin-right: 5px;
     }
 
-    <a asp-controller="Bookmarks" asp-action="CreateBookMark" asp-route-id="@Model?.BookId">Add to wishlist</a> |
-
-    @if (User.IsInRole("Admin"))
-    {
-		<a asp-controller="Discounts" asp-action="Create" asp-route-id="@Model?.BookId">Add discount</a> 
+    .input-group button {
+        padding: 0.375rem 0.75rem;
     }
-</div>
+
+    .card {
+        border: none;
+        background: #f8f9fa;
+    }
+
+    .btn-link {
+        color: #000;
+        text-decoration: none;
+    }
+
+    .btn-link:hover {
+        color: #007bff;
+    }
+</style>
