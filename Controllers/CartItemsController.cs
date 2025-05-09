@@ -191,7 +191,7 @@ namespace Ghayal_Bhaag.Controllers
         }
 
         // POST: CartItems/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("DeleteCartItem")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ConfirmCartItemDeletion(int id)
         {
