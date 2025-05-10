@@ -7,17 +7,16 @@
 
 
 
-    <form asp-action="AddOrdertoCart" asp-controller="Orders">
-        <input type="submit" value="Cart To Order" />
-    </form>
-
-
+    @* <form asp-action="AddOrdertoCart" asp-controller="Orders"> *@
+    @*     <input type="submit" value="Cart To Order" /> *@
+    @* </form> *@
+    
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.User)
+                @Html.DisplayNameFor(model => model.Book.BookTitle)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.BookId)
@@ -35,7 +34,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
+                @Html.DisplayFor(modelItem => item.Book.BookTitle)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BookId)
@@ -47,9 +46,9 @@
                 @Html.DisplayFor(modelItem => item.UnitPrice)
             </td>
             <td>
-                <a asp-action="EditCartItem" asp-route-id="@item.CartItemId">Edit</a> |
-                <a asp-action="GetCartDetails" asp-route-id="@item.CartItemId">Details</a> |
-                <a asp-action="DeleteCartItem" asp-route-id="@item.CartItemId">Delete</a>
+                <a asp-action="EditCartItem" asp-route-id="@item.CartItemId" class="btn btn-sm btn-outline-primary">Edit</a> |
+                <a asp-action="GetCartDetails" asp-route-id="@item.CartItemId" class="btn btn-sm btn-outline-secondary">Details</a> |
+                <a asp-action="DeleteCartItem" asp-route-id="@item.CartItemId" class="btn btn-sm btn-outline-danger">Delete</a>
             </td>
         </tr>
 }

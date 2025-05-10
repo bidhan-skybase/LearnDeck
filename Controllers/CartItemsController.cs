@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Ghayal_Bhaag.Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Ghayal_Bhaag.Models;
 
@@ -23,37 +22,56 @@ namespace Ghayal_Bhaag.Controllers
         // GET: CartItems
         public async Task<IActionResult> ListCartItems()
         {
-            var applicationDbContext = _context.CartItem.Include(c => c.User).Where(item=>item.Status == Enums.OrderStatus.PENDING);
-            return View(await applicationDbContext.ToListAsync());
+            var cartItems = _context.CartItem
+                .Include(c => c.User)
+                .Include(c => c.Book)
+                .Where(item => item.Status == OrderStatus.PENDING);
+            return View(await cartItems.ToListAsync());
         }
-        
-        public IActionResult CreateCartItem(int? id)
-        {
-            if (id != null)
-            {
-                Book? book = _context.Book.Find(id);
-                if (book != null)
-                {
-                    ViewData["UnitPrice"] = book.Price;
-                }
-                ViewData["BookId"] = id;
-            }
-            else
-            {
-                ViewData["BookId"] = new SelectList(_context.Book, "BookId", "BookId");
-            }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
-            return View();
-        }
-        
-        // IMPORTANT: Keep this method as it might still be referenced from other places
+
+        // POST: CartItems/AddToCart
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateCartItem([Bind("CartItemId,UserId,BookId,Quantity,UnitPrice")] CartItem cartItem)
+        [Authorize]
+        public async Task<IActionResult> AddToCart(int id, int quantity)
         {
-            cartItem.Status = OrderStatus.PENDING;
+            var book = await _context.Book.FindAsync(id);
+            if (book == null)
+            {
+                TempData["ErrorMessage"] = "Book not found.";
+                return RedirectToAction("Index", "Books");
+            }
+
+            if (quantity <= 0)
+            {
+                quantity = 1;
+            }
+            else if (quantity > book.Stock)
+            {
+                quantity = book.Stock;
+                TempData["ErrorMessage"] = $"Adjusted quantity to available stock ({book.Stock}).";
+            }
+
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId))
+            {
+                TempData["ErrorMessage"] = "User not logged in.";
+                return RedirectToAction("Login", "Account");
+            }
+
+            CartItem cartItem = new CartItem
+            {
+                UserId = userId,
+                BookId = id,
+                Quantity = quantity,
+                UnitPrice = (decimal)book.Price,
+                Status = OrderStatus.PENDING
+            };
+
             _context.Add(cartItem);
             await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Item added to cart!";
             return RedirectToAction(nameof(ListCartItems));
         }
 
@@ -67,6 +85,7 @@ namespace Ghayal_Bhaag.Controllers
 
             var cartItem = await _context.CartItem
                 .Include(c => c.User)
+                .Include(c => c.Book)
                 .FirstOrDefaultAsync(m => m.CartItemId == id);
             if (cartItem == null)
             {
@@ -76,100 +95,26 @@ namespace Ghayal_Bhaag.Controllers
             return View(cartItem);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddToCart(int id, int quantity)
+        // GET: CartItems/Edit
+        [Authorize]
+        public async Task<IActionResult> EditCartItem()
         {
-            // Find the book
-            Book? book = await _context.Book.FindAsync(id);
-            if (book == null)
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId))
             {
-                return NotFound();
+                TempData["ErrorMessage"] = "User not logged in.";
+                return RedirectToAction("Login", "Account");
             }
-            
-            // Validate quantity against stock
-            if (quantity <= 0)
-            {
-                quantity = 1;
-            }
-            else if (quantity > book.Stock)
-            {
-                quantity = book.Stock;
-            }
-            
-            // Get current user ID - replace this with your actual user ID retrieval method
-            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // If using Identity
-            
-            // Create cart item
-            CartItem cartItem = new CartItem
-            {
-                UserId = userId,
-                BookId = id,
-                Quantity = quantity,
-                UnitPrice = book.Price,
-                Status = OrderStatus.PENDING
-            };
-            
-            // Add to database
-            _context.Add(cartItem);
-            await _context.SaveChangesAsync();
-            
-            // Redirect to cart
-            return RedirectToAction(nameof(ListCartItems));
+
+            var cartItems = await _context.CartItem
+                .Include(c => c.User)
+                .Include(c => c.Book)
+                .Where(c => c.UserId == userId && c.Status == OrderStatus.PENDING)
+                .ToListAsync();
+
+            return View(cartItems);
         }
-
-        // GET: CartItems/Edit/5
-        public async Task<IActionResult> EditCartItem(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var cartItem = await _context.CartItem.FindAsync(id);
-            if (cartItem == null)
-            {
-                return NotFound();
-            }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", cartItem.UserId);
-            return View(cartItem);
-        }
-
-        // POST: CartItems/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditCartItem(int id, [Bind("CartItemId,UserId,BookId,Quantity,UnitPrice")] CartItem cartItem)
-        {
-            if (id != cartItem.CartItemId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(cartItem);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CheckCartItemExists(cartItem.CartItemId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(ListCartItems));
-            }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", cartItem.UserId);
-            return View(cartItem);
-        }
+        
 
         // GET: CartItems/Delete/5
         public async Task<IActionResult> DeleteCartItem(int? id)
@@ -181,6 +126,7 @@ namespace Ghayal_Bhaag.Controllers
 
             var cartItem = await _context.CartItem
                 .Include(c => c.User)
+                .Include(c => c.Book)
                 .FirstOrDefaultAsync(m => m.CartItemId == id);
             if (cartItem == null)
             {
@@ -193,15 +139,21 @@ namespace Ghayal_Bhaag.Controllers
         // POST: CartItems/Delete/5
         [HttpPost, ActionName("DeleteCartItem")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> ConfirmCartItemDeletion(int id)
         {
             var cartItem = await _context.CartItem.FindAsync(id);
-            if (cartItem != null)
+            if (cartItem == null)
+            {
+                TempData["ErrorMessage"] = "Cart item not found.";
+            }
+            else
             {
                 _context.CartItem.Remove(cartItem);
+                await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Cart item deleted successfully!";
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(ListCartItems));
         }
 

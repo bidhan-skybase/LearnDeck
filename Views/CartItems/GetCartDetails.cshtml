@@ -1,42 +1,36 @@
 ﻿@model Ghayal_Bhaag.Models.CartItem
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Cart Item Details";
 }
 
-<h1>Details</h1>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header text-white">
+                    <h4 class="mb-0">Cart Item Details</h4>
+                </div>
+                <div class="card-body">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-4 fw-bold">Book</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.BookId) (ID: @Html.DisplayFor(model => model.BookId))</dd>
 
-<div>
-    <h4>CartItem</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.User)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.User.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BookId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BookId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Quantity)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Quantity)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UnitPrice)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UnitPrice)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="EditCartItem" asp-route-id="@Model?.CartItemId">Edit</a> |
-    <a asp-action="ListCartItems">Back to List</a>
+                        <dt class="col-sm-4 fw-bold">Quantity</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Quantity)</dd>
+
+                        <dt class="col-sm-4 fw-bold">Unit Price</dt>
+                        <dd class="col-sm-8">Rs. @Html.DisplayFor(model => model.UnitPrice)</dd>
+
+                        <dt class="col-sm-4 fw-bold">Total</dt>
+                        <dd class="col-sm-8">Rs. @(Model.Quantity * Model.UnitPrice)</dd>
+                    </dl>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <a asp-action="EditCartItem" asp-route-id="@Model?.CartItemId" class="btn btn-primary">Edit</a>
+                    <a asp-action="ListCartItems" class="btn btn-outline-secondary">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
