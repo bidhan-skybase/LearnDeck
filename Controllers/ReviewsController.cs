@@ -144,7 +144,7 @@ namespace Ghayal_Bhaag.Controllers
         }
 
         // POST: Reviews/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("DeleteReview")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ConfirmReviewDeletion(int id)
         {

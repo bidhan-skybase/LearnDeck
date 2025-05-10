@@ -1,45 +1,65 @@
 ﻿@model Ghayal_Bhaag.Models.Review
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Review";
 }
 
-<h1>Create</h1>
+<div class="container mt-4">
+    <h1>Create Review</h1>
+    <h4>Share your thoughts about the book</h4>
+    <hr />
 
-<h4>Review</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateReview">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <select asp-for="UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <form asp-action="CreateReview" method="post" onsubmit="return confirm('Are you sure you want to submit this review?');">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <!-- Hidden UserId (set in controller) -->
+                        <input type="hidden" asp-for="UserId" />
+
+                        <div class="mb-3">
+                            <label asp-for="BookId" class="form-label"></label>
+                            <select asp-for="BookId" class="form-select" asp-items="ViewBag.BookId">
+                                <option value="">Select a book</option>
+                            </select>
+                            <span asp-validation-for="BookId" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="description" class="form-label"></label>
+                            <textarea asp-for="description" class="form-control" rows="5" placeholder="Write your review here..."></textarea>
+                            <span asp-validation-for="description" class="text-danger"></span>
+                        </div>
+
+                        <!-- CreatedDate is set in controller, not shown in form -->
+                        <input type="hidden" asp-for="CreatedDate" />
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary">Submit Review</button>
+                            <a asp-action="GetReviews" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="BookId" class="control-label"></label>
-                <select asp-for="BookId" class ="form-control" asp-items="ViewBag.BookId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="description" class="control-label"></label>
-                <input asp-for="description" class="form-control" />
-                <span asp-validation-for="description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedDate" class="control-label"></label>
-                <input asp-for="CreatedDate" class="form-control" />
-                <span asp-validation-for="CreatedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="GetReviews">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

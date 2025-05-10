@@ -12,17 +12,12 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
+           
             <th>
                 @Html.DisplayNameFor(model => model.Book)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedDate)
             </th>
             <th></th>
         </tr>
@@ -30,22 +25,17 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+           
             <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Book.BookId)
+                @Html.DisplayFor(modelItem => item.Book.BookTitle)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                <a asp-action="EditReview" asp-route-id="@item.ReviewId">Edit</a> |
-                <a asp-action="GetReviewDetail" asp-route-id="@item.ReviewId">Details</a> |
-                <a asp-action="DeleteReview" asp-route-id="@item.ReviewId">Delete</a>
+                <a asp-action="EditReview" asp-route-id="@item.ReviewId" class="btn btn-sm btn-outline-primary">Edit</a> |
+                <a asp-action="GetReviewDetail" asp-route-id="@item.ReviewId" class="btn btn-sm btn-outline-secondary">Details</a> |
+                <a asp-action="DeleteReview" asp-route-id="@item.ReviewId" class="btn btn-sm btn-outline-danger">Delete</a>
             </td>
         </tr>
 }
