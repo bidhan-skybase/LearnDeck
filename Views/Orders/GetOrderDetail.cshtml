@@ -1,86 +1,189 @@
-﻿@model Ghayal_Bhaag.Models.Order
+﻿@using Ghayal_Bhaag.Enums
+@model Ghayal_Bhaag.Models.Order
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Order Details";
 }
 
-<h1>Details</h1>
+<style>
+    .order-card {
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        background-color: #fff;
+        margin-bottom: 2rem;
+    }
+    
+    .order-header {
+        background: linear-gradient(135deg, #4a6fdc 0%, #3a5bbf 100%);
+        color: white;
+        border-radius: 8px 8px 0 0;
+        padding: 1.5rem;
+    }
+    
+    .order-content {
+        padding: 1.5rem;
+    }
+    
+    .badge-status {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.8rem;
+        border-radius: 50px;
+    }
+    
+    .badge-pending {
+        background-color: #ffc107;
+        color: #212529;
+    }
+    
+    .badge-completed {
+        background-color: #28a745;
+        color: white;
+    }
+    
+    .badge-cancelled {
+        background-color: #dc3545;
+        color: white;
+    }
+    
+    .btn-action {
+        border-radius: 4px;
+        font-weight: 500;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        padding: 0.4rem 0.8rem;
+        margin-right: 0.3rem;
+    }
+    
+    .order-items-table {
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        border-radius: 6px;
+        overflow: hidden;
+    }
+    
+    .order-items-table th {
+        background-color: #f8f9fa;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 0.5px;
+    }
+    
+    .table-hover tbody tr:hover {
+        background-color: #f1f5ff;
+    }
+    
+    .order-summary {
+        background-color: #f8f9fa;
+        border-radius: 6px;
+        padding: 1rem;
+        margin-top: 1.5rem;
+    }
+</style>
 
-<div>
-    <h4>Order</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.User)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.User.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TotalAmount)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TotalAmount)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DiscountApplied)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DiscountApplied)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-    </dl>
+<div class="container py-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Home">Home</a></li>
+            <li class="breadcrumb-item"><a asp-action="GetOrders">Orders</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Order Details</li>
+        </ol>
+    </nav>
+    
+    <div class="order-card">
+        <div class="order-header d-flex justify-content-between align-items-center">
+            <div>
+                <h2 class="mb-0">Order #@Model.OrderId</h2>
+                <p class="mb-0 mt-1">@Model.CreatedDate.ToString("MMMM dd, yyyy")</p>
+            </div>
+            <div>
+                @{
+                    string badgeClass = "badge-pending";
+                    if (Model.Status == OrderStatus.COMPLETED) 
+                    {
+                        badgeClass = "badge-completed";
+                    }
+                    else if (Model.Status == OrderStatus.CANCLED)
+                    {
+                        badgeClass = "badge-cancelled";
+                    }
+                }
+                <span class="badge badge-status @badgeClass">@Model.Status</span>
+            </div>
+        </div>
+        
+        
+        <div class="order-content">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="text-muted mb-3">Customer Information</h5>
+                    <p><strong>User ID:</strong> @Model.User.Id</p>
+                    <p><strong>Order Date:</strong> @Model.CreatedDate.ToString("MMMM dd, yyyy hh:mm tt")</p>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="text-muted mb-3">Payment Information</h5>
+                    <p><strong>Total Amount:</strong> $@Model.TotalAmount.ToString("0.00")</p>
+                    <p><strong>Discount Applied:</strong> $@Model.DiscountApplied.ToString()</p>
+                    <p><strong>Final Amount:</strong> $@((Model.TotalAmount - Model.DiscountApplied).ToString())</p>
+                </div>
+            </div>
+            
+            <h5 class="text-muted mt-4 mb-3">Order Items</h5>
+            <div class="table-responsive order-items-table">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>Book Name</th>
+                            <th>Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Total</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.OrderItems)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="fw-bold">@item.Book.BookTitle</div>
+                                </td>
+                                <td>@item.Quantity</td>
+                                <td>$@item.UnitPrice.ToString("0.00")</td>
+                                <td>$@((item.Quantity * item.UnitPrice).ToString("0.00"))</td>
+                                <td>
+                                    <a asp-action="EditOrder" asp-route-id="@item.OrderItemId" class="btn btn-sm btn-primary btn-action">
+                                        <i class="bi bi-pencil-square"></i> Edit
+                                    </a>
+                                  
+                                    <a asp-action="DeleteOrder" asp-route-id="@item.OrderItemId" class="btn btn-sm btn-danger btn-action">
+                                        <i class="bi bi-trash"></i> Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="order-summary d-flex justify-content-between align-items-center">
+                <div class="d-flex">
+                    <a asp-action="GetOrders" class="btn btn-outline-secondary me-2">
+                        <i class="bi bi-arrow-left"></i> Back to List
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
 </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Book Name
-            </th>
-            <th>
-                "Quantity"
-            </th>
-            <th>
-                "Unit Price"
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.OrderItems)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Book.BookTitle)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UnitPrice)
-                </td>
-                <td>
-                    <a asp-action="EditOrder" asp-route-id="@item.OrderItemId">Edit</a> |
-                    <a asp-action="GetOrderDetail" asp-route-id="@item.OrderItemId">Details</a> |
-                    <a asp-action="DeleteOrder" asp-route-id="@item.OrderItemId">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-<div>
-    <a asp-action="EditOrder" asp-route-id="@Model?.OrderId">Edit</a> |
-    <a asp-action="GetOrders">Back to List</a>
-</div>
+<!-- Add Bootstrap Icons to head section -->
+<script>
+    // Add Bootstrap Icons if not already included
+    if (!document.querySelector('link[href*="bootstrap-icons"]')) {
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css';
+        document.head.appendChild(link);
+    }
+</script>
