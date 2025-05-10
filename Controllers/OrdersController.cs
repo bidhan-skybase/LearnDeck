@@ -300,7 +300,7 @@ namespace Ghayal_Bhaag.Controllers
         }
 
         // POST: Orders/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("DeleteOrder")]
         [ValidateAntiForgeryToken]
         [Authorize]
         public async Task<IActionResult> ConfirmOrderDeletion(int id)
