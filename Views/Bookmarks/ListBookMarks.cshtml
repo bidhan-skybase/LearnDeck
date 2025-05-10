@@ -4,38 +4,33 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="CreateBookMark">Create New</a>
-</p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Book.BookTitle)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Book.BookTitle)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.CreatedDate)
             <td>
                 @Html.DisplayFor(modelItem => item.Book.BookTitle)
             </td>
-            </td>
+            
             <td>
-                <a asp-action="EditBookMark" asp-route-id="@item.BookmarkId">Edit</a> |
-                <a asp-action="GetBookMarkDetails" asp-route-id="@item.BookmarkId">Details</a> |
-                <a asp-action="DeleteBookMark" asp-route-id="@item.BookmarkId">Delete</a>
+                <a asp-action="GetBookMarkDetails" asp-route-id="@item.BookmarkId " class="btn btn-sm btn-outline-secondary">Details</a> |
+                <a asp-action="DeleteBookMark" asp-route-id="@item.BookmarkId" class="btn btn-sm btn-outline-danger">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

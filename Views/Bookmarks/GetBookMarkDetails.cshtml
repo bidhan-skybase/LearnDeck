@@ -4,27 +4,28 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1 class="title">Bookmark Details</h1>
 
-<div>
-    <h4>Bookmark</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
+<div class="details-section">
+    <h4 class="section-heading">Bookmark</h4>
+    <hr class="divider" />
+    <dl class="row details-list">
+        <dt class="col-sm-2 details-label">
             @Html.DisplayNameFor(model => model.User)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10 details-value">
             @Html.DisplayFor(model => model.User.Id)
         </dd>
-        <dt class = "col-sm-2">
+
+        <dt class="col-sm-2 details-label">
             @Html.DisplayNameFor(model => model.CreatedDate)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10 details-value">
             @Html.DisplayFor(model => model.CreatedDate)
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="EditBookMark" asp-route-id="@Model?.BookmarkId">Edit</a> |
-    <a asp-action="ListBookMarks">Back to List</a>
+
+<div class="action-buttons mt-3">
+    <a class="btn btn-secondary" asp-action="ListBookMarks">Back to List</a>
 </div>

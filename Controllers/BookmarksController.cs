@@ -145,7 +145,7 @@ namespace Ghayal_Bhaag.Controllers
         }
 
         // POST: Bookmarks/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("DeleteBookMark")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ConfirmDeletion(int id)
         {
