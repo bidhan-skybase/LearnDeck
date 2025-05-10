@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Ghayal_Bhaag.Migrations
+namespace LearnDeck.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -139,11 +139,10 @@ namespace Ghayal_Bhaag.Migrations
                         .HasColumnType("Date");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<float>("DiscountAmount")
-                        .HasColumnType("real");
+                    b.Property<decimal>("DiscountAmount")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Format")
                         .HasColumnType("integer");
@@ -157,7 +156,6 @@ namespace Ghayal_Bhaag.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Image")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Language")
@@ -170,8 +168,8 @@ namespace Ghayal_Bhaag.Migrations
                     b.Property<bool>("PhysicalAccess")
                         .HasColumnType("boolean");
 
-                    b.Property<float>("Price")
-                        .HasColumnType("real");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Publisher")
                         .IsRequired()
@@ -258,17 +256,18 @@ namespace Ghayal_Bhaag.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp");
 
-                    b.Property<float>("DiscountApplied")
-                        .HasColumnType("real");
+                    b.Property<decimal?>("DiscountApplied")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<float>("TotalAmount")
-                        .HasColumnType("real");
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<int>("status")
-                        .HasColumnType("integer");
 
                     b.HasKey("OrderId");
 
@@ -285,17 +284,17 @@ namespace Ghayal_Bhaag.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("OrderItemId"));
 
-                    b.Property<int?>("BookId")
+                    b.Property<int>("BookId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("OrderId")
+                    b.Property<int>("OrderId")
                         .HasColumnType("integer");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
-                    b.Property<float>("UnitPrice")
-                        .HasColumnType("real");
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("OrderItemId");
 
@@ -509,7 +508,9 @@ namespace Ghayal_Bhaag.Migrations
                 {
                     b.HasOne("Ghayal_Bhaag.Areas.Identity.Data.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -518,11 +519,15 @@ namespace Ghayal_Bhaag.Migrations
                 {
                     b.HasOne("Ghayal_Bhaag.Models.Book", "Book")
                         .WithMany()
-                        .HasForeignKey("BookId");
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Ghayal_Bhaag.Models.Order", "Order")
                         .WithMany()
-                        .HasForeignKey("OrderId");
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Book");
 

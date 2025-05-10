@@ -4,10 +4,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Ghayal_Bhaag.Migrations
+namespace LearnDeck.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialPostgresMigration : Migration
+    public partial class UpdateModels : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,8 +18,8 @@ namespace Ghayal_Bhaag.Migrations
                 {
                     AnouncementId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    title = table.Column<string>(type: "text", nullable: true),
-                    description = table.Column<string>(type: "text", nullable: true),
+                    Title = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
                     StartDate = table.Column<DateTime>(type: "Date", nullable: false),
                     EndDate = table.Column<DateTime>(type: "Date", nullable: false)
                 },
@@ -75,20 +75,22 @@ namespace Ghayal_Bhaag.Migrations
                 {
                     BookId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    title = table.Column<string>(type: "text", nullable: false),
+                    BookTitle = table.Column<string>(type: "text", nullable: false),
                     ISBN = table.Column<string>(type: "text", nullable: false),
                     DateReleased = table.Column<DateTime>(type: "Date", nullable: true),
-                    description = table.Column<string>(type: "text", nullable: false),
-                    publisher = table.Column<string>(type: "text", nullable: false),
-                    genre = table.Column<string>(type: "text", nullable: false),
-                    physical_access = table.Column<bool>(type: "boolean", nullable: false),
-                    on_sale = table.Column<bool>(type: "boolean", nullable: false),
-                    new_arrival = table.Column<bool>(type: "boolean", nullable: false),
-                    stock = table.Column<int>(type: "integer", nullable: false),
-                    price = table.Column<float>(type: "real", nullable: false),
-                    discount = table.Column<float>(type: "real", nullable: false),
-                    language = table.Column<string>(type: "text", nullable: false),
-                    format = table.Column<int>(type: "integer", nullable: false)
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Publisher = table.Column<string>(type: "text", nullable: false),
+                    Genre = table.Column<string>(type: "text", nullable: false),
+                    PhysicalAccess = table.Column<bool>(type: "boolean", nullable: false),
+                    Sale = table.Column<bool>(type: "boolean", nullable: false),
+                    NewArrival = table.Column<bool>(type: "boolean", nullable: false),
+                    Stock = table.Column<int>(type: "integer", nullable: false),
+                    Price = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
+                    DiscountAmount = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
+                    Language = table.Column<string>(type: "text", nullable: false),
+                    Format = table.Column<int>(type: "integer", nullable: false),
+                    Author = table.Column<string>(type: "text", nullable: false),
+                    Image = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -202,38 +204,16 @@ namespace Ghayal_Bhaag.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CartItem",
-                columns: table => new
-                {
-                    CartItemId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<string>(type: "text", nullable: true),
-                    BookId = table.Column<int>(type: "integer", nullable: false),
-                    status = table.Column<int>(type: "integer", nullable: true),
-                    Quantity = table.Column<int>(type: "integer", nullable: true),
-                    UnitPrice = table.Column<float>(type: "real", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CartItem", x => x.CartItemId);
-                    table.ForeignKey(
-                        name: "FK_CartItem_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Order",
                 columns: table => new
                 {
                     OrderId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<string>(type: "text", nullable: true),
+                    UserId = table.Column<string>(type: "text", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp", nullable: false),
-                    TotalAmount = table.Column<float>(type: "real", nullable: false),
-                    DiscountApplied = table.Column<float>(type: "real", nullable: false),
-                    status = table.Column<int>(type: "integer", nullable: false)
+                    TotalAmount = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
+                    DiscountApplied = table.Column<decimal>(type: "numeric(18,2)", nullable: true),
+                    Status = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -242,7 +222,8 @@ namespace Ghayal_Bhaag.Migrations
                         name: "FK_Order_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -268,6 +249,35 @@ namespace Ghayal_Bhaag.Migrations
                         column: x => x.BookId,
                         principalTable: "Book",
                         principalColumn: "BookId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CartItem",
+                columns: table => new
+                {
+                    CartItemId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<string>(type: "text", nullable: false),
+                    BookId = table.Column<int>(type: "integer", nullable: false),
+                    Status = table.Column<int>(type: "integer", nullable: false),
+                    Quantity = table.Column<int>(type: "integer", nullable: false),
+                    UnitPrice = table.Column<decimal>(type: "numeric(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CartItem", x => x.CartItemId);
+                    table.ForeignKey(
+                        name: "FK_CartItem_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CartItem_Book_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Book",
+                        principalColumn: "BookId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -302,10 +312,10 @@ namespace Ghayal_Bhaag.Migrations
                 {
                     OrderItemId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    OrderId = table.Column<int>(type: "integer", nullable: true),
-                    BookId = table.Column<int>(type: "integer", nullable: true),
+                    OrderId = table.Column<int>(type: "integer", nullable: false),
+                    BookId = table.Column<int>(type: "integer", nullable: false),
                     Quantity = table.Column<int>(type: "integer", nullable: false),
-                    UnitPrice = table.Column<float>(type: "real", nullable: false)
+                    UnitPrice = table.Column<decimal>(type: "numeric(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -314,12 +324,14 @@ namespace Ghayal_Bhaag.Migrations
                         name: "FK_OrderItem_Book_BookId",
                         column: x => x.BookId,
                         principalTable: "Book",
-                        principalColumn: "BookId");
+                        principalColumn: "BookId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_OrderItem_Order_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Order",
-                        principalColumn: "OrderId");
+                        principalColumn: "OrderId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -368,6 +380,11 @@ namespace Ghayal_Bhaag.Migrations
                 name: "IX_Bookmark_UserId",
                 table: "Bookmark",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartItem_BookId",
+                table: "CartItem",
+                column: "BookId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CartItem_UserId",

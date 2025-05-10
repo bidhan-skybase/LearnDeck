@@ -50,6 +50,13 @@
                 <a asp-action="GetCartDetails" asp-route-id="@item.CartItemId" class="btn btn-sm btn-outline-secondary">Details</a> |
                 <a asp-action="DeleteCartItem" asp-route-id="@item.CartItemId" class="btn btn-sm btn-outline-danger">Delete</a>
             </td>
+         
+            <td>
+                <form asp-controller="Orders" asp-action="AddOrdertoCart" method="post">
+                    <button type="submit" class="btn btn-primary">Checkout</button>
+                </form>
+            </td>
+           
         </tr>
 }
     </tbody>

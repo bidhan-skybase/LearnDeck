@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using Ghayal_Bhaag.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNet.Identity;
-using static System.Reflection.Metadata.BlobBuilder;
+using Ghayal_Bhaag.Models;
+using Ghayal_Bhaag.Enums;
 
 namespace Ghayal_Bhaag.Controllers
 {
@@ -44,7 +44,10 @@ namespace Ghayal_Bhaag.Controllers
             {
                 return NotFound();
             }
-            order.OrderItems = _context.OrderItem.Where(o => o.OrderId == id).Include(item => item.Book);
+            order.OrderItems = await _context.OrderItem
+                .Where(o => o.OrderId == id)
+                .Include(item => item.Book)
+                .ToListAsync();
 
             return View(order);
         }
@@ -52,104 +55,177 @@ namespace Ghayal_Bhaag.Controllers
         // GET: Orders/Create
         public IActionResult CreateOrder()
         {
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "UserName");
             return View();
         }
 
         // POST: Orders/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateOrder([Bind("OrderId,UserId,CreatedDate,TotalAmount,DiscountApplied,status")] Order order)
+        [Authorize]
+        public async Task<IActionResult> CreateOrder([Bind("OrderId,UserId,CreatedDate,TotalAmount,DiscountApplied,Status")] Order order)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(order);
                 await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Order created successfully!";
                 return RedirectToAction(nameof(GetOrders));
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", order.UserId);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "UserName", order.UserId);
+            TempData["ErrorMessage"] = "Please correct the errors and try again.";
             return View(order);
         }
 
+        // POST: Orders/AddOrdertoCart
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //Create a order and query the order
-        //Get all the cart items that are in pending state
-        //Convert all the cart item to order items in a loop and add to the database
+        [Authorize]
         public async Task<IActionResult> AddOrdertoCart()
         {
-            List<CartItem> cartItems = _context.CartItem.Where(item => item.Status == Enums.OrderStatus.PENDING).ToList();
-
-            if (cartItems.Count > 0)
+            string userId = User.Identity.GetUserId();
+            if (string.IsNullOrEmpty(userId))
             {
-                Order order = new Order();
-                order.UserId = User.Identity.GetUserId();
-                DateTime now = DateTime.UtcNow;
-                order.CreatedDate = now;
-
-                _context.Add(order);
-                await _context.SaveChangesAsync();
-
-                Order? added_order = _context.Order.Where(item => item.CreatedDate == now).First();
-
-                float total_amount = 0;
-
-                if(added_order != null)
-                {
-                    foreach(CartItem cart_item in  cartItems)
-                    {
-                        OrderItem order_item = new OrderItem();
-                        order_item.Order = added_order;
-                        order_item.OrderId = added_order.OrderId;
-                        order_item.BookId = cart_item.BookId;
-                        order_item.Quantity = (int)cart_item.Quantity;
-                        order_item.UnitPrice = (float)cart_item.UnitPrice;
-
-                        Book? book = _context.Book.Find(cart_item.BookId);
-
-                        float total_book_price = order_item.Quantity * order_item.UnitPrice;
-
-
-                        if (book != null)
-                        {
-                            if (book.Sale)
-                            {
-                                total_book_price -= book.DiscountAmount * order_item.Quantity;
-                            }
-                            total_amount += total_book_price;
-                        }
-
-                        cart_item.Status = Enums.OrderStatus.COMPLETED;
-                        _context.CartItem.Update(cart_item);
-                        _context.OrderItem.Add(order_item);
-                    }
-
-                    //Member can get 5 % discounts for an order of 5 + books
-                    if (cartItems.Count >= 5)
-                    {
-                        float discount = 0;
-                        discount = 5 / 100 * total_amount;
-                        total_amount -= 5;
-                    }
-
-                    // 10% stackable discount after 10 successful orders
-
-                    List<Order> succ_orders = _context.Order.Where(o=> o.UserId == User.Identity.GetUserId()).Where(o=>o.status == Enums.OrderStatus.COMPLETED).ToList();
-
-                    if (succ_orders.Count == 10)
-                    {
-                        float discount = 0;
-                        discount = 10 / 100 * total_amount;
-                        total_amount -= 5;
-                    }
-
-                    added_order.TotalAmount = total_amount;
-                    _context.Order.Update(added_order);
-                }
-                await _context.SaveChangesAsync();
+                TempData["ErrorMessage"] = "User not logged in.";
+                return RedirectToAction("Login", "Account");
             }
+
+            var cartItems = await _context.CartItem
+                .Where(item => item.Status == OrderStatus.PENDING && item.UserId == userId)
+                .Include(item => item.Book)
+                .ToListAsync();
+
+            if (!cartItems.Any())
+            {
+                TempData["ErrorMessage"] = "No pending cart items to checkout.";
+                return RedirectToAction("ListCartItems", "CartItems");
+            }
+
+            var order = new Order
+            {
+                UserId = userId,
+                CreatedDate = DateTime.UtcNow,
+                Status = OrderStatus.PENDING
+            };
+
+            _context.Add(order);
+            await _context.SaveChangesAsync();
+
+            decimal totalAmount = 0;
+            foreach (var cartItem in cartItems)
+            {
+                var orderItem = new OrderItem
+                {
+                    OrderId = order.OrderId,
+                    BookId = cartItem.BookId,
+                    Quantity = cartItem.Quantity,
+                    UnitPrice = cartItem.UnitPrice
+                };
+
+                decimal totalBookPrice = orderItem.Quantity * orderItem.UnitPrice;
+                if (cartItem.Book.Sale)
+                {
+                    totalBookPrice -= cartItem.Book.DiscountAmount * orderItem.Quantity;
+                }
+                totalAmount += totalBookPrice;
+
+                cartItem.Status = OrderStatus.COMPLETED;
+                _context.CartItem.Update(cartItem);
+                _context.OrderItem.Add(orderItem);
+            }
+
+            // Apply discounts
+            if (cartItems.Count >= 5)
+            {
+                decimal discount = totalAmount * 0.05m; // 5% discount
+                totalAmount -= discount;
+                order.DiscountApplied = (order.DiscountApplied ?? 0) + discount;
+            }
+
+            var successfulOrders = await _context.Order
+                .Where(o => o.UserId == userId && o.Status == OrderStatus.COMPLETED)
+                .CountAsync();
+            if (successfulOrders >= 10)
+            {
+                decimal discount = totalAmount * 0.10m; // 10% discount
+                totalAmount -= discount;
+                order.DiscountApplied = (order.DiscountApplied ?? 0) + discount;
+            }
+
+            order.TotalAmount = totalAmount;
+            _context.Order.Update(order);
+            await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Order created successfully!";
+            return RedirectToAction(nameof(GetOrders));
+        }
+
+        // POST: Orders/CheckoutSingleCartItem
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> CheckoutSingleCartItem(int id)
+        {
+            string userId = User.Identity.GetUserId();
+            if (string.IsNullOrEmpty(userId))
+            {
+                TempData["ErrorMessage"] = "User not logged in.";
+                return RedirectToAction("Login", "Account");
+            }
+
+            var cartItem = await _context.CartItem
+                .Include(item => item.Book)
+                .FirstOrDefaultAsync(item => item.CartItemId == id && item.UserId == userId && item.Status == OrderStatus.PENDING);
+
+            if (cartItem == null)
+            {
+                TempData["ErrorMessage"] = "Cart item not found or already processed.";
+                return RedirectToAction("ListCartItems", "CartItems");
+            }
+
+            var order = new Order
+            {
+                UserId = userId,
+                CreatedDate = DateTime.UtcNow,
+                Status = OrderStatus.PENDING
+            };
+
+            _context.Add(order);
+            await _context.SaveChangesAsync();
+
+            var orderItem = new OrderItem
+            {
+                OrderId = order.OrderId,
+                BookId = cartItem.BookId,
+                Quantity = cartItem.Quantity,
+                UnitPrice = cartItem.UnitPrice
+            };
+
+            decimal totalAmount = orderItem.Quantity * orderItem.UnitPrice;
+            if (cartItem.Book.Sale)
+            {
+                totalAmount -= cartItem.Book.DiscountAmount * orderItem.Quantity;
+            }
+
+            // Apply loyalty discount
+            var successfulOrders = await _context.Order
+                .Where(o => o.UserId == userId && o.Status == OrderStatus.COMPLETED)
+                .CountAsync();
+            if (successfulOrders >= 10)
+            {
+                decimal discount = totalAmount * 0.10m; // 10% discount
+                totalAmount -= discount;
+                order.DiscountApplied = discount;
+            }
+
+            order.TotalAmount = totalAmount;
+            cartItem.Status = OrderStatus.COMPLETED;
+            _context.Order.Update(order);
+            _context.CartItem.Update(cartItem);
+            _context.OrderItem.Add(orderItem);
+            await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Order created successfully for the selected item!";
             return RedirectToAction(nameof(GetOrders));
         }
 
@@ -166,16 +242,15 @@ namespace Ghayal_Bhaag.Controllers
             {
                 return NotFound();
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", order.UserId);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "UserName", order.UserId);
             return View(order);
         }
 
         // POST: Orders/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditOrder(int id, [Bind("OrderId,UserId,CreatedDate,TotalAmount,DiscountApplied,status")] Order order)
+        [Authorize]
+        public async Task<IActionResult> EditOrder(int id, [Bind("OrderId,UserId,CreatedDate,TotalAmount,DiscountApplied,Status")] Order order)
         {
             if (id != order.OrderId)
             {
@@ -188,6 +263,7 @@ namespace Ghayal_Bhaag.Controllers
                 {
                     _context.Update(order);
                     await _context.SaveChangesAsync();
+                    TempData["SuccessMessage"] = "Order updated successfully!";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -195,14 +271,12 @@ namespace Ghayal_Bhaag.Controllers
                     {
                         return NotFound();
                     }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;
                 }
                 return RedirectToAction(nameof(GetOrders));
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", order.UserId);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "UserName", order.UserId);
+            TempData["ErrorMessage"] = "Please correct the errors and try again.";
             return View(order);
         }
 
@@ -228,15 +302,21 @@ namespace Ghayal_Bhaag.Controllers
         // POST: Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> ConfirmOrderDeletion(int id)
         {
             var order = await _context.Order.FindAsync(id);
-            if (order != null)
+            if (order == null)
+            {
+                TempData["ErrorMessage"] = "Order not found.";
+            }
+            else
             {
                 _context.Order.Remove(order);
+                await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Order deleted successfully!";
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(GetOrders));
         }
 

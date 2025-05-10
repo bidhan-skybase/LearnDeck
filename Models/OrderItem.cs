@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ghayal_Bhaag.Models
 {
@@ -9,15 +9,21 @@ namespace Ghayal_Bhaag.Models
         public int OrderItemId { get; set; }
 
         [ForeignKey("Order")]
-        public int? OrderId { get; set; }
+        [Required]
+        public int OrderId { get; set; }
+
         public Order Order { get; set; } = null!;
 
         [ForeignKey("Book")]
-        public int? BookId { get; set; }
+        [Required]
+        public int BookId { get; set; }
+
         public Book Book { get; set; } = null!;
 
+        [Range(1, int.MaxValue)]
         public int Quantity { get; set; }
-        public float UnitPrice { get; set; }
 
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal UnitPrice { get; set; }
     }
 }
