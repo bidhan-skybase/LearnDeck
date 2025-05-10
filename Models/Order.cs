@@ -16,9 +16,9 @@ namespace Ghayal_Bhaag.Models
 
         public ApplicationUser User { get; set; } = null!;
 
-        // For PostgreSQL, use timestamp instead of datetime
-        [Column(TypeName = "timestampz")]
-        public DateTime CreatedDate { get; set; }
+        [Column(TypeName = "Date")]
+        public DateTime? CreatedDate { get; set; }
+       
 
         [Column(TypeName = "decimal(18,2)")]
         public decimal TotalAmount { get; set; }

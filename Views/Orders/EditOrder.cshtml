@@ -1,53 +1,183 @@
 ﻿@model Ghayal_Bhaag.Models.Order
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Order";
 }
 
-<h1>Edit</h1>
+<div class="container py-4">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Home">Home</a></li>
+            <li class="breadcrumb-item"><a asp-action="GetOrders">Orders</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit Order</li>
+        </ol>
+    </nav>
 
-<h4>Order</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="EditOrder">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="OrderId" />
-            <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
-                <span asp-validation-for="UserId" class="text-danger"></span>
+    <!-- Page Header -->
+    <div class="bg-gradient text-white rounded-3 p-4 mb-4" style="background: linear-gradient(135deg, #4a6fdc 0%, #3a5bbf 100%);">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h1 class="mb-0">Edit Order</h1>
+                <p class="mb-0 mt-1">Modify order #@Model.OrderId</p>
             </div>
-            <div class="form-group">
-                <label asp-for="CreatedDate" class="control-label"></label>
-                <input asp-for="CreatedDate" class="form-control" />
-                <span asp-validation-for="CreatedDate" class="text-danger"></span>
+            <div>
+                <span class="badge rounded-pill px-3 py-2" style="background-color: #f8f9fa; color: #333;">
+                    Order #@Model.OrderId
+                </span>
             </div>
-            <div class="form-group">
-                <label asp-for="TotalAmount" class="control-label"></label>
-                <input asp-for="TotalAmount" class="form-control" />
-                <span asp-validation-for="TotalAmount" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Card Container -->
+            <div class="card shadow-sm border-0 rounded-3 mb-4">
+                <div class="card-body">
+                    <form asp-action="EditOrder">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        <input type="hidden" asp-for="OrderId" />
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <h5 class="text-secondary mb-3">Customer Information</h5>
+                                
+                                <div class="mb-3">
+                                    <label asp-for="UserId" class="form-label fw-bold"></label>
+                                    <select asp-for="UserId" class="form-select" asp-items="ViewBag.UserId"></select>
+                                    <span asp-validation-for="UserId" class="text-danger"></span>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label asp-for="CreatedDate" class="form-label fw-bold"></label>
+                                    <input asp-for="CreatedDate" class="form-control" />
+                                    <span asp-validation-for="CreatedDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <h5 class="text-secondary mb-3">Order Information</h5>
+                                
+                                <div class="mb-3">
+                                    <label asp-for="Status" class="form-label fw-bold"></label>
+                                    <select asp-for="Status" class="form-select">
+                                        <option value="Pending">Pending</option>
+                                        <option value="Processing">Processing</option>
+                                        <option value="Completed">Completed</option>
+                                        <option value="Cancelled">Cancelled</option>
+                                    </select>
+                                    <span asp-validation-for="Status" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h5 class="text-secondary mb-3">Payment Information</h5>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="TotalAmount" class="form-label fw-bold"></label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input asp-for="TotalAmount" class="form-control" />
+                                    </div>
+                                    <span asp-validation-for="TotalAmount" class="text-danger"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="DiscountApplied" class="form-label fw-bold"></label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input asp-for="DiscountApplied" class="form-control" />
+                                    </div>
+                                    <span asp-validation-for="DiscountApplied" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-light p-3 rounded-3 mt-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <a asp-action="GetOrders" class="btn btn-outline-secondary me-2">
+                                        <i class="bi bi-arrow-left"></i> Back to List
+                                    </a>
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn btn-primary px-4">
+                                        <i class="bi bi-check-lg"></i> Save Changes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="DiscountApplied" class="control-label"></label>
-                <input asp-for="DiscountApplied" class="form-control" />
-                <span asp-validation-for="DiscountApplied" class="text-danger"></span>
+        </div>
+        
+        <div class="col-lg-4">
+            <!-- Summary Card -->
+            <div class="card shadow-sm border-0 rounded-3 mb-4">
+                <div class="card-header bg-light py-3">
+                    <h5 class="mb-0">Order Summary</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Order ID:</span>
+                        <span class="fw-bold">#@Model.OrderId</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Created Date:</span>
+                        <span>@Model.CreatedDate.ToString()</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Total Amount:</span>
+                        <span class="fw-bold">$@Model.TotalAmount.ToString("0.00")</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Discount:</span>
+                        <span class="text-success">-$@Model.DiscountApplied.ToString()</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <span>Final Amount:</span>
+                        <span class="fw-bold fs-5">$@((Model.TotalAmount - Model.DiscountApplied).ToString())</span>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <select asp-for="Status" class="form-control"></select>
-                <span asp-validation-for="Status" class="text-danger"></span>
+            
+            <!-- Actions Card -->
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-header bg-light py-3">
+                    <h5 class="mb-0">Quick Actions</h5>
+                </div>
+                <div class="card-body">
+                    <a asp-action="GetOrderDetail" asp-route-id="@Model.OrderId" class="btn btn-outline-primary d-block mb-2">
+                        <i class="bi bi-info-circle"></i> View Details
+                    </a>
+                    <a href="#" class="btn btn-outline-success d-block mb-2">
+                        <i class="bi bi-printer"></i> Print Order
+                    </a>
+                    <a asp-action="DeleteOrder" asp-route-id="@Model.OrderId" class="btn btn-outline-danger d-block">
+                        <i class="bi bi-trash"></i> Delete Order
+                    </a>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="GetOrders">Back to List</a>
-</div>
+<!-- Add Bootstrap Icons to head section -->
+<script>
+    // Add Bootstrap Icons if not already included
+    if (!document.querySelector('link[href*="bootstrap-icons"]')) {
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css';
+        document.head.appendChild(link);
+    }
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -319,10 +320,79 @@ namespace Ghayal_Bhaag.Controllers
 
             return RedirectToAction(nameof(GetOrders));
         }
+        
+        
+                // GET: Orders/Cancel/5
+        [Authorize]
+        public async Task<IActionResult> CancelOrder(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var order = await _context.Order
+                .Include(o => o.User)
+                .FirstOrDefaultAsync(m => m.OrderId == id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            // Ensure the logged-in user can only cancel their own orders
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (order.UserId != userId)
+            {
+                return Forbid();
+            }
+
+            return View(order);
+        }
+
+        // POST: Orders/Cancel/5
+        [HttpPost, ActionName("CancelOrder")]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> ConfirmOrderCancellation(int id)
+        {
+            var order = await _context.Order.FindAsync(id);
+            if (order == null)
+            {
+                TempData["ErrorMessage"] = "Order not found.";
+            }
+            else
+            {
+                // Ensure the logged-in user can only cancel their own orders
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                if (order.UserId != userId)
+                {
+                    TempData["ErrorMessage"] = "You are not authorized to cancel this order.";
+                    return RedirectToAction(nameof(GetOrders));
+                }
+
+                // Prevent cancelling completed orders
+                if (order.Status == OrderStatus.COMPLETED)
+                {
+                    TempData["ErrorMessage"] = "Completed orders cannot be cancelled.";
+                    return RedirectToAction(nameof(GetOrders));
+                }
+
+                // Update the order status to CANCELLED
+                order.Status = OrderStatus.CANCLED;
+                _context.Update(order);
+                await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Order cancelled successfully!";
+            }
+
+            return RedirectToAction(nameof(GetOrders));
+        }
+    
 
         private bool CheckOrderExists(int id)
         {
             return _context.Order.Any(e => e.OrderId == id);
         }
+        
+        
     }
 }

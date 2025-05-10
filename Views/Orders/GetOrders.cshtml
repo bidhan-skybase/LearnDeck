@@ -1,54 +1,88 @@
 ﻿@model IEnumerable<Ghayal_Bhaag.Models.Order>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "My Orders";
 }
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalAmount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DiscountApplied)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalAmount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DiscountApplied)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                <a asp-action="EditOrder" asp-route-id="@item.OrderId" class="btn btn-sm btn-outline-primary">Edit</a> |
-                <a asp-action="GetOrderDetail" asp-route-id="@item.OrderId" class="btn btn-sm btn-outline">Details</a> |
-                <a asp-action="DeleteOrder" asp-route-id="@item.OrderId" class="btn btn-sm btn-outline-danger">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container mt-4">
+    <h1 class="mb-3">My Orders</h1>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalAmount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DiscountApplied)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="6" class="text-center text-muted">No orders found.</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderId)
+                        </td>
+                        <td>
+                            @item.CreatedDate.ToString()
+                        </td>
+                        <td>
+                            @item.TotalAmount.ToString("C")
+                        </td>
+                        <td>
+                            @item.DiscountApplied.ToString()
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            <a asp-action="GetOrderDetail" asp-route-id="@item.OrderId" class="btn btn-sm btn-outline-secondary">Details</a> |
+                            @if (item.Status != Ghayal_Bhaag.Enums.OrderStatus.CANCLED)
+                            {
+                                <a asp-action="CancelOrder" asp-route-id="@item.OrderId" class="btn btn-sm btn-outline-danger">Cancel Order</a>
+                            }
+                            else
+                            {
+                                <span class="text-muted">Cancelled</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
