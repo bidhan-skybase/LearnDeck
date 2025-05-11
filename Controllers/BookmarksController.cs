@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -21,8 +22,19 @@ namespace Ghayal_Bhaag.Controllers
         // GET: Bookmarks
         public async Task<IActionResult> ListBookMarks()
         {
-            var applicationDbContext = _context.Bookmark.Include(b => b.User).Include(b => b.Book);
-            return View(await applicationDbContext.ToListAsync());
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var isAdmin = User.IsInRole("Admin");
+
+            IQueryable<Bookmark> bookmarksQuery = _context.Bookmark
+                .Include(b => b.User)
+                .Include(b => b.Book);
+
+            if (!isAdmin)
+            {
+                bookmarksQuery = bookmarksQuery.Where(b => b.UserId == userId);
+            }
+
+            return View(await bookmarksQuery.ToListAsync());
         }
 
         // GET: Bookmarks/Details/5
@@ -43,13 +55,21 @@ namespace Ghayal_Bhaag.Controllers
                 return NotFound();
             }
 
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var isAdmin = User.IsInRole("Admin");
+
+            if (!isAdmin && bookmark.UserId != userId)
+            {
+                return Forbid();
+            }
+
             return View(bookmark);
         }
 
         // GET: Bookmarks/Create
         public IActionResult CreateBookMark(int? id)
         {
-            if ( id != null)
+            if (id != null)
             {
                 ViewData["BookId"] = id;
             }
@@ -57,7 +77,10 @@ namespace Ghayal_Bhaag.Controllers
             {
                 ViewData["BookId"] = new SelectList(_context.Book, "BookId", "BookId");
             }
+
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+
+
             return View();
         }
 
@@ -87,6 +110,7 @@ namespace Ghayal_Bhaag.Controllers
             {
                 return NotFound();
             }
+
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", bookmark.UserId);
             return View(bookmark);
         }
@@ -121,9 +145,19 @@ namespace Ghayal_Bhaag.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(ListBookMarks));
             }
+
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", bookmark.UserId);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var isAdmin = User.IsInRole("Admin");
+
+            if (!isAdmin && bookmark.UserId != userId)
+            {
+                return Forbid();
+            }
+
             return View(bookmark);
         }
 
@@ -141,6 +175,14 @@ namespace Ghayal_Bhaag.Controllers
             if (bookmark == null)
             {
                 return NotFound();
+            }
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var isAdmin = User.IsInRole("Admin");
+
+            if (!isAdmin && bookmark.UserId != userId)
+            {
+                return Forbid();
             }
 
             return View(bookmark);
