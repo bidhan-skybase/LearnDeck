@@ -72,7 +72,7 @@ namespace Ghayal_Bhaag.Controllers
             await _context.SaveChangesAsync();
 
             TempData["SuccessMessage"] = "Item added to cart!";
-            return RedirectToAction(nameof(ListCartItems));
+            return RedirectToAction(nameof(EditCartItem));
         }
 
         // GET: CartItems/Details/5
@@ -115,6 +115,56 @@ namespace Ghayal_Bhaag.Controllers
             return View(cartItems);
         }
         
+        // POST: CartItems/UpdateQuantity
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> UpdateCartItemQuantity(int id, int quantity)
+        {
+            // Find the cart item
+            var cartItem = await _context.CartItem
+                .Include(c => c.Book)
+                .FirstOrDefaultAsync(m => m.CartItemId == id);
+
+            if (cartItem == null)
+            {
+                TempData["ErrorMessage"] = "Cart item not found.";
+                return RedirectToAction(nameof(EditCartItem));
+            }
+
+            // Validate the user owns this cart item
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (cartItem.UserId != userId)
+            {
+                TempData["ErrorMessage"] = "You don't have permission to modify this cart item.";
+                return RedirectToAction(nameof(EditCartItem));
+            }
+
+            // Validate the quantity
+            if (quantity <= 0)
+            {
+                // If quantity is 0 or negative, remove the item from cart
+                _context.CartItem.Remove(cartItem);
+                await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Item removed from cart.";
+                return RedirectToAction(nameof(EditCartItem));
+            }
+            
+            // Check if quantity exceeds available stock
+            if (quantity > cartItem.Book.Stock)
+            {
+                quantity = cartItem.Book.Stock;
+                TempData["ErrorMessage"] = $"Adjusted quantity to available stock ({cartItem.Book.Stock}).";
+            }
+
+            // Update the quantity
+            cartItem.Quantity = quantity;
+            _context.Update(cartItem);
+            await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Cart item quantity updated successfully!";
+            return RedirectToAction(nameof(EditCartItem));
+        }
 
         // GET: CartItems/Delete/5
         public async Task<IActionResult> DeleteCartItem(int? id)
