@@ -1,108 +1,141 @@
-﻿@model IEnumerable<Ghayal_Bhaag.Models.Book>
+﻿@model List<Ghayal_Bhaag.Models.Book>
 
-@{
-    ViewData["Title"] = "Books";
-}
-
-<div class="container py-4">
-    <!-- Search Form -->
-    <div class="card mb-4 shadow-sm">
-        <div class="card-body bg-light">
-            @using (Html.BeginForm(FormMethod.Get))
-            {
-                <div class="row g-3 align-items-center">
-                    <div class="col-md-3">
-                        <div class="form-floating">
-                            @Html.TextBox("searchTitle", null, new { @class = "form-control", placeholder = " " })
-                            <label for="searchTitle">Book Title</label>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-floating">
-                            @Html.TextBox("searchDescription", null, new { @class = "form-control", placeholder = " " })
-                            <label for="searchDescription">Description</label>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-floating">
-                            @Html.TextBox("searchISBN", null, new { @class = "form-control", placeholder = " " })
-                            <label for="searchISBN">ISBN</label>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <button type="submit" class="btn btn-secondary w-100 h-100">
-                            <i class="bi bi-search me-2"></i>Search
-                        </button>
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
-
-    @if (User.IsInRole("Admin"))
+<div class="container mt-4">
+    <h1>Books</h1>
+    @if (TempData["SuccessMessage"] != null)
     {
-        <div class="mb-4">
-            <a asp-action="CreateBook" class="btn btn-success">
-                <i class="bi bi-plus-circle me-2"></i>Add New Book
-            </a>
-        </div>
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
     }
 
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        @foreach (var item in Model)
+    <!-- Search Form -->
+    <div class="card-body bg-light mb-4">
+        @using (Html.BeginForm("ListBooks", "Books", FormMethod.Get))
         {
-            <div class="col">
-                <div class="card h-100 shadow-sm hover-shadow">
-                    <div class="position-relative">
-                       
-                        <img src=" @(string.IsNullOrEmpty(item.Image) ? Url.Content("~/images/book_holder.png") : item.Image)" class="card-img-top p-3" alt="@item.BookTitle"/>
-                        <span class="position-absolute top-0 end-0 badge bg-secondary m-3">
-                            $@item.Price
-                        </span>
+            <div class="row g-3 align-items-center">
+                <div class="col-md-3">
+                    <div class="form-floating">
+                        @Html.TextBox("searchTitle", null, new { @class = "form-control", placeholder = " " })
+                        <label for="searchTitle">Book Title</label>
                     </div>
-                    <div class="card-body">
-                        <h5 class="card-title">@item.BookTitle</h5>
-                        <p class="card-text text-muted small">@(item.Description?.Length > 100 ? item.Description.Substring(0, 97) + "..." : item.Description)</p>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-floating">
+                        @Html.TextBox("searchDescription", null, new { @class = "form-control", placeholder = " " })
+                        <label for="searchDescription">Description</label>
                     </div>
-                    <div class="card-footer bg-white">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <a asp-action="GetBookDetail" asp-route-id="@item.BookId" class="btn btn-sm btn-outline-secondary">
-                                View Details
-                            </a>
-                            @if (User.IsInRole("Admin"))
+                </div>
+                <div class="col-md-3">
+                    <div class="form-floating">
+                        @Html.TextBox("searchISBN", null, new { @class = "form-control", placeholder = " " })
+                        <label for="searchISBN">ISBN</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-floating">
+                        <select name="searchGenre" class="form-select">
+                            <option value="">All Genres</option>
+                            @foreach (var genre in ViewBag.Genres)
                             {
-                                <div>
-                                    <a asp-action="EditBook" asp-route-id="@item.BookId" class="btn btn-sm btn-outline-secondary">
-                                        <i class="bi bi-pencil"></i>
-                                    </a>
-                                    <a asp-action="DeleteBook" asp-route-id="@item.BookId" class="btn btn-sm btn-outline-danger">
-                                        <i class="bi bi-trash"></i>
-                                    </a>
-                                </div>
+                                <option value="@genre" selected="@(genre == ViewBag.SearchGenre ? "selected" : null)">@genre</option>
                             }
-                        </div>
+                        </select>
+                        <label for="searchGenre">Genre</label>
                     </div>
+                </div>
+            </div>
+            <div class="row g-3 align-items-center mt-2">
+                <div class="col-md-3">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="newArrival" name="newArrival" value="true" @(ViewBag.NewArrival == true ? "checked" : "") />
+                        <label class="form-check-label" for="newArrival">New Arrivals Only</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="sale" name="sale" value="true" @(ViewBag.Sale == true ? "checked" : "") />
+                        <label class="form-check-label" for="sale">On Sale Only</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="physicalAccess" name="physicalAccess" value="true" @(ViewBag.PhysicalAccess == true ? "checked" : "") />
+                        <label class="form-check-label" for="physicalAccess">Physical Access Only</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-secondary w-100 h-100">
+                        <i class="bi bi-search me-2"></i>Search
+                    </button>
                 </div>
             </div>
         }
     </div>
+
+    <!-- Book Cards -->
+    @if (Model.Any())
+    {
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach (var item in Model)
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm hover-shadow">
+                        <div class="position-relative">
+                            <img src="@(string.IsNullOrEmpty(item.Image) ? Url.Content("~/images/book_holder.png") : item.Image)" class="card-img-top p-3" alt="@item.BookTitle" />
+                            <span class="position-absolute top-0 end-0 badge bg-secondary m-3">
+                                @if (item.Sale && item.DiscountAmount > 0)
+                                {
+                                    <span class="text-decoration-line-through text-muted">$@item.Price</span>
+                                    <span> $@(item.Price - item.DiscountAmount)</span>
+                                }
+                                else
+                                {
+                                    <span>$@item.Price</span>
+                                }
+                            </span>
+                            @if (item.Sale)
+                            {
+                                <span class="position-absolute top-0 start-0 badge bg-success m-3">On Sale</span>
+                            }
+                            @if (item.NewArrival)
+                            {
+                                <span class="position-absolute top-10 start-0 badge bg-primary m-3">New Arrival</span>
+                            }
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">@item.BookTitle</h5>
+                            <p class="card-text text-muted small">by @item.Author</p>
+                            <p class="card-text text-muted small">Genre: @item.Genre</p>
+                            <p class="card-text text-muted small">@(item.Description?.Length > 100 ? item.Description.Substring(0, 97) + "..." : item.Description)</p>
+                        </div>
+                        <div class="card-footer bg-white">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a asp-action="GetBookDetail" asp-route-id="@item.BookId" class="btn btn-sm btn-outline-secondary">
+                                    View Details
+                                </a>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <div>
+                                        <a asp-action="EditBook" asp-route-id="@item.BookId" class="btn btn-sm btn-outline-secondary">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                        <a asp-action="DeleteBook" asp-route-id="@item.BookId" class="btn btn-sm btn-outline-danger">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p>No books found.</p>
+    }
 </div>
-
-<style>
-    .hover-shadow:hover {
-        transition: all 0.3s;
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
-    }
-    
-    .form-floating label {
-        z-index: 3;
-    }
-    
-   
-   
-</style>
-
-@section Scripts {
-    <!-- Add Bootstrap Icons if not already included in your project -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-}
