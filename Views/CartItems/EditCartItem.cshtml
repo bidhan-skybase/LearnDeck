@@ -60,10 +60,10 @@ else
                     <td>@string.Format("{0:C}", item.UnitPrice * item.Quantity)</td>
                     <td>
                         <a asp-action="DeleteCartItem" asp-route-id="@item.CartItemId" class="btn btn-danger">Remove</a>
-                        <a 
-                            
-                            asp-controller="Orders"
-                            asp-action="CheckoutSingleCartItem" asp-route-id="@item.CartItemId" class="btn btn-primary">Order</a>
+                        <form asp-controller="Orders" asp-action="CheckoutSingleCartItem" method="post">
+                            <input type="hidden" name="id" value="@item.CartItemId" />
+                            <button type="submit" class="btn btn-primary">Checkout</button>
+                        </form>
                     </td>
                 </tr>
             }

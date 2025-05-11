@@ -52,7 +52,8 @@
             </td>
          
             <td>
-                <form asp-controller="Orders" asp-action="AddOrdertoCart" method="post">
+                <form asp-controller="Orders" asp-action="CheckoutSingleCartItem" method="post">
+                    <input type="hidden" name="id" value="@item.CartItemId" />
                     <button type="submit" class="btn btn-primary">Checkout</button>
                 </form>
             </td>
