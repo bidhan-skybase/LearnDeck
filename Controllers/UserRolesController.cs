@@ -1,5 +1,5 @@
-﻿using Ghayal_Bhaag.Areas.Identity.Data;
-using Ghayal_Bhaag.Models;
+﻿using BookMart.Areas.Identity.Data;
+using BookMart.Models;
 using Microsoft.AspNetCore.Mvc;
 
 using Microsoft.AspNetCore.Authorization;
@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace Ghayal_Bhaag.Controllers
+namespace BookMart.Controllers
 {
         // to allow all features available for now for GitHub demo, the authorization access is commented
         // [Authorize(Roles = "Manager")]

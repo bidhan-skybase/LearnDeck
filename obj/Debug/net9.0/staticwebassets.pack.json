@@ -1,484 +1,484 @@
 {
   "Files": [
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/obj/Debug/net9.0/scopedcss/projectbundle/LearnDeck.bundle.scp.css",
-      "PackagePath": "staticwebassets/LearnDeck.7kx1bps29p.bundle.scp.css"
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/obj/Debug/net9.0/scopedcss/projectbundle/BookMart.bundle.scp.css",
+      "PackagePath": "staticwebassets/BookMart.oramjf6h3l.bundle.scp.css"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/css/ajax-loader.gif",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/css/ajax-loader.gif",
       "PackagePath": "staticwebassets/css/ajax-loader.gif"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/css/bootstrap.min.css",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/css/bootstrap.min.css",
       "PackagePath": "staticwebassets/css/bootstrap.min.css"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/css/site.css",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/css/style.css",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/css/style.css",
       "PackagePath": "staticwebassets/css/style.css"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/css/vendor.css",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/css/vendor.css",
       "PackagePath": "staticwebassets/css/vendor.css"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/favicon.ico",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/favicon.ico",
       "PackagePath": "staticwebassets/favicon.ico"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/BOOKMART.png",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/BOOKMART.png",
       "PackagePath": "staticwebassets/images/BOOKMART.png"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/ajax-loader.gif",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/ajax-loader.gif",
       "PackagePath": "staticwebassets/images/ajax-loader.gif"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/banner-img1.png",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/banner-img1.png",
       "PackagePath": "staticwebassets/images/banner-img1.png"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/banner-img2.png",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/banner-img2.png",
       "PackagePath": "staticwebassets/images/banner-img2.png"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/banner-img3.png",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/banner-img3.png",
       "PackagePath": "staticwebassets/images/banner-img3.png"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/banner-img4.png",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/banner-img4.png",
       "PackagePath": "staticwebassets/images/banner-img4.png"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/book1.png",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/book1.png",
       "PackagePath": "staticwebassets/images/book1.png"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/book2.png",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/book2.png",
       "PackagePath": "staticwebassets/images/book2.png"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/book3.png",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/book3.png",
       "PackagePath": "staticwebassets/images/book3.png"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/book_holder.png",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/book_holder.png",
       "PackagePath": "staticwebassets/images/book_holder.png"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/bootstrap.bundle.min.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/bootstrap.bundle.min.js",
       "PackagePath": "staticwebassets/images/bootstrap.bundle.min.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/cart-img1.jpg",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/cart-img1.jpg",
       "PackagePath": "staticwebassets/images/cart-img1.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/cart-img2.jpg",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/cart-img2.jpg",
       "PackagePath": "staticwebassets/images/cart-img2.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/jquery-1.11.0.min.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/jquery-1.11.0.min.js",
       "PackagePath": "staticwebassets/images/jquery-1.11.0.min.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/main-logo.png",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/main-logo.png",
       "PackagePath": "staticwebassets/images/main-logo.png"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/modernizr.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/modernizr.js",
       "PackagePath": "staticwebassets/images/modernizr.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/plugins.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/plugins.js",
       "PackagePath": "staticwebassets/images/plugins.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/post-item1.jpg",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/post-item1.jpg",
       "PackagePath": "staticwebassets/images/post-item1.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/post-item2.jpg",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/post-item2.jpg",
       "PackagePath": "staticwebassets/images/post-item2.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/post-item3.jpg",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/post-item3.jpg",
       "PackagePath": "staticwebassets/images/post-item3.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/post-item4.jpg",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/post-item4.jpg",
       "PackagePath": "staticwebassets/images/post-item4.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item1.jpg",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/product-item1.jpg",
       "PackagePath": "staticwebassets/images/product-item1.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item10.jpg",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/product-item10.jpg",
       "PackagePath": "staticwebassets/images/product-item10.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item2.jpg",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/product-item2.jpg",
       "PackagePath": "staticwebassets/images/product-item2.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item3.jpg",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/product-item3.jpg",
       "PackagePath": "staticwebassets/images/product-item3.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item4.jpg",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/product-item4.jpg",
       "PackagePath": "staticwebassets/images/product-item4.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item5.jpg",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/product-item5.jpg",
       "PackagePath": "staticwebassets/images/product-item5.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item6.jpg",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/product-item6.jpg",
       "PackagePath": "staticwebassets/images/product-item6.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item7.jpg",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/product-item7.jpg",
       "PackagePath": "staticwebassets/images/product-item7.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item8.jpg",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/product-item8.jpg",
       "PackagePath": "staticwebassets/images/product-item8.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/product-item9.jpg",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/product-item9.jpg",
       "PackagePath": "staticwebassets/images/product-item9.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/script.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/script.js",
       "PackagePath": "staticwebassets/images/script.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/single-image3.jpg",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/single-image3.jpg",
       "PackagePath": "staticwebassets/images/single-image3.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/single-post.jpg",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/single-post.jpg",
       "PackagePath": "staticwebassets/images/single-post.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/images/video-image.jpg",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/images/video-image.jpg",
       "PackagePath": "staticwebassets/images/video-image.jpg"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/js/ajax-loader.gif",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/js/ajax-loader.gif",
       "PackagePath": "staticwebassets/js/ajax-loader.gif"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/js/bootstrap.bundle.min.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/js/bootstrap.bundle.min.js",
       "PackagePath": "staticwebassets/js/bootstrap.bundle.min.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/js/jquery-1.11.0.min.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/js/jquery-1.11.0.min.js",
       "PackagePath": "staticwebassets/js/jquery-1.11.0.min.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/js/modernizr.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/js/modernizr.js",
       "PackagePath": "staticwebassets/js/modernizr.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/js/plugins.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/js/plugins.js",
       "PackagePath": "staticwebassets/js/plugins.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/js/script.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/js/script.js",
       "PackagePath": "staticwebassets/js/script.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/js/site.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/js/site.js",
       "PackagePath": "staticwebassets/js/site.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/LICENSE",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/LICENSE",
       "PackagePath": "staticwebassets/lib/bootstrap"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.css"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.css.map"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.min.css"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.min.css.map"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.css"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.css"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.css.map"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.min.css"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-theme.css"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css.map",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-theme.css.map"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.min.css",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.min.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-theme.min.css"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.min.css.map",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.min.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-theme.min.css.map"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.css"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.css.map"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.min.css"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap.css",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.css"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.css.map"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.min.css"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.min.css.map"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.css"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.css.map"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.min.css"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.js.map"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.js.map"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.min.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.min.js.map"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/js/bootstrap.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/js/bootstrap.js",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.js.map"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.min.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.min.js.map"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt",
       "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/LICENSE.txt"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js",
       "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js",
       "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
       "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
       "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/jquery-validation/LICENSE.md",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/jquery-validation/LICENSE.md",
       "PackagePath": "staticwebassets/lib/jquery-validation/LICENSE.md"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/jquery-validation/dist/additional-methods.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/jquery-validation/dist/additional-methods.js",
       "PackagePath": "staticwebassets/lib/jquery-validation/dist/additional-methods.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
       "PackagePath": "staticwebassets/lib/jquery-validation/dist/additional-methods.min.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/jquery-validation/dist/jquery.validate.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/jquery-validation/dist/jquery.validate.js",
       "PackagePath": "staticwebassets/lib/jquery-validation/dist/jquery.validate.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
       "PackagePath": "staticwebassets/lib/jquery-validation/dist/jquery.validate.min.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/jquery/LICENSE.txt",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/jquery/LICENSE.txt",
       "PackagePath": "staticwebassets/lib/jquery/LICENSE.txt"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/jquery/dist/jquery.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/jquery/dist/jquery.js",
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/jquery/dist/jquery.min.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/jquery/dist/jquery.min.js",
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/jquery/dist/jquery.min.map",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/jquery/dist/jquery.min.map",
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/jquery/dist/jquery.slim.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/jquery/dist/jquery.slim.js",
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.slim.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/jquery/dist/jquery.slim.min.js",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/jquery/dist/jquery.slim.min.js",
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.slim.min.js"
     },
     {
-      "Id": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/wwwroot/lib/jquery/dist/jquery.slim.min.map",
+      "Id": "/Users/bidhan/Desktop/LearnDeck/BookMart/wwwroot/lib/jquery/dist/jquery.slim.min.map",
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.slim.min.map"
     },
     {
-      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.LearnDeck.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.BookMart.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
     {
-      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.LearnDeck.Microsoft.AspNetCore.StaticWebAssets.props",
+      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.BookMart.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
     {
-      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.build.LearnDeck.props",
-      "PackagePath": "build\\LearnDeck.props"
+      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.build.BookMart.props",
+      "PackagePath": "build\\BookMart.props"
     },
     {
-      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.buildMultiTargeting.LearnDeck.props",
-      "PackagePath": "buildMultiTargeting\\LearnDeck.props"
+      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.buildMultiTargeting.BookMart.props",
+      "PackagePath": "buildMultiTargeting\\BookMart.props"
     },
     {
-      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.buildTransitive.LearnDeck.props",
-      "PackagePath": "buildTransitive\\LearnDeck.props"
+      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.buildTransitive.BookMart.props",
+      "PackagePath": "buildTransitive\\BookMart.props"
     }
   ],
   "ElementsToRemove": []

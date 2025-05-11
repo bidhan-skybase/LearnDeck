@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Ghayal_Bhaag.Controllers
+namespace BookMart.Controllers
 {
     public class RoleManagerController: Controller
     {

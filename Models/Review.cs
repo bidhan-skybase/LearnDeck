@@ -1,8 +1,8 @@
-﻿using Ghayal_Bhaag.Areas.Identity.Data;
+﻿using BookMart.Areas.Identity.Data;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Ghayal_Bhaag.Models
+namespace BookMart.Models
 {
     public class Review
     {

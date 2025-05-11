@@ -1,9 +1,9 @@
-﻿using Ghayal_Bhaag.Areas.Identity.Data;
-using Ghayal_Bhaag.Enums;
+﻿using BookMart.Areas.Identity.Data;
+using BookMart.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Ghayal_Bhaag.Models
+namespace BookMart.Models
 {
     public class CartItem
     {

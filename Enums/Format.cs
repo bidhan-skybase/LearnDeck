@@ -1,4 +1,4 @@
-﻿namespace Ghayal_Bhaag.Enums
+﻿namespace BookMart.Enums
 {
     public enum Format
     {

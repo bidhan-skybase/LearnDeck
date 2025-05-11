@@ -1,4 +1,4 @@
-﻿@model Ghayal_Bhaag.Models.Book
+﻿@model BookMart.Models.Book
 
 @{
     ViewData["Title"] = "Add New Book";
@@ -78,7 +78,7 @@
                             <div class="col-md-6 mb-3">
                                 <div class="form-floating">
                                     <select asp-for="Format" class="form-select"
-                                            asp-items="@Html.GetEnumSelectList(typeof(Ghayal_Bhaag.Enums.Format))"></select>
+                                            asp-items="@Html.GetEnumSelectList(typeof(BookMart.Enums.Format))"></select>
                                     <label asp-for="Format"></label>
                                     <span asp-validation-for="Format" class="text-danger"></span>
                                 </div>

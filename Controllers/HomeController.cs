@@ -1,10 +1,10 @@
 using System.Diagnostics;
-using Ghayal_Bhaag.Models;
+using BookMart.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace Ghayal_Bhaag.Controllers
+namespace BookMart.Controllers
 {
     [Authorize]
     public class HomeController : Controller
@@ -20,11 +20,20 @@ namespace Ghayal_Bhaag.Controllers
 
         public async Task<IActionResult> List()
         {
-            var books = await _context.Book
+            // Get new arrival books for billboard section
+            var newArrivalBooks = await _context.Book
                 .Where(b => b.NewArrival == true)
                 .ToListAsync();
 
-            return View(books);
+            // Get all books for products section
+            var allBooks = await _context.Book
+                .ToListAsync();
+
+            // Pass both lists to the view
+            ViewBag.AllBooks = allBooks;
+
+            // Return new arrival books as the primary model for billboard
+            return View(newArrivalBooks);
         }
         
 

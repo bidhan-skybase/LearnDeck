@@ -1,4 +1,4 @@
-@model Ghayal_Bhaag.Models.Order
+@model BookMart.Models.Order
 
 @{
     ViewData["Title"] = "Cancel Order";
@@ -46,9 +46,9 @@
                                         
                                         <dt class="col-sm-5">Status:</dt>
                                         <dd class="col-sm-7">
-                                            <span class="badge bg-@(Model.Status == Ghayal_Bhaag.Enums.OrderStatus.COMPLETED ? "success" : 
-                                                                  Model.Status == Ghayal_Bhaag.Enums.OrderStatus.PENDING ? "warning" : 
-                                                                  Model.Status == Ghayal_Bhaag.Enums.OrderStatus.CANCLED ? "secondary" : "info")">
+                                            <span class="badge bg-@(Model.Status == BookMart.Enums.OrderStatus.COMPLETED ? "success" : 
+                                                                  Model.Status == BookMart.Enums.OrderStatus.PENDING ? "warning" : 
+                                                                  Model.Status == BookMart.Enums.OrderStatus.COMPLETED ? "secondary" : "info")">
                                                 @Html.DisplayFor(model => model.Status)
                                             </span>
                                         </dd>

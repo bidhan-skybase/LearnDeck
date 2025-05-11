@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PCqLslHnFPA=",
+  "dgSpecHash": "5Fy1zrdcWLc=",
   "success": true,
-  "projectFilePath": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/LearnDeck.csproj",
+  "projectFilePath": "/Users/bidhan/Desktop/LearnDeck/BookMart/BookMart.csproj",
   "expectedPackageFiles": [
     "/Users/bidhan/.nuget/packages/entityframework/6.5.1/entityframework.6.5.1.nupkg.sha512",
     "/Users/bidhan/.nuget/packages/humanizer/2.14.1/humanizer.2.14.1.nupkg.sha512",

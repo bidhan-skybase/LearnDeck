@@ -1,0 +1,265 @@
+is_global = true
+build_property.TargetFramework = net9.0
+build_property.TargetFramework = net9.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = BookMart
+build_property.RootNamespace = BookMart
+build_property.ProjectDir = /Users/bidhan/Desktop/LearnDeck/BookMart/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 9.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /Users/bidhan/Desktop/LearnDeck/BookMart
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 9.0
+build_property.EnableCodeStyleSeverity = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Areas/Identity/Pages/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvQWNjb3VudC9Mb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Areas/Identity/Pages/Account/Logout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvQWNjb3VudC9Mb2dvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Areas/Identity/Pages/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvQWNjb3VudC9SZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Areas/Identity/Pages/Account/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvQWNjb3VudC9fVmlld0ltcG9ydHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Areas/Identity/Pages/_AuthLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvX0F1dGhMYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Areas/Identity/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Areas/Identity/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Anouncements/CreateAnnouncement.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQW5vdW5jZW1lbnRzL0NyZWF0ZUFubm91bmNlbWVudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Anouncements/DeleteAnnouncement.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQW5vdW5jZW1lbnRzL0RlbGV0ZUFubm91bmNlbWVudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Anouncements/EditAnnouncement.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQW5vdW5jZW1lbnRzL0VkaXRBbm5vdW5jZW1lbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Anouncements/GetAnnouncementDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQW5vdW5jZW1lbnRzL0dldEFubm91bmNlbWVudERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Anouncements/GetAnnouncements.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQW5vdW5jZW1lbnRzL0dldEFubm91bmNlbWVudHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Bookmarks/CreateBookMark.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQm9va21hcmtzL0NyZWF0ZUJvb2tNYXJrLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Bookmarks/DeleteBookMark.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQm9va21hcmtzL0RlbGV0ZUJvb2tNYXJrLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Bookmarks/EditBookMark.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQm9va21hcmtzL0VkaXRCb29rTWFyay5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Bookmarks/GetBookMarkDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQm9va21hcmtzL0dldEJvb2tNYXJrRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Bookmarks/ListBookMarks.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQm9va21hcmtzL0xpc3RCb29rTWFya3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Books/CreateBook.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQm9va3MvQ3JlYXRlQm9vay5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Books/DeleteBook.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQm9va3MvRGVsZXRlQm9vay5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Books/EditBook.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQm9va3MvRWRpdEJvb2suY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Books/GetBookDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQm9va3MvR2V0Qm9va0RldGFpbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Books/ListBooks.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQm9va3MvTGlzdEJvb2tzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/CartItems/AddToCart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2FydEl0ZW1zL0FkZFRvQ2FydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/CartItems/DeleteCartItem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2FydEl0ZW1zL0RlbGV0ZUNhcnRJdGVtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/CartItems/EditCartItem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2FydEl0ZW1zL0VkaXRDYXJ0SXRlbS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/CartItems/GetCartDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2FydEl0ZW1zL0dldENhcnREZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/CartItems/ListCartItems.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2FydEl0ZW1zL0xpc3RDYXJ0SXRlbXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Home/About.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9BYm91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Home/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9MaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/OrderItems/CreateOrderItem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXJJdGVtcy9DcmVhdGVPcmRlckl0ZW0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/OrderItems/DeleteOrderItem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXJJdGVtcy9EZWxldGVPcmRlckl0ZW0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/OrderItems/EditOrderItem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXJJdGVtcy9FZGl0T3JkZXJJdGVtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/OrderItems/GetOrderItemDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXJJdGVtcy9HZXRPcmRlckl0ZW1EZXRhaWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/OrderItems/GetOrderItems.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXJJdGVtcy9HZXRPcmRlckl0ZW1zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Orders/CancelOrder.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXJzL0NhbmNlbE9yZGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Orders/CreateOrder.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXJzL0NyZWF0ZU9yZGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Orders/DeleteOrder.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXJzL0RlbGV0ZU9yZGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Orders/EditOrder.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXJzL0VkaXRPcmRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Orders/GetOrderDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXJzL0dldE9yZGVyRGV0YWlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Orders/GetOrders.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXJzL0dldE9yZGVycy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Reviews/CreateReview.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmV2aWV3cy9DcmVhdGVSZXZpZXcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Reviews/DeleteReview.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmV2aWV3cy9EZWxldGVSZXZpZXcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Reviews/EditReview.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmV2aWV3cy9FZGl0UmV2aWV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Reviews/GetReviewDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmV2aWV3cy9HZXRSZXZpZXdEZXRhaWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Reviews/GetReviews.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmV2aWV3cy9HZXRSZXZpZXdzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/RoleManager/ListRoles.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUm9sZU1hbmFnZXIvTGlzdFJvbGVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/User/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/User/DeleteUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9EZWxldGVVc2VyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/User/EditUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9FZGl0VXNlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/User/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/UserRoles/ManageRoles.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlclJvbGVzL01hbmFnZVJvbGVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-aslocw0z8r

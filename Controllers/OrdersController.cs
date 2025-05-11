@@ -8,10 +8,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNet.Identity;
-using Ghayal_Bhaag.Models;
-using Ghayal_Bhaag.Enums;
+using BookMart.Models;
+using BookMart.Enums;
 
-namespace Ghayal_Bhaag.Controllers
+namespace BookMart.Controllers
 {
     public class OrdersController : Controller
     {
@@ -431,7 +431,7 @@ namespace Ghayal_Bhaag.Controllers
                 }
 
                 // Update the order status to CANCELLED
-                order.Status = OrderStatus.CANCLED;
+                order.Status = OrderStatus.CANCELLED;
                 _context.Update(order);
                 await _context.SaveChangesAsync();
                 TempData["SuccessMessage"] = "Order cancelled successfully!";

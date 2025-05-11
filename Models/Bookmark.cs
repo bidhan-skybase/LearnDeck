@@ -1,8 +1,8 @@
-﻿using Ghayal_Bhaag.Areas.Identity.Data;
+﻿using BookMart.Areas.Identity.Data;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace Ghayal_Bhaag.Models
+namespace BookMart.Models
 {
     public class Bookmark
     {

@@ -1,4 +1,4 @@
-﻿namespace Ghayal_Bhaag.Models
+﻿namespace BookMart.Models
 {
     public class ManageUserRolesViewModel
     {

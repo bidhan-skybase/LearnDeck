@@ -1,5 +1,5 @@
-﻿using Ghayal_Bhaag.Areas.Identity.Data;
-using Ghayal_Bhaag.Models;
+﻿using BookMart.Areas.Identity.Data;
+using BookMart.Models;
 using Microsoft.AspNetCore.Mvc;
 
 using Microsoft.AspNetCore.Authorization;
@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Ghayal_Bhaag.Controllers
+namespace BookMart.Controllers
 {
     public class UserController: Controller
     {

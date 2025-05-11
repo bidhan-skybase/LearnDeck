@@ -1,5 +1,5 @@
-﻿@using Ghayal_Bhaag.Enums
-@model Ghayal_Bhaag.Models.Order
+﻿@using BookMart.Enums
+@model BookMart.Models.Order
 
 @{
     ViewData["Title"] = "Order Details";
@@ -28,7 +28,7 @@
                     {
                         badgeClass = "badge-completed";
                     }
-                    else if (Model.Status == OrderStatus.CANCLED)
+                    else if (Model.Status == OrderStatus.CANCELLED)
                     {
                         badgeClass = "badge-cancelled";
                     }

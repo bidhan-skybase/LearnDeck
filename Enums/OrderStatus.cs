@@ -1,9 +1,9 @@
-﻿namespace Ghayal_Bhaag.Enums
+﻿namespace BookMart.Enums
 {
     public enum OrderStatus
     {
         PENDING,
-        CANCLED,
+        CANCELLED,
         COMPLETED
     }
 }

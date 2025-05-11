@@ -2,13 +2,13 @@
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Ghayal_Bhaag.Enums;
+using BookMart.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Ghayal_Bhaag.Models;
+using BookMart.Models;
 
-namespace Ghayal_Bhaag.Controllers
+namespace BookMart.Controllers
 {
     public class CartItemsController : Controller
     {

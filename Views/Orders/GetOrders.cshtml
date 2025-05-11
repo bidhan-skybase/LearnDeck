@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Ghayal_Bhaag.Models.Order>
+﻿@model IEnumerable<BookMart.Models.Order>
 
 @{
     ViewData["Title"] = "My Orders";
@@ -68,7 +68,7 @@
                         </td>
                         <td>
                             <a asp-action="GetOrderDetail" asp-route-id="@item.OrderId" class="btn btn-sm btn-outline-secondary">Details</a> |
-                            @if (item.Status != Ghayal_Bhaag.Enums.OrderStatus.CANCLED)
+                            @if (item.Status != BookMart.Enums.OrderStatus.CANCELLED)
                             {
                                 <a asp-action="CancelOrder" asp-route-id="@item.OrderId" class="btn btn-sm btn-outline-danger">Cancel Order</a>
                             }

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 
-namespace Ghayal_Bhaag.Areas.Identity.Data
+namespace BookMart.Areas.Identity.Data
 {
     public class ApplicationUser : IdentityUser
     {

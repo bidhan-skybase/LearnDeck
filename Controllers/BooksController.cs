@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
-using Ghayal_Bhaag.Models;
+using BookMart.Models;
 
-namespace Ghayal_Bhaag.Controllers
+namespace BookMart.Controllers
 {
     public class BooksController : Controller
     {

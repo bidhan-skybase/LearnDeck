@@ -1,19 +1,19 @@
-﻿using Ghayal_Bhaag.Areas.Identity.Data;
+﻿using BookMart.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Ghayal_Bhaag.Models;
 
-namespace Ghayal_Bhaag.Models
+
+namespace BookMart.Models
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Book> Book { get; set; }
-        public DbSet<Ghayal_Bhaag.Models.Anouncement> Anouncement { get; set; } = default!;
-        public DbSet<Ghayal_Bhaag.Models.Bookmark> Bookmark { get; set; } = default!;
-        public DbSet<Ghayal_Bhaag.Models.CartItem> CartItem { get; set; } = default!;
-        public DbSet<Ghayal_Bhaag.Models.OrderItem> OrderItem { get; set; } = default!;
-        public DbSet<Ghayal_Bhaag.Models.Order> Order { get; set; } = default!;
-        public DbSet<Ghayal_Bhaag.Models.Review> Review { get; set; } = default!;
+        public DbSet<BookMart.Models.Anouncement> Anouncement { get; set; } = default!;
+        public DbSet<BookMart.Models.Bookmark> Bookmark { get; set; } = default!;
+        public DbSet<BookMart.Models.CartItem> CartItem { get; set; } = default!;
+        public DbSet<BookMart.Models.OrderItem> OrderItem { get; set; } = default!;
+        public DbSet<BookMart.Models.Order> Order { get; set; } = default!;
+        public DbSet<BookMart.Models.Review> Review { get; set; } = default!;
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

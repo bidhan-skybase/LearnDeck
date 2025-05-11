@@ -1,4 +1,4 @@
-﻿@model List<Ghayal_Bhaag.Models.Book>
+﻿@model List<BookMart.Models.Book>
 
 <div class="container mt-4">
     <h1>Books</h1>
@@ -75,6 +75,15 @@
         }
     </div>
 
+    
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="mb-4">
+            <a asp-action="CreateBook" class="btn btn-success">
+                <i class="bi bi-plus-circle me-2"></i>Add New Book
+            </a>
+        </div>
+    }
     <!-- Book Cards -->
     @if (Model.Any())
     {

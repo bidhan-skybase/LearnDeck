@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Ghayal_Bhaag.Models;
-using Ghayal_Bhaag.Areas.Identity.Data;
+using BookMart.Models;
+using BookMart.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

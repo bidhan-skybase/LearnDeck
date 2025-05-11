@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Ghayal_Bhaag.Enums;
+using BookMart.Enums;
 
-namespace Ghayal_Bhaag.Models
+namespace BookMart.Models
 {
     public class Book
     {

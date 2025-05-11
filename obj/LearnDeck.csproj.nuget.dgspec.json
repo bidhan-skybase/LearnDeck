@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/bidhan/Desktop/LearnDeck/LearnDeck/LearnDeck.csproj": {}
+    "/Users/bidhan/Desktop/LearnDeck/BookMart/LearnDeck.csproj": {}
   },
   "projects": {
-    "/Users/bidhan/Desktop/LearnDeck/LearnDeck/LearnDeck.csproj": {
+    "/Users/bidhan/Desktop/LearnDeck/BookMart/LearnDeck.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/LearnDeck.csproj",
+        "projectUniqueName": "/Users/bidhan/Desktop/LearnDeck/BookMart/LearnDeck.csproj",
         "projectName": "LearnDeck",
-        "projectPath": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/LearnDeck.csproj",
+        "projectPath": "/Users/bidhan/Desktop/LearnDeck/BookMart/LearnDeck.csproj",
         "packagesPath": "/Users/bidhan/.nuget/packages/",
-        "outputPath": "/Users/bidhan/Desktop/LearnDeck/LearnDeck/obj/",
+        "outputPath": "/Users/bidhan/Desktop/LearnDeck/BookMart/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/bidhan/.nuget/NuGet/NuGet.Config"
