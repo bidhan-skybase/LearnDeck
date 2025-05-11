@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LearnDeck")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+af60ca0fc46fa13e35b9bdcbbf859efcd4e1d8fc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9294feab4ad15e128f673b29c7aecc3b486afe42")]
 [assembly: System.Reflection.AssemblyProductAttribute("LearnDeck")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LearnDeck")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

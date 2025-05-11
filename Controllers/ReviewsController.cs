@@ -22,11 +22,11 @@ namespace Ghayal_Bhaag.Controllers
         // GET: Reviews
         public async Task<IActionResult> GetReviews()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
-            var isAdmin = User.IsInRole("Admin"); 
-            
-            Console.WriteLine("current user id: "+userId);
-            Console.WriteLine("current user is admin: "+isAdmin);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var isAdmin = User.IsInRole("Admin");
+
+            Console.WriteLine("current user id: " + userId);
+            Console.WriteLine("current user is admin: " + isAdmin);
 
             IQueryable<Review> reviewsQuery = _context.Review
                 .Include(r => r.Book)
@@ -58,13 +58,22 @@ namespace Ghayal_Bhaag.Controllers
                 return NotFound();
             }
 
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var isAdmin = User.IsInRole("Admin");
+
+            if (!isAdmin && review.UserId != userId)
+            {
+                return Forbid();
+            }
+
+
             return View(review);
         }
 
         // GET: Reviews/Create
         public IActionResult CreateReview(int? id)
         {
-            if ( id != null)
+            if (id != null)
             {
                 ViewData["BookId"] = id;
             }
@@ -85,9 +94,8 @@ namespace Ghayal_Bhaag.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateReview([Bind("ReviewId,BookId,description,CreatedDate")] Review review)
         {
-            // Get logged-in user ID
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            review.UserId = userId; 
+            review.UserId = userId;
 
             review.CreatedDate = DateTime.UtcNow;
 
@@ -105,6 +113,7 @@ namespace Ghayal_Bhaag.Controllers
                 return NotFound();
             }
 
+
             var review = await _context.Review
                 .Include(r => r.Book)
                 .FirstOrDefaultAsync(r => r.ReviewId == id);
@@ -116,7 +125,15 @@ namespace Ghayal_Bhaag.Controllers
 
             ViewData["BookId"] = new SelectList(_context.Book, "BookId", "BookId", review.BookId);
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", review.UserId);
-            ViewBag.BookTitle = review.Book?.BookTitle; // Set BookTitle in ViewBag (optional)
+            ViewBag.BookTitle = review.Book?.BookTitle;
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var isAdmin = User.IsInRole("Admin");
+
+            if (!isAdmin && review.UserId != userId)
+            {
+                return Forbid();
+            }
 
             return View(review);
         }
@@ -126,37 +143,37 @@ namespace Ghayal_Bhaag.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditReview(int id, [Bind("ReviewId,UserId,BookId,description,CreatedDate")] Review review)
+        public async Task<IActionResult> EditReview(int id,
+            [Bind("ReviewId,UserId,BookId,description,CreatedDate")] Review review)
         {
             if (id != review.ReviewId)
             {
                 return NotFound();
             }
 
-                try
+            try
+            {
+                _context.Update(review);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CheckReviewExists(review.ReviewId))
                 {
-                    _context.Update(review);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!CheckReviewExists(review.ReviewId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;
                 }
-                return RedirectToAction(nameof(GetReviews));
+            }
+
+            return RedirectToAction(nameof(GetReviews));
         }
 
         // GET: Reviews/Delete/5
         public async Task<IActionResult> DeleteReview(int? id)
         {
-            
-            
             if (id == null)
             {
                 return NotFound();
@@ -169,6 +186,14 @@ namespace Ghayal_Bhaag.Controllers
             if (review == null)
             {
                 return NotFound();
+            }
+            
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var isAdmin = User.IsInRole("Admin");
+
+            if (!isAdmin && review.UserId != userId)
+            {
+                return Forbid(); 
             }
 
             return View(review);
