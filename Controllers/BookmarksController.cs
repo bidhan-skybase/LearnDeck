@@ -34,8 +34,10 @@ namespace Ghayal_Bhaag.Controllers
             }
 
             var bookmark = await _context.Bookmark
-                .Include(b => b.User)
+                .Include(b => b.Book) // Include Book details
+                .Include(b => b.User) // Optional: Include User if needed elsewhere
                 .FirstOrDefaultAsync(m => m.BookmarkId == id);
+
             if (bookmark == null)
             {
                 return NotFound();
@@ -134,7 +136,7 @@ namespace Ghayal_Bhaag.Controllers
             }
 
             var bookmark = await _context.Bookmark
-                .Include(b => b.User)
+                .Include(b => b.Book)
                 .FirstOrDefaultAsync(m => m.BookmarkId == id);
             if (bookmark == null)
             {

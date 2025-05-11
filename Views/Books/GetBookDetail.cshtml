@@ -1,4 +1,5 @@
-﻿@model Ghayal_Bhaag.Models.Book
+﻿@using System.Security.Claims
+@model Ghayal_Bhaag.Models.Book
 
 @{
     ViewData["Title"] = "Book Details";
@@ -67,8 +68,11 @@
                         <a asp-controller="Reviews" asp-action="CreateReview" asp-route-id="@Model?.BookId"
                            class="btn btn-outline-primary me-2">Review</a>
                     }
-                    <a asp-controller="Bookmarks" asp-action="CreateBookMark" asp-route-id="@Model?.BookId"
-                       class="btn btn-outline-success me-2">Add to Wishlist</a>
+                    <form asp-controller="Bookmarks" asp-action="CreateBookMark" method="post" class="d-inline">
+                        <input type="hidden" name="BookId" value="@Model?.BookId" />
+                        <input type="hidden" name="UserId" value="@User.FindFirstValue(ClaimTypes.NameIdentifier)" />
+                        <button type="submit" class="btn btn-outline-success me-2">Add to Wishlist</button>
+                    </form>
                 </div>
             }
             <!-- Actions -->
