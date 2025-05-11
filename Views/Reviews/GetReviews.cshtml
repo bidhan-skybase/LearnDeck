@@ -6,33 +6,58 @@
 
 <table class="table">
     <thead>
-        <tr>
-           
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Book)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        @if (User.IsInRole("Admin"))
+        {
             <th>
-                @Html.DisplayNameFor(model => model.Book)
+                @Html.DisplayNameFor(model => model.User.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.description)
+                @Html.DisplayNameFor(model => model.User.Email)
             </th>
-            <th></th>
-        </tr>
+            
+        }
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
-           
+
             <td>
                 @Html.DisplayFor(modelItem => item.Book.BookTitle)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.description)
             </td>
+            @{
+                if (User.IsInRole("Admin"))
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.Email)
+                    </td>
+                }
+            }
             <td>
-                <a asp-action="EditReview" asp-route-id="@item.ReviewId" class="btn btn-sm btn-outline-primary">Edit</a> |
-                <a asp-action="GetReviewDetail" asp-route-id="@item.ReviewId" class="btn btn-sm btn-outline-secondary">Details</a> |
-                <a asp-action="DeleteReview" asp-route-id="@item.ReviewId" class="btn btn-sm btn-outline-danger">Delete</a>
+                <a asp-action="EditReview" asp-route-id="@item.ReviewId" class="btn btn-sm btn-outline-primary">Edit</a>
+                |
+                <a asp-action="GetReviewDetail" asp-route-id="@item.ReviewId" class="btn btn-sm btn-outline-secondary">Details</a>
+                |
+                <a asp-action="DeleteReview" asp-route-id="@item.ReviewId"
+                   class="btn btn-sm btn-outline-danger">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>
