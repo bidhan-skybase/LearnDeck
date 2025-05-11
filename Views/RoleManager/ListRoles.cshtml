@@ -1,31 +1,65 @@
 ﻿@model List<Microsoft.AspNetCore.Identity.IdentityRole>
+
 @{
-    ViewData["Title"] = "Role Manager";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Manage Roles";
 }
-<h1>Role Manager</h1>
-<form method="post" asp-action="AddNewRole" asp-controller="RoleManager">
-    <div class="input-group">
-        <input name="roleName" class="form-control w-25">
-        <span class="input-group-btn">
-            <button class="btn btn-info">Add New Role</button>
-        </span>
+
+
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["SuccessMessage"]
     </div>
-</form>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<div class="mb-4">
+    <h4>Add New Role</h4>
+    <form asp-action="AddNewRole" method="post">
+        <div class="input-group mb-3">
+            <input type="text" name="roleName" class="form-control" placeholder="Enter role name" required />
+            <button type="submit" class="btn btn-primary">Add Role</button>
+        </div>
+    </form>
+</div>
+
+<h4>Existing Roles</h4>
 <table class="table table-striped">
     <thead>
-        <tr>
-            <th>Id</th>
-            <th>Role</th>
-        </tr>
+    <tr>
+        <th>Role Name</th>
+        <th>Role Id</th>
+        <th>Actions</th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var role in Model)
-        {
-            <tr>
-                <td>@role.Id</td>
-                <td>@role.Name</td>
-            </tr>
-        }
+    @foreach (var role in Model)
+    {
+        <tr>
+            <td>@role.Id</td>
+            <td>@role.Name</td>
+            <td>
+                <form asp-action="DeleteRole" method="post" onsubmit="return confirm('Are you sure you want to delete the role: @role.Name?');">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" value="@role.Id" />
+                    <button type="submit" class="btn btn-danger btn-sm" @(role.Name == "Admin" || role.Name == "User" ? "disabled" : "")>Delete</button>
+                   
+                </form>
+            </td>
+        </tr>
+    }
     </tbody>
 </table>
+
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
