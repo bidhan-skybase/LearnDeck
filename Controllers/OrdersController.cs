@@ -25,8 +25,17 @@ namespace Ghayal_Bhaag.Controllers
         // GET: Orders
         public async Task<IActionResult> GetOrders()
         {
-            var applicationDbContext = _context.Order.Include(o => o.User);
-            return View(await applicationDbContext.ToListAsync());
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var isAdmin = User.IsInRole("Admin");
+
+            IQueryable<Order> ordersQuery = _context.Order.Include(o => o.User);
+            
+            if (!isAdmin)
+            {
+                ordersQuery = ordersQuery.Where(o => o.UserId == userId);
+            }
+
+            return View(await ordersQuery.ToListAsync());
         }
 
         // GET: Orders/Details/5
@@ -45,6 +54,15 @@ namespace Ghayal_Bhaag.Controllers
             {
                 return NotFound();
             }
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
+            var isAdmin = User.IsInRole("Admin");
+            
+            if (!isAdmin && order.UserId != userId)
+            {
+                return Forbid(); 
+            }
+            
             order.OrderItems = await _context.OrderItem
                 .Where(o => o.OrderId == id)
                 .Include(item => item.Book)
@@ -53,9 +71,11 @@ namespace Ghayal_Bhaag.Controllers
             return View(order);
         }
 
+
         // GET: Orders/Create
         public IActionResult CreateOrder()
         {
+            
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "UserName");
             return View();
         }
@@ -66,6 +86,14 @@ namespace Ghayal_Bhaag.Controllers
         [Authorize]
         public async Task<IActionResult> CreateOrder([Bind("OrderId,UserId,CreatedDate,TotalAmount,DiscountApplied,Status")] Order order)
         {
+            
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
+            var isAdmin = User.IsInRole("Admin");
+            
+            if (!isAdmin && order.UserId != userId)
+            {
+                return Forbid(); 
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(order);
@@ -167,6 +195,7 @@ namespace Ghayal_Bhaag.Controllers
         [Authorize]
         public async Task<IActionResult> CheckoutSingleCartItem(int id)
         {
+            
             string userId = User.Identity.GetUserId();
             if (string.IsNullOrEmpty(userId))
             {
@@ -243,6 +272,14 @@ namespace Ghayal_Bhaag.Controllers
             {
                 return NotFound();
             }
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
+            var isAdmin = User.IsInRole("Admin");
+            
+            if (!isAdmin && order.UserId != userId)
+            {
+                return Forbid(); 
+            }
+            
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "UserName", order.UserId);
             return View(order);
         }
@@ -257,7 +294,15 @@ namespace Ghayal_Bhaag.Controllers
             {
                 return NotFound();
             }
-
+            
+            
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
+            var isAdmin = User.IsInRole("Admin");
+            
+            if (!isAdmin && order.UserId != userId)
+            {
+                return Forbid(); 
+            }
             if (ModelState.IsValid)
             {
                 try
@@ -289,6 +334,7 @@ namespace Ghayal_Bhaag.Controllers
                 return NotFound();
             }
 
+            
             var order = await _context.Order
                 .Include(o => o.User)
                 .FirstOrDefaultAsync(m => m.OrderId == id);
@@ -296,7 +342,13 @@ namespace Ghayal_Bhaag.Controllers
             {
                 return NotFound();
             }
-
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
+            var isAdmin = User.IsInRole("Admin");
+            
+            if (!isAdmin && order.UserId != userId)
+            {
+                return Forbid(); 
+            }
             return View(order);
         }
 
@@ -347,6 +399,7 @@ namespace Ghayal_Bhaag.Controllers
             }
 
             return View(order);
+            
         }
 
         // POST: Orders/Cancel/5

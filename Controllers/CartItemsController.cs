@@ -22,12 +22,22 @@ namespace Ghayal_Bhaag.Controllers
         // GET: CartItems
         public async Task<IActionResult> ListCartItems()
         {
-            var cartItems = _context.CartItem
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var isAdmin = User.IsInRole("Admin");
+
+            IQueryable<CartItem> cartItemsQuery = _context.CartItem
                 .Include(c => c.User)
                 .Include(c => c.Book)
                 .Where(item => item.Status == OrderStatus.PENDING);
-            return View(await cartItems.ToListAsync());
+
+            if (!isAdmin)
+            {
+                cartItemsQuery = cartItemsQuery.Where(item => item.UserId == userId);
+            }
+
+            return View(await cartItemsQuery.ToListAsync());
         }
+
 
         // POST: CartItems/AddToCart
         [HttpPost]
@@ -87,13 +97,23 @@ namespace Ghayal_Bhaag.Controllers
                 .Include(c => c.User)
                 .Include(c => c.Book)
                 .FirstOrDefaultAsync(m => m.CartItemId == id);
+
             if (cartItem == null)
             {
                 return NotFound();
             }
 
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var isAdmin = User.IsInRole("Admin");
+
+            if (!isAdmin && cartItem.UserId != userId)
+            {
+                return Forbid(); // Or redirect to an error page
+            }
+
             return View(cartItem);
         }
+
 
         // GET: CartItems/Edit
         [Authorize]
@@ -111,6 +131,7 @@ namespace Ghayal_Bhaag.Controllers
                 .Include(c => c.Book)
                 .Where(c => c.UserId == userId && c.Status == OrderStatus.PENDING)
                 .ToListAsync();
+            
 
             return View(cartItems);
         }
@@ -157,6 +178,13 @@ namespace Ghayal_Bhaag.Controllers
                 TempData["ErrorMessage"] = $"Adjusted quantity to available stock ({cartItem.Book.Stock}).";
             }
 
+            
+            var isAdmin = User.IsInRole("Admin");
+
+            if (!isAdmin && cartItem.UserId != userId)
+            {
+                return Forbid(); // Or redirect to an error page
+            }
             // Update the quantity
             cartItem.Quantity = quantity;
             _context.Update(cartItem);
@@ -181,6 +209,14 @@ namespace Ghayal_Bhaag.Controllers
             if (cartItem == null)
             {
                 return NotFound();
+            }
+            
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var isAdmin = User.IsInRole("Admin");
+
+            if (!isAdmin && cartItem.UserId != userId)
+            {
+                return Forbid(); // Or redirect to an error page
             }
 
             return View(cartItem);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -21,9 +22,21 @@ namespace Ghayal_Bhaag.Controllers
         // GET: OrderItems
         public async Task<IActionResult> GetOrderItems()
         {
-            var applicationDbContext = _context.OrderItem.Include(o => o.Book).Include(o => o.Order);
-            return View(await applicationDbContext.ToListAsync());
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var isAdmin = User.IsInRole("Admin");
+
+            IQueryable<OrderItem> orderItemsQuery = _context.OrderItem
+                .Include(o => o.Book)
+                .Include(o => o.Order);
+
+            if (!isAdmin)
+            {
+                orderItemsQuery = orderItemsQuery.Where(o => o.Order.UserId == userId); // Assuming Order has UserId
+            }
+
+            return View(await orderItemsQuery.ToListAsync());
         }
+
 
         // GET: OrderItems/Details/5
         public async Task<IActionResult> GetOrderItemDetail(int? id)
@@ -37,19 +50,30 @@ namespace Ghayal_Bhaag.Controllers
                 .Include(o => o.Book)
                 .Include(o => o.Order)
                 .FirstOrDefaultAsync(m => m.OrderItemId == id);
+
             if (orderItem == null)
             {
                 return NotFound();
             }
 
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var isAdmin = User.IsInRole("Admin");
+            
+            if (!isAdmin && orderItem.Order.UserId != userId)
+            {
+                return Forbid(); 
+            }
+
             return View(orderItem);
         }
+
 
         // GET: OrderItems/Create
         public IActionResult CreateOrderItem()
         {
             ViewData["BookId"] = new SelectList(_context.Book, "BookId", "BookId");
             ViewData["OrderId"] = new SelectList(_context.Set<Order>(), "OrderId", "OrderId");
+            
             return View();
         }
 
@@ -78,6 +102,8 @@ namespace Ghayal_Bhaag.Controllers
             {
                 return NotFound();
             }
+            
+            
 
             var orderItem = await _context.OrderItem.FindAsync(id);
             if (orderItem == null)
@@ -99,6 +125,14 @@ namespace Ghayal_Bhaag.Controllers
             if (id != orderItem.OrderItemId)
             {
                 return NotFound();
+            }
+            
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var isAdmin = User.IsInRole("Admin");
+            
+            if (!isAdmin && orderItem.Order.UserId != userId)
+            {
+                return Forbid(); 
             }
 
             if (ModelState.IsValid)
@@ -142,6 +176,14 @@ namespace Ghayal_Bhaag.Controllers
             {
                 return NotFound();
             }
+            
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var isAdmin = User.IsInRole("Admin");
+            
+            if (!isAdmin && orderItem.Order.UserId != userId)
+            {
+                return Forbid(); 
+            }
 
             return View(orderItem);
         }
@@ -155,6 +197,14 @@ namespace Ghayal_Bhaag.Controllers
             if (orderItem != null)
             {
                 _context.OrderItem.Remove(orderItem);
+            }
+            
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var isAdmin = User.IsInRole("Admin");
+            
+            if (!isAdmin && orderItem.Order.UserId != userId)
+            {
+                return Forbid(); 
             }
 
             await _context.SaveChangesAsync();
