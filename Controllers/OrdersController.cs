@@ -29,7 +29,7 @@ namespace BookMart.Controllers
             var isAdmin = User.IsInRole("Admin");
 
             IQueryable<Order> ordersQuery = _context.Order.Include(o => o.User);
-            
+
             if (!isAdmin)
             {
                 ordersQuery = ordersQuery.Where(o => o.UserId == userId);
@@ -55,14 +55,14 @@ namespace BookMart.Controllers
                 return NotFound();
             }
 
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var isAdmin = User.IsInRole("Admin");
-            
+
             if (!isAdmin && order.UserId != userId)
             {
-                return Forbid(); 
+                return Forbid();
             }
-            
+
             order.OrderItems = await _context.OrderItem
                 .Where(o => o.OrderId == id)
                 .Include(item => item.Book)
@@ -75,7 +75,6 @@ namespace BookMart.Controllers
         // GET: Orders/Create
         public IActionResult CreateOrder()
         {
-            
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "UserName");
             return View();
         }
@@ -84,16 +83,18 @@ namespace BookMart.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> CreateOrder([Bind("OrderId,UserId,CreatedDate,TotalAmount,DiscountApplied,Status")] Order order)
+        public async Task<IActionResult> CreateOrder(
+            [Bind("OrderId,UserId,CreatedDate,TotalAmount,DiscountApplied,Status")]
+            Order order)
         {
-            
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var isAdmin = User.IsInRole("Admin");
-            
+
             if (!isAdmin && order.UserId != userId)
             {
-                return Forbid(); 
+                return Forbid();
             }
+
             if (ModelState.IsValid)
             {
                 _context.Add(order);
@@ -101,6 +102,7 @@ namespace BookMart.Controllers
                 TempData["SuccessMessage"] = "Order created successfully!";
                 return RedirectToAction(nameof(GetOrders));
             }
+
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "UserName", order.UserId);
             TempData["ErrorMessage"] = "Please correct the errors and try again.";
             return View(order);
@@ -156,6 +158,7 @@ namespace BookMart.Controllers
                 {
                     totalBookPrice -= cartItem.Book.DiscountAmount * orderItem.Quantity;
                 }
+
                 totalAmount += totalBookPrice;
 
                 cartItem.Status = OrderStatus.COMPLETED;
@@ -195,7 +198,6 @@ namespace BookMart.Controllers
         [Authorize]
         public async Task<IActionResult> CheckoutSingleCartItem(int id)
         {
-            
             string userId = User.Identity.GetUserId();
             if (string.IsNullOrEmpty(userId))
             {
@@ -205,7 +207,8 @@ namespace BookMart.Controllers
 
             var cartItem = await _context.CartItem
                 .Include(item => item.Book)
-                .FirstOrDefaultAsync(item => item.CartItemId == id && item.UserId == userId && item.Status == OrderStatus.PENDING);
+                .FirstOrDefaultAsync(item =>
+                    item.CartItemId == id && item.UserId == userId && item.Status == OrderStatus.PENDING);
 
             if (cartItem == null)
             {
@@ -272,44 +275,65 @@ namespace BookMart.Controllers
             {
                 return NotFound();
             }
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var isAdmin = User.IsInRole("Admin");
-            
+
             if (!isAdmin && order.UserId != userId)
             {
-                return Forbid(); 
+                return Forbid();
             }
-            
+
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "UserName", order.UserId);
             return View(order);
         }
 
         // POST: Orders/Edit/5
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
-        public async Task<IActionResult> EditOrder(int id, [Bind("OrderId,UserId,CreatedDate,TotalAmount,DiscountApplied,Status")] Order order)
+        public async Task<IActionResult> EditOrder(int id,
+            [Bind("OrderId,UserId,CreatedDate,TotalAmount,DiscountApplied,Status")] Order order)
         {
             if (id != order.OrderId)
             {
                 return NotFound();
             }
-            
-            
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var isAdmin = User.IsInRole("Admin");
-            
+
             if (!isAdmin && order.UserId != userId)
             {
-                return Forbid(); 
+                return Forbid();
             }
+
+            // Remove the User validation error specifically
+            ModelState.Remove("User");
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(order);
+                    // IMPORTANT: Use a different approach that doesn't replace the entire entity
+                    // Get the existing order first
+                    var existingOrder = await _context.Order.FindAsync(id);
+                    if (existingOrder == null)
+                    {
+                        return NotFound();
+                    }
+
+                    // Just update the specific fields from the form
+                    existingOrder.UserId = order.UserId;
+                    existingOrder.CreatedDate = order.CreatedDate;
+                    existingOrder.TotalAmount = order.TotalAmount;
+                    existingOrder.DiscountApplied = order.DiscountApplied;
+                    existingOrder.Status = order.Status;
+
+                    // Now save the changes
                     await _context.SaveChangesAsync();
                     TempData["SuccessMessage"] = "Order updated successfully!";
+                    return RedirectToAction(nameof(GetOrders));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -317,10 +341,17 @@ namespace BookMart.Controllers
                     {
                         return NotFound();
                     }
+
                     throw;
                 }
-                return RedirectToAction(nameof(GetOrders));
+                catch (Exception ex)
+                {
+                    // Log the exception
+                    Console.WriteLine($"Error updating order: {ex.Message}");
+                    ModelState.AddModelError("", "An error occurred while updating the order: " + ex.Message);
+                }
             }
+
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "UserName", order.UserId);
             TempData["ErrorMessage"] = "Please correct the errors and try again.";
             return View(order);
@@ -334,7 +365,7 @@ namespace BookMart.Controllers
                 return NotFound();
             }
 
-            
+
             var order = await _context.Order
                 .Include(o => o.User)
                 .FirstOrDefaultAsync(m => m.OrderId == id);
@@ -342,13 +373,15 @@ namespace BookMart.Controllers
             {
                 return NotFound();
             }
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var isAdmin = User.IsInRole("Admin");
-            
+
             if (!isAdmin && order.UserId != userId)
             {
-                return Forbid(); 
+                return Forbid();
             }
+
             return View(order);
         }
 
@@ -372,9 +405,9 @@ namespace BookMart.Controllers
 
             return RedirectToAction(nameof(GetOrders));
         }
-        
-        
-                // GET: Orders/Cancel/5
+
+
+        // GET: Orders/Cancel/5
         [Authorize]
         public async Task<IActionResult> CancelOrder(int? id)
         {
@@ -399,7 +432,6 @@ namespace BookMart.Controllers
             }
 
             return View(order);
-            
         }
 
         // POST: Orders/Cancel/5
@@ -439,13 +471,11 @@ namespace BookMart.Controllers
 
             return RedirectToAction(nameof(GetOrders));
         }
-    
+
 
         private bool CheckOrderExists(int id)
         {
             return _context.Order.Any(e => e.OrderId == id);
         }
-        
-        
     }
 }

@@ -4,6 +4,7 @@
     {
         PENDING,
         CANCELLED,
+        PACKAGED,
         COMPLETED
     }
 }

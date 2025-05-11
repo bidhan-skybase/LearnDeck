@@ -31,11 +31,16 @@
                     @Html.DisplayNameFor(model => model.TotalAmount)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.DiscountApplied)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.Status)
                 </th>
+                @{
+                    if (User.IsInRole("Admin"))
+                    {
+                        <th>
+                            @Html.DisplayNameFor(model => model.UserId)
+                        </th>
+                    }
+                }
                 <th></th>
             </tr>
         </thead>
@@ -60,23 +65,43 @@
                         <td>
                             @item.TotalAmount.ToString("C")
                         </td>
-                        <td>
-                            @item.DiscountApplied.ToString()
-                        </td>
+                        
                         <td>
                             @Html.DisplayFor(modelItem => item.Status)
                         </td>
-                        <td>
-                            <a asp-action="GetOrderDetail" asp-route-id="@item.OrderId" class="btn btn-sm btn-outline-secondary">Details</a> |
-                            @if (item.Status != BookMart.Enums.OrderStatus.CANCELLED)
+                        
+                        @{
+                            if (User.IsInRole("Admin"))
                             {
-                                <a asp-action="CancelOrder" asp-route-id="@item.OrderId" class="btn btn-sm btn-outline-danger">Cancel Order</a>
+                                <td>
+                                    @item.UserId.ToString()
+                                </td> 
                             }
-                            else
+                        }
+                        @{
+                            if (User.IsInRole("Admin"))
                             {
-                                <span class="text-muted">Cancelled</span>
+                                <td>
+                                    <a asp-action="GetOrderDetail" asp-route-id="@item.OrderId" class="btn btn-sm btn-outline-secondary">Details</a> |
+                                    <a asp-action="EditOrder" asp-route-id="@item.OrderId" class="btn btn-sm btn-outline-primary">Update</a> 
+                                       
+                                </td>
+                            }else if (User.IsInRole("User"))
+                            {
+                                <td>
+                                    <a asp-action="GetOrderDetail" asp-route-id="@item.OrderId" class="btn btn-sm btn-outline-secondary">Details</a> |
+                                    @if (item.Status != BookMart.Enums.OrderStatus.CANCELLED)
+                                    {
+                                        <a asp-action="CancelOrder" asp-route-id="@item.OrderId" class="btn btn-sm btn-outline-danger">Cancel Order</a>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">Cancelled</span>
+                                    }
+                                </td>
                             }
-                        </td>
+                        }
+                        
                     </tr>
                 }
             }
