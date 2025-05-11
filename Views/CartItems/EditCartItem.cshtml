@@ -3,6 +3,14 @@
     ViewData["Title"] = "Edit Cart Items";
 }
 
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="List">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="CartItems" asp-action="ListCartItems">Cart</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Edit</li>
+    </ol>
+</nav>
+
 <h1>Edit Your Cart</h1>
 
 @if (TempData["SuccessMessage"] != null)

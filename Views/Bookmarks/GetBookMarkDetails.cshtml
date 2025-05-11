@@ -4,6 +4,14 @@
     ViewData["Title"] = "Bookmark Details";
 }
 
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="List">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Bookmarks" asp-action="ListBookMarks">Bookmarks</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Details</li>
+    </ol>
+</nav>
+
 <div class="container py-4">
         <div class="card-body p-4">
             <div class="bookmark-details mb-4">

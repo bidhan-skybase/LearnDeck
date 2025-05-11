@@ -5,6 +5,14 @@
     var bookTitle = Model?.Book?.BookTitle ?? ViewBag.BookTitle ?? "Unknown Book";
 }
 
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="List">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Reviews" asp-action="GetReviews">Reviews</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Edit</li>
+    </ol>
+</nav>
+
 <div class="container mt-4">
     <h1>Edit Review</h1>
     <h4>Update your review for @bookTitle</h4>
