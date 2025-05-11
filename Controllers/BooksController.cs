@@ -128,13 +128,13 @@ namespace BookMart.Controllers
             // Check if the user has purchased this book (optimized)
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             bool hasPurchased = false;
+
             if (!string.IsNullOrEmpty(userId))
             {
                 hasPurchased = await _context.Order
-                    .Where(o => o.UserId == userId)
-                    .Join(_context.OrderItem, o => o.OrderId, oi => oi.OrderId, (o, oi) => oi)
-                    .AnyAsync(oi => oi.BookId == id);
+                    .AnyAsync(o => o.UserId == userId);
             }
+
             ViewData["has_purchased"] = hasPurchased.ToString().ToLower();
 
             return View(book);

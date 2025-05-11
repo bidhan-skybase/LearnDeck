@@ -60,24 +60,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Anouncements/CreateAnnouncement.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQW5vdW5jZW1lbnRzL0NyZWF0ZUFubm91bmNlbWVudC5jc2h0bWw=
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Announcements/CreateAnnouncement.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQW5ub3VuY2VtZW50cy9DcmVhdGVBbm5vdW5jZW1lbnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Anouncements/DeleteAnnouncement.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQW5vdW5jZW1lbnRzL0RlbGV0ZUFubm91bmNlbWVudC5jc2h0bWw=
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Announcements/DeleteAnnouncement.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQW5ub3VuY2VtZW50cy9EZWxldGVBbm5vdW5jZW1lbnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Anouncements/EditAnnouncement.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQW5vdW5jZW1lbnRzL0VkaXRBbm5vdW5jZW1lbnQuY3NodG1s
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Announcements/EditAnnouncement.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQW5ub3VuY2VtZW50cy9FZGl0QW5ub3VuY2VtZW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Anouncements/GetAnnouncementDetails.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQW5vdW5jZW1lbnRzL0dldEFubm91bmNlbWVudERldGFpbHMuY3NodG1s
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Announcements/GetAnnouncementDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQW5ub3VuY2VtZW50cy9HZXRBbm5vdW5jZW1lbnREZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Anouncements/GetAnnouncements.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQW5vdW5jZW1lbnRzL0dldEFubm91bmNlbWVudHMuY3NodG1s
+[/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Announcements/GetAnnouncements.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQW5ub3VuY2VtZW50cy9HZXRBbm5vdW5jZW1lbnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/bidhan/Desktop/LearnDeck/BookMart/Views/Bookmarks/CreateBookMark.cshtml]

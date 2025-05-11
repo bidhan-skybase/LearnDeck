@@ -125,7 +125,7 @@
                                 <li><a class="dropdown-item" asp-area="" asp-controller="Orders" asp-action="GetOrders">My Orders</a></li>
                                 <li><a class="dropdown-item" asp-area="" asp-controller="Reviews" asp-action="GetReviews">My Reviews</a></li>
                                 <li><a class="dropdown-item" asp-area="" asp-controller="Bookmarks" asp-action="ListBookMarks">My Wishlists</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Anouncements" asp-action="GetAnnouncements">Announcements</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Announcements" asp-action="GetAnnouncements">Announcements</a></li>
                             </ul>
                         </li>
                     }
@@ -138,9 +138,11 @@
                                 Admin
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="adminDropdown">
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Anouncements" asp-action="GetAnnouncements">Announcements</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Orders" asp-action="GetOrders">Manage orders</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Reviews" asp-action="GetReviews">Manage reviews</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Announcements" asp-action="GetAnnouncements">Manage announcements</a></li>
                                 <li><a class="dropdown-item" asp-area="" asp-controller="RoleManager" asp-action="ListRoles">User Roles</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Index">User Management</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Index">Manage users</a></li>
                             </ul>
                         </li>
                     }

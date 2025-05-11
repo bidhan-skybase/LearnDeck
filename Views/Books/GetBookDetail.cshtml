@@ -63,7 +63,7 @@
             {
                 <div class="mt-4">
                     <a asp-action="ListBooks" class="btn btn-outline-secondary me-2">Back to List</a>
-                    @if (ViewData["has_purchased"].Equals("True"))
+                    @if (ViewData["has_purchased"].Equals("true"))
                     {
                         <a asp-controller="Reviews" asp-action="CreateReview" asp-route-id="@Model?.BookId"
                            class="btn btn-outline-primary me-2">Review</a>

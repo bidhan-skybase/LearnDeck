@@ -5,11 +5,11 @@ using BookMart.Models;
 
 namespace BookMart.Controllers
 {
-    public class AnouncementsController : Controller
+    public class AnnouncementsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public AnouncementsController(ApplicationDbContext context)
+        public AnnouncementsController(ApplicationDbContext context)
         {
             _context = context;
         }
