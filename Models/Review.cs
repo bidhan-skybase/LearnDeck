@@ -19,7 +19,7 @@ namespace Ghayal_Bhaag.Models
 
         public string? description { get; set; }
 
-        [Column(TypeName = "timestamp")]
+        [Column(TypeName = "Date")]
         public DateTime? CreatedDate { get; set; }
 
     }

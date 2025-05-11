@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -21,8 +22,23 @@ namespace Ghayal_Bhaag.Controllers
         // GET: Reviews
         public async Task<IActionResult> GetReviews()
         {
-            var applicationDbContext = _context.Review.Include(r => r.Book).Include(r => r.User);
-            return View(await applicationDbContext.ToListAsync());
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
+            var isAdmin = User.IsInRole("Admin"); 
+            
+            Console.WriteLine("current user id: "+userId);
+            Console.WriteLine("current user is admin: "+isAdmin);
+
+            IQueryable<Review> reviewsQuery = _context.Review
+                .Include(r => r.Book)
+                .Include(r => r.User);
+
+            if (!isAdmin)
+            {
+                reviewsQuery = reviewsQuery.Where(r => r.UserId == userId);
+            }
+
+            var reviews = await reviewsQuery.ToListAsync();
+            return View(reviews);
         }
 
         // GET: Reviews/Details/5
@@ -67,10 +83,17 @@ namespace Ghayal_Bhaag.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateReview([Bind("ReviewId,UserId,BookId,description,CreatedDate")] Review review)
+        public async Task<IActionResult> CreateReview([Bind("ReviewId,BookId,description,CreatedDate")] Review review)
         {
+            // Get logged-in user ID
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            review.UserId = userId; 
+
+            review.CreatedDate = DateTime.UtcNow;
+
             _context.Add(review);
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(GetReviews));
         }
 
