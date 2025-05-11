@@ -82,13 +82,19 @@ namespace Ghayal_Bhaag.Controllers
                 return NotFound();
             }
 
-            var review = await _context.Review.FindAsync(id);
+            var review = await _context.Review
+                .Include(r => r.Book)
+                .FirstOrDefaultAsync(r => r.ReviewId == id);
+
             if (review == null)
             {
                 return NotFound();
             }
+
             ViewData["BookId"] = new SelectList(_context.Book, "BookId", "BookId", review.BookId);
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", review.UserId);
+            ViewBag.BookTitle = review.Book?.BookTitle; // Set BookTitle in ViewBag (optional)
+
             return View(review);
         }
 
@@ -126,6 +132,8 @@ namespace Ghayal_Bhaag.Controllers
         // GET: Reviews/Delete/5
         public async Task<IActionResult> DeleteReview(int? id)
         {
+            
+            
             if (id == null)
             {
                 return NotFound();
