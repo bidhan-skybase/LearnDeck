@@ -19,7 +19,8 @@ namespace BookMart.Controllers
         private readonly IEmailService _emailService;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public OrdersController(ApplicationDbContext context, IEmailService emailService, UserManager<ApplicationUser> userManager)
+        public OrdersController(ApplicationDbContext context, IEmailService emailService,
+            UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _emailService = emailService;
@@ -218,7 +219,7 @@ namespace BookMart.Controllers
                     {(order.DiscountApplied > 0 ? $"<p>Discount Applied: ${order.DiscountApplied}</p>" : "")}
                     <p><strong>Total: ${order.TotalAmount}</strong></p>
                     <p>Status: {order.Status}</p>
-                    <p>We will notify you when your order is shipped.</p>
+                    <p>We will notify you when your order is ready for pickup.</p>
                     <p>Thank you for shopping with BookMart!</p>";
 
                 await _emailService.SendEmailAsync(user.Email, emailSubject, emailBody);
@@ -327,7 +328,7 @@ namespace BookMart.Controllers
                     {(order.DiscountApplied > 0 ? $"<p>Discount Applied: ${order.DiscountApplied}</p>" : "")}
                     <p><strong>Total: ${order.TotalAmount}</strong></p>
                     <p>Status: {order.Status}</p>
-                    <p>We will notify you when your order is shipped.</p>
+                    <p>We will notify you when your order is packaged.</p>
                     <p>Thank you for shopping with BookMart!</p>";
 
                 await _emailService.SendEmailAsync(user.Email, emailSubject, emailBody);
@@ -374,7 +375,8 @@ namespace BookMart.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditOrder(int id,
-            [Bind("OrderId,UserId,CreatedDate,TotalAmount,DiscountApplied,Status")] Order order)
+            [Bind("OrderId,UserId,CreatedDate,TotalAmount,DiscountApplied,Status")]
+            Order order)
         {
             if (id != order.OrderId)
             {
@@ -389,7 +391,6 @@ namespace BookMart.Controllers
                 return Forbid();
             }
 
-            // Remove the User validation error specifically
             ModelState.Remove("User");
 
             if (ModelState.IsValid)
@@ -402,6 +403,7 @@ namespace BookMart.Controllers
                         return NotFound();
                     }
 
+                    var originalStatus = existingOrder.Status;
                     existingOrder.UserId = order.UserId;
                     existingOrder.CreatedDate = order.CreatedDate;
                     existingOrder.TotalAmount = order.TotalAmount;
@@ -409,7 +411,45 @@ namespace BookMart.Controllers
                     existingOrder.Status = order.Status;
 
                     await _context.SaveChangesAsync();
-                    TempData["SuccessMessage"] = "Order updated successfully!";
+                    Console.WriteLine(order.Status);
+                    // Send email if status changed to PACKAGED
+                    if (originalStatus != OrderStatus.PACKAGED && order.Status == OrderStatus.PACKAGED)
+                    {
+                        var user = await _userManager.FindByIdAsync(order.UserId);
+                        if (user != null)
+                        {
+                            try
+                            {
+                                var emailSubject = $"BookMart Order #{order.OrderId} - Packaged";
+                                var emailBody = $@"<h2>Order Status Update</h2>
+                            <p>Dear {user.FirstName} {user.LastName},</p>
+                            <p>Your order #{order.OrderId} has been packaged and is ready for pick up {DateTime.UtcNow:dd MMM yyyy}.</p>
+                            <p>Status: {order.Status}</p>
+                       
+                            <p>Thank you for shopping with BookMart!</p>";
+
+                                await _emailService.SendEmailAsync(user.Email, emailSubject, emailBody);
+                                TempData["SuccessMessage"] =
+                                    "Order updated successfully! A status update email has been sent.";
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine($"Failed to send email: {ex.Message}");
+                                TempData["SuccessMessage"] =
+                                    "Order updated successfully, but failed to send status update email.";
+                            }
+                        }
+                        else
+                        {
+                            TempData["SuccessMessage"] =
+                                "Order updated successfully, but user not found for email notification.";
+                        }
+                    }
+                    else
+                    {
+                        TempData["SuccessMessage"] = "Order updated successfully!";
+                    }
+
                     return RedirectToAction(nameof(GetOrders));
                 }
                 catch (DbUpdateConcurrencyException)
@@ -418,6 +458,7 @@ namespace BookMart.Controllers
                     {
                         return NotFound();
                     }
+
                     throw;
                 }
                 catch (Exception ex)
