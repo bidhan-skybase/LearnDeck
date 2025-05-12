@@ -1,25 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
+﻿using Microsoft.AspNetCore.Mvc;
+using BookMart.Services;
+using BookMart.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNet.Identity;
+using System.Security.Claims;
 using BookMart.Models;
 using BookMart.Enums;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BookMart.Controllers
 {
     public class OrdersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IEmailService _emailService;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public OrdersController(ApplicationDbContext context)
+        public OrdersController(ApplicationDbContext context, IEmailService emailService, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _emailService = emailService;
+            _userManager = userManager;
         }
 
         // GET: Orders
@@ -71,7 +75,6 @@ namespace BookMart.Controllers
             return View(order);
         }
 
-
         // GET: Orders/Create
         public IActionResult CreateOrder()
         {
@@ -114,10 +117,17 @@ namespace BookMart.Controllers
         [Authorize]
         public async Task<IActionResult> AddOrdertoCart()
         {
-            string userId = User.Identity.GetUserId();
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(userId))
             {
                 TempData["ErrorMessage"] = "User not logged in.";
+                return RedirectToAction("Login", "Account");
+            }
+
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                TempData["ErrorMessage"] = "User not found.";
                 return RedirectToAction("Login", "Account");
             }
 
@@ -188,7 +198,39 @@ namespace BookMart.Controllers
             _context.Order.Update(order);
             await _context.SaveChangesAsync();
 
-            TempData["SuccessMessage"] = "Order created successfully!";
+            // Load order with items for email
+            order.OrderItems = await _context.OrderItem
+                .Where(oi => oi.OrderId == order.OrderId)
+                .Include(oi => oi.Book)
+                .ToListAsync();
+
+            // Send confirmation email
+            try
+            {
+                var emailSubject = $"BookMart Order Confirmation - Order #{order.OrderId}";
+                var emailBody = $@"<h2>Thank You for Your Order!</h2>
+                    <p>Dear {user.FirstName} {user.LastName},</p>
+                    <p>Your order #{order.OrderId} has been successfully placed on {order.CreatedDate:dd MMM yyyy}.</p>
+                    <h3>Order Details</h3>
+                    <ul>
+                        {string.Join("", order.OrderItems.Select(oi => $"<li>{oi.Book.BookTitle} (x{oi.Quantity}) - ${oi.UnitPrice * oi.Quantity}</li>"))}
+                    </ul>
+                    {(order.DiscountApplied > 0 ? $"<p>Discount Applied: ${order.DiscountApplied}</p>" : "")}
+                    <p><strong>Total: ${order.TotalAmount}</strong></p>
+                    <p>Status: {order.Status}</p>
+                    <p>We will notify you when your order is shipped.</p>
+                    <p>Thank you for shopping with BookMart!</p>";
+
+                await _emailService.SendEmailAsync(user.Email, emailSubject, emailBody);
+                TempData["SuccessMessage"] = "Order created successfully! A confirmation email has been sent.";
+            }
+            catch (Exception ex)
+            {
+                // Log the error (consider using ILogger)
+                Console.WriteLine($"Failed to send email: {ex.Message}");
+                TempData["SuccessMessage"] = "Order created successfully, but failed to send confirmation email.";
+            }
+
             return RedirectToAction(nameof(GetOrders));
         }
 
@@ -198,10 +240,17 @@ namespace BookMart.Controllers
         [Authorize]
         public async Task<IActionResult> CheckoutSingleCartItem(int id)
         {
-            string userId = User.Identity.GetUserId();
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(userId))
             {
                 TempData["ErrorMessage"] = "User not logged in.";
+                return RedirectToAction("Login", "Account");
+            }
+
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                TempData["ErrorMessage"] = "User not found.";
                 return RedirectToAction("Login", "Account");
             }
 
@@ -258,7 +307,39 @@ namespace BookMart.Controllers
             _context.OrderItem.Add(orderItem);
             await _context.SaveChangesAsync();
 
-            TempData["SuccessMessage"] = "Order created successfully for the selected item!";
+            // Load order with items for email
+            order.OrderItems = await _context.OrderItem
+                .Where(oi => oi.OrderId == order.OrderId)
+                .Include(oi => oi.Book)
+                .ToListAsync();
+
+            // Send confirmation email
+            try
+            {
+                var emailSubject = $"BookMart Order Confirmation - Order #{order.OrderId}";
+                var emailBody = $@"<h2>Thank You for Your Order!</h2>
+                    <p>Dear {user.FirstName} {user.LastName},</p>
+                    <p>Your order #{order.OrderId} has been successfully placed on {order.CreatedDate:dd MMM yyyy}.</p>
+                    <h3>Order Details</h3>
+                    <ul>
+                        {string.Join("", order.OrderItems.Select(oi => $"<li>{oi.Book.BookTitle} (x{oi.Quantity}) - ${oi.UnitPrice * oi.Quantity}</li>"))}
+                    </ul>
+                    {(order.DiscountApplied > 0 ? $"<p>Discount Applied: ${order.DiscountApplied}</p>" : "")}
+                    <p><strong>Total: ${order.TotalAmount}</strong></p>
+                    <p>Status: {order.Status}</p>
+                    <p>We will notify you when your order is shipped.</p>
+                    <p>Thank you for shopping with BookMart!</p>";
+
+                await _emailService.SendEmailAsync(user.Email, emailSubject, emailBody);
+                TempData["SuccessMessage"] = "Order created successfully! A confirmation email has been sent.";
+            }
+            catch (Exception ex)
+            {
+                // Log the error (consider using ILogger)
+                Console.WriteLine($"Failed to send email: {ex.Message}");
+                TempData["SuccessMessage"] = "Order created successfully, but failed to send confirmation email.";
+            }
+
             return RedirectToAction(nameof(GetOrders));
         }
 
@@ -315,22 +396,18 @@ namespace BookMart.Controllers
             {
                 try
                 {
-                    // IMPORTANT: Use a different approach that doesn't replace the entire entity
-                    // Get the existing order first
                     var existingOrder = await _context.Order.FindAsync(id);
                     if (existingOrder == null)
                     {
                         return NotFound();
                     }
 
-                    // Just update the specific fields from the form
                     existingOrder.UserId = order.UserId;
                     existingOrder.CreatedDate = order.CreatedDate;
                     existingOrder.TotalAmount = order.TotalAmount;
                     existingOrder.DiscountApplied = order.DiscountApplied;
                     existingOrder.Status = order.Status;
 
-                    // Now save the changes
                     await _context.SaveChangesAsync();
                     TempData["SuccessMessage"] = "Order updated successfully!";
                     return RedirectToAction(nameof(GetOrders));
@@ -341,12 +418,10 @@ namespace BookMart.Controllers
                     {
                         return NotFound();
                     }
-
                     throw;
                 }
                 catch (Exception ex)
                 {
-                    // Log the exception
                     Console.WriteLine($"Error updating order: {ex.Message}");
                     ModelState.AddModelError("", "An error occurred while updating the order: " + ex.Message);
                 }
@@ -364,7 +439,6 @@ namespace BookMart.Controllers
             {
                 return NotFound();
             }
-
 
             var order = await _context.Order
                 .Include(o => o.User)
@@ -406,7 +480,6 @@ namespace BookMart.Controllers
             return RedirectToAction(nameof(GetOrders));
         }
 
-
         // GET: Orders/Cancel/5
         [Authorize]
         public async Task<IActionResult> CancelOrder(int? id)
@@ -424,7 +497,6 @@ namespace BookMart.Controllers
                 return NotFound();
             }
 
-            // Ensure the logged-in user can only cancel their own orders
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (order.UserId != userId)
             {
@@ -447,7 +519,6 @@ namespace BookMart.Controllers
             }
             else
             {
-                // Ensure the logged-in user can only cancel their own orders
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 if (order.UserId != userId)
                 {
@@ -455,14 +526,12 @@ namespace BookMart.Controllers
                     return RedirectToAction(nameof(GetOrders));
                 }
 
-                // Prevent cancelling completed orders
                 if (order.Status == OrderStatus.COMPLETED)
                 {
                     TempData["ErrorMessage"] = "Completed orders cannot be cancelled.";
                     return RedirectToAction(nameof(GetOrders));
                 }
 
-                // Update the order status to CANCELLED
                 order.Status = OrderStatus.CANCELLED;
                 _context.Update(order);
                 await _context.SaveChangesAsync();
@@ -471,7 +540,6 @@ namespace BookMart.Controllers
 
             return RedirectToAction(nameof(GetOrders));
         }
-
 
         private bool CheckOrderExists(int id)
         {

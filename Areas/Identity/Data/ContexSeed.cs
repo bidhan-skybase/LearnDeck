@@ -17,8 +17,8 @@ public static class ContextSeed
         var defaultUser = new ApplicationUser
         {
             UserName = "admin",
-            FirstName = "Ghayal",
-            LastName = "Bhaag",
+            FirstName = "admin",
+            LastName = "admin",
             Email = "admin@gmail.com",
             EmailConfirmed = true,
             PhoneNumberConfirmed = true,
