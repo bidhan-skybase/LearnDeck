@@ -285,10 +285,10 @@ namespace BookMart.Controllers
             };
 
             decimal totalAmount = orderItem.Quantity * orderItem.UnitPrice;
-            if (cartItem.Book.Sale)
-            {
-                totalAmount -= cartItem.Book.DiscountAmount * orderItem.Quantity;
-            }
+            // if (cartItem.Book.Sale)
+            // {
+            //     totalAmount -= cartItem.Book.DiscountAmount * orderItem.Quantity;
+            // }
 
             // Apply loyalty discount
             var successfulOrders = await _context.Order

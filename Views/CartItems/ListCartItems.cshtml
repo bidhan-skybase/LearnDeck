@@ -43,7 +43,25 @@
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UnitPrice)
+                @if (item.Book.DiscountAmount > 0)
+                {
+                    <!-- Show original price with strikethrough -->
+                    <span class="text-muted">
+                        <s>Rs. @Html.DisplayFor(modelItem => item.Book.Price)</s>
+                    </span>
+                    <!-- Show discounted price -->
+                    <span class="text-success">
+                        Rs. @(item.UnitPrice)
+                    </span>
+                }
+                else
+                {
+                    <!-- Show only original price if no discount -->
+                    <span>
+                         Rs. @Html.DisplayFor(modelItem => item.UnitPrice)
+                    </span>
+                   
+                }
             </td>
             <td>
                 <a asp-action="EditCartItem" asp-route-id="@item.CartItemId" class="btn btn-sm btn-outline-primary">Edit</a> |

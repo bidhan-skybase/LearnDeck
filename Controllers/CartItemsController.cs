@@ -69,12 +69,15 @@ namespace BookMart.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
+            // Calculate the unit price: apply discount if available
+            decimal unitPrice = book.DiscountAmount > 0 ? (decimal)book.Price - book.DiscountAmount : (decimal)book.Price;
+
             CartItem cartItem = new CartItem
             {
                 UserId = userId,
                 BookId = id,
                 Quantity = quantity,
-                UnitPrice = (decimal)book.Price,
+                UnitPrice = unitPrice,
                 Status = OrderStatus.PENDING
             };
 

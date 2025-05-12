@@ -19,11 +19,12 @@
         <div class="col-md-8">
             <h2 class="mb-3">@Html.DisplayFor(model => model.BookTitle)</h2>
             <p class="text-muted mb-2">
-                by @Html.DisplayFor(model => model.Author) <!-- Assuming 'author' is a property; add if missing --></p>
+                by @Html.DisplayFor(model => model.Author)
+            </p>
             <div class="mb-3">
                 <span class="badge bg-secondary">Paper Back</span>
-                <!-- Assuming format; adjust if using model.format -->
-                <span class="text-warning">★ N/A</span> <span class="text-muted">(0 Book Reviews)</span>
+                <span class="text-warning">★ N/A</span>
+                <span class="text-muted">(@ViewData["ReviewCount"] Book Reviews)</span>
             </div>
             <p class="text-muted mb-2">Sold by BookMart Nepal</p>
 
@@ -33,7 +34,25 @@
 
             <!-- Price and Quantity -->
             <div class="d-flex align-items-center mb-3">
-                <h4 class="me-3 mb-0">Rs. @Html.DisplayFor(model => model.Price)</h4>
+                <!-- Check if there is a discount (DiscountAmount > 0) -->
+                @if (Model.DiscountAmount > 0)
+                {
+                    <!-- Show original price with strikethrough -->
+                    <h4 class="me-3 mb-0 text-muted">
+                        <s>Rs. @Model.Price</s>
+                    </h4>
+                    <!-- Show discounted price -->
+                    <h4 class="me-3 mb-0 text-success">
+                        Rs. @(Model.Price - Model.DiscountAmount)
+                    </h4>
+                }
+                else
+                {
+                    <!-- Show only original price if no discount -->
+                    <h4 class="me-3 mb-0">
+                        Rs. @Model.Price
+                    </h4>
+                }
                 <div class="input-group w-25">
                     <button class="btn btn-outline-secondary" type="button" id="quantityDown">-</button>
                     <input type="number" class="form-control text-center" value="1" min="1" id="quantity"
@@ -52,7 +71,7 @@
                     <button type="submit" class="btn btn-primary mb-3">Add to Cart</button>
                 </form>
             }
-            
+
             <h5>Genres:</h5>
             <div class="mb-3">
                 @foreach (var genre in Model.Genre.Split(',').Select(g => g.Trim()))
@@ -60,14 +79,15 @@
                     <span class="badge bg-light text-dark me-1">@genre</span>
                 }
             </div>
+
             @if (User.IsInRole("User"))
             {
                 <div class="mt-4">
                     <a asp-action="ListBooks" class="btn btn-outline-secondary me-2">Back to List</a>
-                    @if (ViewData["has_purchased"].Equals("true"))
+                    @if (ViewData["has_purchased"]?.ToString() == "true")
                     {
                         <a asp-controller="Reviews" asp-action="CreateReview" asp-route-id="@Model?.BookId"
-                           class="btn btn-outline-primary me-2">Review</a>
+                           class="btn btn-outline-primary me-2">Write a Review</a>
                     }
                     <form asp-controller="Bookmarks" asp-action="CreateBookMark" method="post" class="d-inline">
                         <input type="hidden" name="BookId" value="@Model?.BookId" />
@@ -83,38 +103,58 @@
                 <a asp-controller="Books" asp-action="DeleteBook" asp-route-id="@Model?.BookId"
                    class="btn btn-danger mb-3">Delete</a>
             }
-            <!-- Actions -->
 
+            <!-- Reviews Section -->
+            <h4 class="mt-5">Customer Reviews</h4>
+            @if (ViewBag.Reviews != null && ViewBag.Reviews.Count > 0)
+            {
+                <div class="reviews-list">
+                    @foreach (var review in ViewBag.Reviews)
+                    {
+                        <div class="border-bottom py-3">
+                            <div class="d-flex justify-content-between">
+                                <h6 class="mb-1">@review.User.UserName</h6>
+                                <small class="text-muted">@review.CreatedDate?.ToString("MMM dd, yyyy")</small>
+                            </div>
+                            <p class="mb-0">@review.description</p>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="text-muted">No reviews yet. Be the first to write a review!</p>
+            }
         </div>
     </div>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const quantityInput = document.getElementById('quantity');
         const hiddenQuantityInput = document.getElementById('quantityInput');
         const quantityUp = document.getElementById('quantityUp');
         const quantityDown = document.getElementById('quantityDown');
         const maxStock = parseInt(quantityInput.getAttribute('data-stock'));
-        
+
         // Update the hidden input when the visible one changes
-        quantityInput.addEventListener('change', function() {
+        quantityInput.addEventListener('change', function () {
             let value = parseInt(this.value);
             if (value < 1) value = 1;
             if (value > maxStock) value = maxStock;
             this.value = value;
             hiddenQuantityInput.value = value;
         });
-        
-        quantityUp.addEventListener('click', function() {
+
+        quantityUp.addEventListener('click', function () {
             let currentVal = parseInt(quantityInput.value);
             if (currentVal < maxStock) {
                 quantityInput.value = currentVal + 1;
                 hiddenQuantityInput.value = currentVal + 1;
             }
         });
-        
-        quantityDown.addEventListener('click', function() {
+
+        quantityDown.addEventListener('click', function () {
             let currentVal = parseInt(quantityInput.value);
             if (currentVal > 1) {
                 quantityInput.value = currentVal - 1;
@@ -123,6 +163,7 @@
         });
     });
 </script>
+
 <style>
     .badge {
         margin-right: 5px;
@@ -144,5 +185,10 @@
 
     .btn-link:hover {
         color: #007bff;
+    }
+
+    .reviews-list {
+        max-height: 400px;
+        overflow-y: auto;
     }
 </style>

@@ -124,6 +124,19 @@ namespace BookMart.Controllers
             {
                 return NotFound();
             }
+            
+            // Fetch reviews for the book
+            var reviews = await _context.Review
+                .Where(r => r.BookId == id)
+                .Include(r => r.User) // Include ApplicationUser to access UserName
+                .OrderByDescending(r => r.CreatedDate) // Latest reviews first
+                .ToListAsync();
+
+            // Pass review count to ViewData
+            ViewData["ReviewCount"] = reviews.Count;
+
+            // Pass reviews to the view via ViewBag or ViewData (or modify model if preferred)
+            ViewBag.Reviews = reviews;
 
             // Check if the user has purchased this book (optimized)
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
