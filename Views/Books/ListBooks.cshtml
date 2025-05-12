@@ -97,12 +97,12 @@
                             <span class="position-absolute top-0 end-0 badge bg-secondary m-3">
                                 @if (item.Sale && item.DiscountAmount > 0)
                                 {
-                                    <span class="text-decoration-line-through text-muted">$@item.Price</span>
-                                    <span> $@(item.Price - item.DiscountAmount)</span>
+                                    <span class="text-decoration-line-through text-muted">Rs. @item.Price</span>
+                                    <span> Rs. @(item.Price - item.DiscountAmount)</span>
                                 }
                                 else
                                 {
-                                    <span>$@item.Price</span>
+                                    <span>Rs. @item.Price</span>
                                 }
                             </span>
                             @if (item.Sale)

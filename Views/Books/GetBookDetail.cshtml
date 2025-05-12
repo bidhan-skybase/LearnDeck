@@ -43,15 +43,16 @@
                 <span class="ms-3 text-muted">Available Stock: @Model.Stock</span>
             </div>
 
-            <form asp-controller="CartItems" asp-action="AddToCart" method="post">
-                @Html.AntiForgeryToken()
-                <input type="hidden" name="id" value="@Model.BookId" />
-                <input type="hidden" name="quantity" id="quantityInput" value="1" />
-                <button type="submit" class="btn btn-primary mb-3">Add to Cart</button>
-            </form>
-            <!-- Delivery Information -->
-
-            <!-- Genres -->
+            @if (User.IsInRole("User"))
+            {
+                <form asp-controller="CartItems" asp-action="AddToCart" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" value="@Model.BookId" />
+                    <input type="hidden" name="quantity" id="quantityInput" value="1" />
+                    <button type="submit" class="btn btn-primary mb-3">Add to Cart</button>
+                </form>
+            }
+            
             <h5>Genres:</h5>
             <div class="mb-3">
                 @foreach (var genre in Model.Genre.Split(',').Select(g => g.Trim()))
@@ -74,6 +75,13 @@
                         <button type="submit" class="btn btn-outline-success me-2">Add to Wishlist</button>
                     </form>
                 </div>
+            }
+            @if (User.IsInRole("Admin"))
+            {
+                <a asp-controller="Books" asp-action="EditBook" asp-route-id="@Model?.BookId"
+                   class="btn btn-primary mb-3">Edit</a>
+                <a asp-controller="Books" asp-action="DeleteBook" asp-route-id="@Model?.BookId"
+                   class="btn btn-danger mb-3">Delete</a>
             }
             <!-- Actions -->
 

@@ -30,8 +30,6 @@ public static class ContextSeed
             if (user == null)
             {
                 await userManager.CreateAsync(defaultUser, "Admin!123");
-                await userManager.AddToRoleAsync(defaultUser, Roles.User.ToString());
-                await userManager.AddToRoleAsync(defaultUser, Roles.Member.ToString());
                 await userManager.AddToRoleAsync(defaultUser, Roles.Admin.ToString());
             }
 
