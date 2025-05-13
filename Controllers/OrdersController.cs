@@ -112,7 +112,6 @@ namespace BookMart.Controllers
             return View(order);
         }
 
-        // POST: Orders/AddOrdertoCart
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -164,17 +163,17 @@ namespace BookMart.Controllers
                     OrderId = order.OrderId,
                     BookId = cartItem.BookId,
                     Quantity = cartItem.Quantity,
-                    UnitPrice = cartItem.Book.Price // Use original book price
+                    UnitPrice = cartItem.Book?.Price ?? 0 // Use original book price, handle null
                 };
 
                 // Calculate original price for this item
                 decimal totalBookPrice = orderItem.Quantity * orderItem.UnitPrice;
                 originalTotal += totalBookPrice;
 
-                // Apply fixed discount: 200 per book * quantity
-                fixedDiscount += orderItem.Book.DiscountAmount * orderItem.Quantity;
+                // Apply fixed discount: use cartItem.Book.DiscountAmount * quantity
+                fixedDiscount += (cartItem.Book?.DiscountAmount ?? 0) * orderItem.Quantity;
 
-                cartItem.Status = OrderStatus.PENDING;
+                cartItem.Status = OrderStatus.PENDING; // Update to COMPLETED
                 _context.CartItem.Update(cartItem);
                 orderItems.Add(orderItem);
                 _context.OrderItem.Add(orderItem);
@@ -189,7 +188,8 @@ namespace BookMart.Controllers
 
             // Apply 10% discount for 10+ successful orders
             var successfulOrders = await _context.Order
-                .Where(o => o.UserId == userId && o.Status == OrderStatus.COMPLETED)
+                .Where(o => o.UserId == userId &&
+                            o.Status.ToString().ToLower() == OrderStatus.COMPLETED.ToString().ToLower())
                 .CountAsync();
             decimal loyaltyDiscount = successfulOrders >= 10 ? originalTotal * 0.10m : 0;
             totalDiscount += loyaltyDiscount;
@@ -206,7 +206,7 @@ namespace BookMart.Controllers
             // Update order
             order.DiscountApplied = totalDiscount;
             order.TotalAmount = finalTotal;
-            order.Status = OrderStatus.PENDING;
+            order.Status = OrderStatus.PENDING; // Update to COMPLETED
             _context.Order.Update(order);
             await _context.SaveChangesAsync();
 
@@ -215,6 +215,32 @@ namespace BookMart.Controllers
                 .Where(oi => oi.OrderId == order.OrderId)
                 .Include(oi => oi.Book)
                 .ToListAsync();
+
+            try
+            {
+                var emailSubject = $"BookMart Order Confirmation - Order #{order.OrderId}";
+                var emailBody = $@"<h2>Thank You for Your Order!</h2>
+                    <p>Dear {user.FirstName} {user.LastName},</p>
+                    <p>Your order #{order.OrderId} has been successfully placed on {order.CreatedDate:dd MMM yyyy}.</p>
+                    <h3>Order Details</h3>
+                    <ul>
+                        {string.Join("", order.OrderItems.Select(oi => $"<li>{oi.Book.BookTitle} (x{oi.Quantity}) - ${oi.UnitPrice * oi.Quantity}</li>"))}
+                    </ul>
+                    {(order.DiscountApplied > 0 ? $"<p>Discount Applied: ${order.DiscountApplied}</p>" : "")}
+                    <p><strong>Total: ${order.TotalAmount}</strong></p>
+                    <p>Status: {order.Status}</p>
+                    <p>We will notify you when your order is ready for pickup.</p>
+                    <p>Thank you for shopping with BookMart!</p>";
+
+                await _emailService.SendEmailAsync(user.Email, emailSubject, emailBody);
+                TempData["SuccessMessage"] = "Order created successfully! A confirmation email has been sent.";
+            }
+            catch (Exception ex)
+            {
+                // Log the error (consider using ILogger)
+                Console.WriteLine($"Failed to send email: {ex.Message}");
+                TempData["SuccessMessage"] = "Order created successfully, but failed to send confirmation email.";
+            }
 
             return RedirectToAction(nameof(GetOrders));
         }
@@ -317,6 +343,32 @@ namespace BookMart.Controllers
                 .Where(oi => oi.OrderId == order.OrderId)
                 .Include(oi => oi.Book)
                 .ToListAsync();
+            
+            try
+            {
+                var emailSubject = $"BookMart Order Confirmation - Order #{order.OrderId}";
+                var emailBody = $@"<h2>Thank You for Your Order!</h2>
+                    <p>Dear {user.FirstName} {user.LastName},</p>
+                    <p>Your order #{order.OrderId} has been successfully placed on {order.CreatedDate:dd MMM yyyy}.</p>
+                    <h3>Order Details</h3>
+                    <ul>
+                        {string.Join("", order.OrderItems.Select(oi => $"<li>{oi.Book.BookTitle} (x{oi.Quantity}) - ${oi.UnitPrice * oi.Quantity}</li>"))}
+                    </ul>
+                    {(order.DiscountApplied > 0 ? $"<p>Discount Applied: ${order.DiscountApplied}</p>" : "")}
+                    <p><strong>Total: ${order.TotalAmount}</strong></p>
+                    <p>Status: {order.Status}</p>
+                    <p>We will notify you when your order is ready for pickup.</p>
+                    <p>Thank you for shopping with BookMart!</p>";
+
+                await _emailService.SendEmailAsync(user.Email, emailSubject, emailBody);
+                TempData["SuccessMessage"] = "Order created successfully! A confirmation email has been sent.";
+            }
+            catch (Exception ex)
+            {
+                // Log the error (consider using ILogger)
+                Console.WriteLine($"Failed to send email: {ex.Message}");
+                TempData["SuccessMessage"] = "Order created successfully, but failed to send confirmation email.";
+            }
 
             return RedirectToAction(nameof(GetOrders));
         }
@@ -388,44 +440,44 @@ namespace BookMart.Controllers
                     existingOrder.Status = order.Status;
 
                     await _context.SaveChangesAsync();
-                    // Console.WriteLine(order.Status);
-                    // // Send email if status changed to PACKAGED
-                    // if (originalStatus != OrderStatus.PACKAGED && order.Status == OrderStatus.PACKAGED)
-                    // {
-                    //     var user = await _userManager.FindByIdAsync(order.UserId);
-                    //     if (user != null)
-                    //     {
-                    //         try
-                    //         {
-                    //             var emailSubject = $"BookMart Order #{order.OrderId} - Packaged";
-                    //             var emailBody = $@"<h2>Order Status Update</h2>
-                    //         <p>Dear {user.FirstName} {user.LastName},</p>
-                    //         <p>Your order #{order.OrderId} has been packaged and is ready for pick up {DateTime.UtcNow:dd MMM yyyy}.</p>
-                    //         <p>Status: {order.Status}</p>
-                    //    
-                    //         <p>Thank you for shopping with BookMart!</p>";
-                    //
-                    //             await _emailService.SendEmailAsync(user.Email, emailSubject, emailBody);
-                    //             TempData["SuccessMessage"] =
-                    //                 "Order updated successfully! A status update email has been sent.";
-                    //         }
-                    //         catch (Exception ex)
-                    //         {
-                    //             Console.WriteLine($"Failed to send email: {ex.Message}");
-                    //             TempData["SuccessMessage"] =
-                    //                 "Order updated successfully, but failed to send status update email.";
-                    //         }
-                    //     }
-                    //     else
-                    //     {
-                    //         TempData["SuccessMessage"] =
-                    //             "Order updated successfully, but user not found for email notification.";
-                    //     }
-                    // }
-                    // else
-                    // {
-                    //     TempData["SuccessMessage"] = "Order updated successfully!";
-                    // }
+                    Console.WriteLine(order.Status);
+                    // Send email if status changed to PACKAGED
+                    if (originalStatus != OrderStatus.PACKAGED && order.Status == OrderStatus.PACKAGED)
+                    {
+                        var user = await _userManager.FindByIdAsync(order.UserId);
+                        if (user != null)
+                        {
+                            try
+                            {
+                                var emailSubject = $"BookMart Order #{order.OrderId} - Packaged";
+                                var emailBody = $@"<h2>Order Status Update</h2>
+                            <p>Dear {user.FirstName} {user.LastName},</p>
+                            <p>Your order #{order.OrderId} has been packaged and is ready for pick up {DateTime.UtcNow:dd MMM yyyy}.</p>
+                            <p>Status: {order.Status}</p>
+                       
+                            <p>Thank you for shopping with BookMart!</p>";
+                    
+                                await _emailService.SendEmailAsync(user.Email, emailSubject, emailBody);
+                                TempData["SuccessMessage"] =
+                                    "Order updated successfully! A status update email has been sent.";
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine($"Failed to send email: {ex.Message}");
+                                TempData["SuccessMessage"] =
+                                    "Order updated successfully, but failed to send status update email.";
+                            }
+                        }
+                        else
+                        {
+                            TempData["SuccessMessage"] =
+                                "Order updated successfully, but user not found for email notification.";
+                        }
+                    }
+                    else
+                    {
+                        TempData["SuccessMessage"] = "Order updated successfully!";
+                    }
 
                     return RedirectToAction(nameof(GetOrders));
                 }

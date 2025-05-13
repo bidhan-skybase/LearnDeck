@@ -104,6 +104,33 @@ namespace BookMart.Controllers
             return RedirectToAction("ListCartItems", "CartItems"); // Changed to list cart items
         }
 
+        public async Task<IActionResult> GetCartDetails(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var cartItem = await _context.CartItem
+                .Include(c => c.User)
+                .Include(c => c.Book)
+                .FirstOrDefaultAsync(m => m.CartItemId == id);
+
+            if (cartItem == null)
+            {
+                return NotFound();
+            }
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var isAdmin = User.IsInRole("Admin");
+
+            if (!isAdmin && cartItem.UserId != userId)
+            {
+                return Forbid(); // Or redirect to an error page
+            }
+
+            return View(cartItem);
+        }
 
         // GET: CartItems/Edit
         [Authorize]

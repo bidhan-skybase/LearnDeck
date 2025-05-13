@@ -28,8 +28,15 @@
                         <dd class="col-sm-8">@Html.DisplayFor(model => model.Quantity)</dd>
 
                         <dt class="col-sm-4 fw-bold">Unit Price</dt>
-                        <dd class="col-sm-8">Rs. @Html.DisplayFor(model => model.UnitPrice)</dd>
-
+                        <dd class="col-sm-8">Rs. @Html.DisplayFor(model => model.Book.Price)</dd>
+                        
+                        <dt class="col-sm-4 fw-bold">Discount Price</dt>
+                        <dd class="col-sm-8">
+                            @{
+                                decimal discountTotal = (Model.Book?.DiscountAmount ?? 0) * (Model.Quantity);
+                            }
+                            Rs @discountTotal.ToString()
+                        </dd> 
                         <dt class="col-sm-4 fw-bold">Total</dt>
                         <dd class="col-sm-8">Rs. @(Model.Quantity * Model.UnitPrice)</dd>
                     </dl>
