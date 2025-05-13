@@ -165,11 +165,6 @@ namespace BookMart.Controllers
                 };
 
                 decimal totalBookPrice = orderItem.Quantity * orderItem.UnitPrice;
-                // if (cartItem.Book.Sale)
-                // {
-                //     totalBookPrice -= cartItem.Book.DiscountAmount * orderItem.Quantity;
-                // }
-
                 totalAmount += totalBookPrice;
 
                 cartItem.Status = OrderStatus.COMPLETED;
@@ -177,7 +172,6 @@ namespace BookMart.Controllers
                 _context.OrderItem.Add(orderItem);
             }
 
-            // Apply discounts
             if (cartItems.Count >= 5)
             {
                 decimal discount = totalAmount * 0.05m; // 5% discount
@@ -206,31 +200,31 @@ namespace BookMart.Controllers
                 .ToListAsync();
 
             // Send confirmation email
-            try
-            {
-                var emailSubject = $"BookMart Order Confirmation - Order #{order.OrderId}";
-                var emailBody = $@"<h2>Thank You for Your Order!</h2>
-                    <p>Dear {user.FirstName} {user.LastName},</p>
-                    <p>Your order #{order.OrderId} has been successfully placed on {order.CreatedDate:dd MMM yyyy}.</p>
-                    <h3>Order Details</h3>
-                    <ul>
-                        {string.Join("", order.OrderItems.Select(oi => $"<li>{oi.Book.BookTitle} (x{oi.Quantity}) - ${oi.UnitPrice * oi.Quantity}</li>"))}
-                    </ul>
-                    {(order.DiscountApplied > 0 ? $"<p>Discount Applied: ${order.DiscountApplied}</p>" : "")}
-                    <p><strong>Total: ${order.TotalAmount}</strong></p>
-                    <p>Status: {order.Status}</p>
-                    <p>We will notify you when your order is ready for pickup.</p>
-                    <p>Thank you for shopping with BookMart!</p>";
-
-                await _emailService.SendEmailAsync(user.Email, emailSubject, emailBody);
-                TempData["SuccessMessage"] = "Order created successfully! A confirmation email has been sent.";
-            }
-            catch (Exception ex)
-            {
-                // Log the error (consider using ILogger)
-                Console.WriteLine($"Failed to send email: {ex.Message}");
-                TempData["SuccessMessage"] = "Order created successfully, but failed to send confirmation email.";
-            }
+            // try
+            // {
+            //     var emailSubject = $"BookMart Order Confirmation - Order #{order.OrderId}";
+            //     var emailBody = $@"<h2>Thank You for Your Order!</h2>
+            //         <p>Dear {user.FirstName} {user.LastName},</p>
+            //         <p>Your order #{order.OrderId} has been successfully placed on {order.CreatedDate:dd MMM yyyy}.</p>
+            //         <h3>Order Details</h3>
+            //         <ul>
+            //             {string.Join("", order.OrderItems.Select(oi => $"<li>{oi.Book.BookTitle} (x{oi.Quantity}) - ${oi.UnitPrice * oi.Quantity}</li>"))}
+            //         </ul>
+            //         {(order.DiscountApplied > 0 ? $"<p>Discount Applied: ${order.DiscountApplied}</p>" : "")}
+            //         <p><strong>Total: ${order.TotalAmount}</strong></p>
+            //         <p>Status: {order.Status}</p>
+            //         <p>We will notify you when your order is ready for pickup.</p>
+            //         <p>Thank you for shopping with BookMart!</p>";
+            //
+            //     await _emailService.SendEmailAsync(user.Email, emailSubject, emailBody);
+            //     TempData["SuccessMessage"] = "Order created successfully! A confirmation email has been sent.";
+            // }
+            // catch (Exception ex)
+            // {
+            //     // Log the error (consider using ILogger)
+            //     Console.WriteLine($"Failed to send email: {ex.Message}");
+            //     TempData["SuccessMessage"] = "Order created successfully, but failed to send confirmation email.";
+            // }
 
             return RedirectToAction(nameof(GetOrders));
         }
@@ -244,7 +238,7 @@ namespace BookMart.Controllers
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(userId))
             {
-                TempData["ErrorMessage"] = "User not logged in.";
+                TempData["ErrorMessage"] = "User not logged blok in.";
                 return RedirectToAction("Login", "Account");
             }
 
@@ -285,23 +279,22 @@ namespace BookMart.Controllers
             };
 
             decimal totalAmount = orderItem.Quantity * orderItem.UnitPrice;
-            // if (cartItem.Book.Sale)
-            // {
-            //     totalAmount -= cartItem.Book.DiscountAmount * orderItem.Quantity;
-            // }
+            decimal discount = 0m;
 
-            // Apply loyalty discount
-            var successfulOrders = await _context.Order
-                .Where(o => o.UserId == userId && o.Status == OrderStatus.COMPLETED)
-                .CountAsync();
-            if (successfulOrders >= 10)
+            // Apply 5% discount only if Quantity >= 5
+            if (orderItem.Quantity >= 5)
             {
-                decimal discount = totalAmount * 0.10m; // 10% discount
+                discount = totalAmount * 0.05m; // 5% discount
                 totalAmount -= discount;
-                order.DiscountApplied = discount;
             }
 
+            order.DiscountApplied = discount; // Store discount (0 if no discount applied)
             order.TotalAmount = totalAmount;
+
+            // Log for debugging
+            Console.WriteLine(
+                $"CartItem: UnitPrice={cartItem.UnitPrice}, Quantity={cartItem.Quantity}, TotalAmount={order.TotalAmount}, Discount={order.DiscountApplied}");
+
             cartItem.Status = OrderStatus.COMPLETED;
             _context.Order.Update(order);
             _context.CartItem.Update(cartItem);
@@ -313,33 +306,6 @@ namespace BookMart.Controllers
                 .Where(oi => oi.OrderId == order.OrderId)
                 .Include(oi => oi.Book)
                 .ToListAsync();
-
-            // Send confirmation email
-            try
-            {
-                var emailSubject = $"BookMart Order Confirmation - Order #{order.OrderId}";
-                var emailBody = $@"<h2>Thank You for Your Order!</h2>
-                    <p>Dear {user.FirstName} {user.LastName},</p>
-                    <p>Your order #{order.OrderId} has been successfully placed on {order.CreatedDate:dd MMM yyyy}.</p>
-                    <h3>Order Details</h3>
-                    <ul>
-                        {string.Join("", order.OrderItems.Select(oi => $"<li>{oi.Book.BookTitle} (x{oi.Quantity}) - ${oi.UnitPrice * oi.Quantity}</li>"))}
-                    </ul>
-                    {(order.DiscountApplied > 0 ? $"<p>Discount Applied: ${order.DiscountApplied}</p>" : "")}
-                    <p><strong>Total: ${order.TotalAmount}</strong></p>
-                    <p>Status: {order.Status}</p>
-                    <p>We will notify you when your order is packaged.</p>
-                    <p>Thank you for shopping with BookMart!</p>";
-
-                await _emailService.SendEmailAsync(user.Email, emailSubject, emailBody);
-                TempData["SuccessMessage"] = "Order created successfully! A confirmation email has been sent.";
-            }
-            catch (Exception ex)
-            {
-                // Log the error (consider using ILogger)
-                Console.WriteLine($"Failed to send email: {ex.Message}");
-                TempData["SuccessMessage"] = "Order created successfully, but failed to send confirmation email.";
-            }
 
             return RedirectToAction(nameof(GetOrders));
         }
