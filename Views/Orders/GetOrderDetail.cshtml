@@ -14,7 +14,7 @@
             <li class="breadcrumb-item active" aria-current="page">Order Details</li>
         </ol>
     </nav>
-    
+
     <div class="order-card">
         <div class="order-header d-flex justify-content-between align-items-center">
             <div>
@@ -24,7 +24,7 @@
             <div>
                 @{
                     string badgeClass = "badge-pending";
-                    if (Model.Status == OrderStatus.COMPLETED) 
+                    if (Model.Status == OrderStatus.COMPLETED)
                     {
                         badgeClass = "badge-completed";
                     }
@@ -36,8 +36,8 @@
                 <span class="badge badge-status @badgeClass">@Model.Status</span>
             </div>
         </div>
-        
-        
+
+
         <div class="order-content">
             <div class="row">
                 <div class="col-md-6">
@@ -48,67 +48,62 @@
                 <div class="col-md-6">
                     <h5 class="text-muted mb-3">Payment Information</h5>
                     <p>
-                        <strong>Total Amount:</strong> Rs
                         @{
-                            decimal totalAmount = Model.OrderItems?.Sum(item => item.Book.Price) ?? 0;
+                            decimal originalTotal = Model.OrderItems?.Sum(item => item.Book.Price * item.Quantity) ?? 0;
                         }
-                        @totalAmount
+                        <strong>Original Total:</strong> Rs @originalTotal.ToString("N2")<br/>
+                        <strong>Total Discount Applied:</strong> Rs @Model.DiscountApplied<br/>
+                        <strong>Final Total:</strong> Rs @Model.TotalAmount.ToString("N2")
                     </p>
-                    <p><strong>Discount Applied:</strong> Rs 
-                        @{
-                            decimal discount = Model.OrderItems?.Sum(item => item.Book.DiscountAmount) ?? 0;
-                        }
-                        @discount
-                    </p>
-                    <p><strong>Final Amount:</strong> Rs@((totalAmount - discount).ToString())</p>
                 </div>
             </div>
-            
+
             <h5 class="text-muted mt-4 mb-3">Order Items</h5>
             <div class="table-responsive order-items-table">
                 <table class="table table-hover mb-0">
                     <thead>
-                        <tr>
-                            <th>Book Name</th>
-                            <th>Quantity</th>
-                            <th>Unit Price</th>
-                            <th>Total</th>
-                            <th>Actions</th>
-                        </tr>
+                    <tr>
+                        <th>Book Name</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th>Total</th>
+                        <th>Grand Total</th>
+                        <th>Actions</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model.OrderItems)
-                        {
-                            <tr>
-                                <td>
-                                    <div class="fw-bold">@item.Book.BookTitle</div>
-                                </td>
-                                <td>@item.Quantity</td>
-                                <td>Rs @item.UnitPrice.ToString("0.00")</td>
-                                <td>Rs @((item.Quantity * item.UnitPrice).ToString("0.00"))</td>
-                                <td>
-                                    @* <a asp-action="EditOrder" asp-route-id="@item.OrderItemId" class="btn btn-sm btn-primary btn-action"> *@
-                                    @*     <i class="bi bi-pencil-square"></i> Edit *@
-                                    @* </a> *@
-                                  
-                                    <a asp-action="DeleteOrder" asp-route-id="@item.OrderItemId" class="btn btn-sm btn-danger btn-action">
-                                        <i class="bi bi-trash"></i> Delete
-                                    </a>
-                                </td>
-                            </tr>
-                        }
+                    @foreach (var item in Model.OrderItems)
+                    {
+                        <tr>
+                            <td>
+                                <div class="fw-bold">@item.Book.BookTitle</div>
+                            </td>
+                            <td>@item.Quantity</td>
+                            <td>Rs @item.Book.Price.ToString("0.00")</td>
+                            <td>Rs @(originalTotal)</td>
+                            <td>
+                                Rs @Model.TotalAmount
+                            </td>
+                            <td>
+                                <a asp-action="DeleteOrder" asp-route-id="@item.OrderItemId"
+                                   class="btn btn-sm btn-danger btn-action">
+                                    <i class="bi bi-trash"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
                     </tbody>
                 </table>
             </div>
-            
+
             <div class="order-summary d-flex justify-content-between align-items-center">
                 <div class="d-flex">
                     <a asp-action="GetOrders" class="btn btn-outline-secondary me-2">
                         <i class="bi bi-arrow-left"></i> Back to List
                     </a>
-                    
+
                 </div>
-                
+
             </div>
         </div>
     </div>

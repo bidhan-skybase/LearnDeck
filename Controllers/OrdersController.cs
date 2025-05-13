@@ -116,7 +116,7 @@ namespace BookMart.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> AddOrdertoCart()
+        public async Task<IActionResult> CheckoutAllOrder()
         {
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(userId))
@@ -153,7 +153,10 @@ namespace BookMart.Controllers
             _context.Add(order);
             await _context.SaveChangesAsync();
 
-            decimal totalAmount = 0;
+            decimal originalTotal = 0;
+            decimal fixedDiscount = 0;
+            List<OrderItem> orderItems = new List<OrderItem>();
+
             foreach (var cartItem in cartItems)
             {
                 var orderItem = new OrderItem
@@ -161,35 +164,49 @@ namespace BookMart.Controllers
                     OrderId = order.OrderId,
                     BookId = cartItem.BookId,
                     Quantity = cartItem.Quantity,
-                    UnitPrice = cartItem.UnitPrice
+                    UnitPrice = cartItem.Book.Price // Use original book price
                 };
 
+                // Calculate original price for this item
                 decimal totalBookPrice = orderItem.Quantity * orderItem.UnitPrice;
-                totalAmount += totalBookPrice;
+                originalTotal += totalBookPrice;
 
-                cartItem.Status = OrderStatus.COMPLETED;
+                // Apply fixed discount: 200 per book * quantity
+                fixedDiscount += orderItem.Book.DiscountAmount * orderItem.Quantity;
+
+                cartItem.Status = OrderStatus.PENDING;
                 _context.CartItem.Update(cartItem);
+                orderItems.Add(orderItem);
                 _context.OrderItem.Add(orderItem);
             }
 
-            if (cartItems.Count >= 5)
-            {
-                decimal discount = totalAmount * 0.05m; // 5% discount
-                totalAmount -= discount;
-                order.DiscountApplied = (order.DiscountApplied ?? 0) + discount;
-            }
+            // Calculate total discount
+            decimal totalDiscount = fixedDiscount;
 
+            // Apply 5% discount if 5 or more items
+            decimal percentageDiscount = cartItems.Count >= 5 ? originalTotal * 0.05m : 0;
+            totalDiscount += percentageDiscount;
+
+            // Apply 10% discount for 10+ successful orders
             var successfulOrders = await _context.Order
                 .Where(o => o.UserId == userId && o.Status == OrderStatus.COMPLETED)
                 .CountAsync();
-            if (successfulOrders >= 10)
-            {
-                decimal discount = totalAmount * 0.10m; // 10% discount
-                totalAmount -= discount;
-                order.DiscountApplied = (order.DiscountApplied ?? 0) + discount;
-            }
+            decimal loyaltyDiscount = successfulOrders >= 10 ? originalTotal * 0.10m : 0;
+            totalDiscount += loyaltyDiscount;
 
-            order.TotalAmount = totalAmount;
+            // Calculate final total
+            decimal finalTotal = originalTotal - totalDiscount;
+
+            // Log for debugging
+            Console.WriteLine(
+                $"Order: OriginalTotal={originalTotal}, FixedDiscount={fixedDiscount}, " +
+                $"PercentageDiscount={percentageDiscount}, LoyaltyDiscount={loyaltyDiscount}, " +
+                $"TotalDiscount={totalDiscount}, FinalTotal={finalTotal}, ItemCount={cartItems.Count}");
+
+            // Update order
+            order.DiscountApplied = totalDiscount;
+            order.TotalAmount = finalTotal;
+            order.Status = OrderStatus.PENDING;
             _context.Order.Update(order);
             await _context.SaveChangesAsync();
 
@@ -199,37 +216,11 @@ namespace BookMart.Controllers
                 .Include(oi => oi.Book)
                 .ToListAsync();
 
-            // Send confirmation email
-            // try
-            // {
-            //     var emailSubject = $"BookMart Order Confirmation - Order #{order.OrderId}";
-            //     var emailBody = $@"<h2>Thank You for Your Order!</h2>
-            //         <p>Dear {user.FirstName} {user.LastName},</p>
-            //         <p>Your order #{order.OrderId} has been successfully placed on {order.CreatedDate:dd MMM yyyy}.</p>
-            //         <h3>Order Details</h3>
-            //         <ul>
-            //             {string.Join("", order.OrderItems.Select(oi => $"<li>{oi.Book.BookTitle} (x{oi.Quantity}) - ${oi.UnitPrice * oi.Quantity}</li>"))}
-            //         </ul>
-            //         {(order.DiscountApplied > 0 ? $"<p>Discount Applied: ${order.DiscountApplied}</p>" : "")}
-            //         <p><strong>Total: ${order.TotalAmount}</strong></p>
-            //         <p>Status: {order.Status}</p>
-            //         <p>We will notify you when your order is ready for pickup.</p>
-            //         <p>Thank you for shopping with BookMart!</p>";
-            //
-            //     await _emailService.SendEmailAsync(user.Email, emailSubject, emailBody);
-            //     TempData["SuccessMessage"] = "Order created successfully! A confirmation email has been sent.";
-            // }
-            // catch (Exception ex)
-            // {
-            //     // Log the error (consider using ILogger)
-            //     Console.WriteLine($"Failed to send email: {ex.Message}");
-            //     TempData["SuccessMessage"] = "Order created successfully, but failed to send confirmation email.";
-            // }
-
             return RedirectToAction(nameof(GetOrders));
         }
 
         // POST: Orders/CheckoutSingleCartItem
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -238,7 +229,7 @@ namespace BookMart.Controllers
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(userId))
             {
-                TempData["ErrorMessage"] = "User not logged blok in.";
+                TempData["ErrorMessage"] = "User not logged in.";
                 return RedirectToAction("Login", "Account");
             }
 
@@ -275,27 +266,47 @@ namespace BookMart.Controllers
                 OrderId = order.OrderId,
                 BookId = cartItem.BookId,
                 Quantity = cartItem.Quantity,
-                UnitPrice = cartItem.UnitPrice
+                UnitPrice = cartItem.Book.Price // Use original book price
             };
 
-            decimal totalAmount = orderItem.Quantity * orderItem.UnitPrice;
-            decimal discount = 0m;
+            // Calculate original total: quantity * original book price
+            decimal originalTotal = orderItem.Quantity * orderItem.UnitPrice;
 
-            // Apply 5% discount only if Quantity >= 5
-            if (orderItem.Quantity >= 5)
-            {
-                discount = totalAmount * 0.05m; // 5% discount
-                totalAmount -= discount;
-            }
+            // Calculate discounts:
+            // 1. Fixed discount: use book's discount amount * quantity
+            decimal fixedDiscount = cartItem.Book.DiscountAmount * orderItem.Quantity;
+            // 2. 5% discount on original total only if quantity >= 5
+            decimal percentageDiscount = orderItem.Quantity >= 5 ? originalTotal * 0.05m : 0;
+            // 3. 10% loyalty discount for 10+ successful orders
+            var successfulOrders = await _context.Order
+                .Where(o => o.UserId == userId &&
+                            o.Status.ToString().ToLower() == OrderStatus.COMPLETED.ToString().ToLower())
+                .CountAsync();
+            decimal loyaltyDiscount = successfulOrders >= 10 ? originalTotal * 0.10m : 0;
 
-            order.DiscountApplied = discount; // Store discount (0 if no discount applied)
-            order.TotalAmount = totalAmount;
+            // Total discount: sum of all discounts
+            decimal totalDiscount = fixedDiscount + percentageDiscount + loyaltyDiscount;
+
+            // Final total: original total - total discount
+            decimal finalTotal = originalTotal - totalDiscount;
+
+            // Assign to order
+            order.DiscountApplied = totalDiscount;
+            order.TotalAmount = finalTotal;
+            order.Status = OrderStatus.PENDING; // Update order status to reflect completion
 
             // Log for debugging
             Console.WriteLine(
-                $"CartItem: UnitPrice={cartItem.UnitPrice}, Quantity={cartItem.Quantity}, TotalAmount={order.TotalAmount}, Discount={order.DiscountApplied}");
+                $"CartItem: BookPrice={cartItem.Book.Price}, UnitPrice={orderItem.UnitPrice}, " +
+                $"Quantity={cartItem.Quantity}, FixedDiscount={fixedDiscount}, " +
+                $"PercentageDiscount={percentageDiscount}, LoyaltyDiscount={loyaltyDiscount}, " +
+                $"TotalDiscount={order.DiscountApplied}, OriginalTotal={originalTotal}, " +
+                $"FinalTotal={order.TotalAmount}");
 
-            cartItem.Status = OrderStatus.COMPLETED;
+            // Update cart item status
+            cartItem.Status = OrderStatus.PENDING;
+
+            // Save changes
             _context.Order.Update(order);
             _context.CartItem.Update(cartItem);
             _context.OrderItem.Add(orderItem);
@@ -377,44 +388,44 @@ namespace BookMart.Controllers
                     existingOrder.Status = order.Status;
 
                     await _context.SaveChangesAsync();
-                    Console.WriteLine(order.Status);
-                    // Send email if status changed to PACKAGED
-                    if (originalStatus != OrderStatus.PACKAGED && order.Status == OrderStatus.PACKAGED)
-                    {
-                        var user = await _userManager.FindByIdAsync(order.UserId);
-                        if (user != null)
-                        {
-                            try
-                            {
-                                var emailSubject = $"BookMart Order #{order.OrderId} - Packaged";
-                                var emailBody = $@"<h2>Order Status Update</h2>
-                            <p>Dear {user.FirstName} {user.LastName},</p>
-                            <p>Your order #{order.OrderId} has been packaged and is ready for pick up {DateTime.UtcNow:dd MMM yyyy}.</p>
-                            <p>Status: {order.Status}</p>
-                       
-                            <p>Thank you for shopping with BookMart!</p>";
-
-                                await _emailService.SendEmailAsync(user.Email, emailSubject, emailBody);
-                                TempData["SuccessMessage"] =
-                                    "Order updated successfully! A status update email has been sent.";
-                            }
-                            catch (Exception ex)
-                            {
-                                Console.WriteLine($"Failed to send email: {ex.Message}");
-                                TempData["SuccessMessage"] =
-                                    "Order updated successfully, but failed to send status update email.";
-                            }
-                        }
-                        else
-                        {
-                            TempData["SuccessMessage"] =
-                                "Order updated successfully, but user not found for email notification.";
-                        }
-                    }
-                    else
-                    {
-                        TempData["SuccessMessage"] = "Order updated successfully!";
-                    }
+                    // Console.WriteLine(order.Status);
+                    // // Send email if status changed to PACKAGED
+                    // if (originalStatus != OrderStatus.PACKAGED && order.Status == OrderStatus.PACKAGED)
+                    // {
+                    //     var user = await _userManager.FindByIdAsync(order.UserId);
+                    //     if (user != null)
+                    //     {
+                    //         try
+                    //         {
+                    //             var emailSubject = $"BookMart Order #{order.OrderId} - Packaged";
+                    //             var emailBody = $@"<h2>Order Status Update</h2>
+                    //         <p>Dear {user.FirstName} {user.LastName},</p>
+                    //         <p>Your order #{order.OrderId} has been packaged and is ready for pick up {DateTime.UtcNow:dd MMM yyyy}.</p>
+                    //         <p>Status: {order.Status}</p>
+                    //    
+                    //         <p>Thank you for shopping with BookMart!</p>";
+                    //
+                    //             await _emailService.SendEmailAsync(user.Email, emailSubject, emailBody);
+                    //             TempData["SuccessMessage"] =
+                    //                 "Order updated successfully! A status update email has been sent.";
+                    //         }
+                    //         catch (Exception ex)
+                    //         {
+                    //             Console.WriteLine($"Failed to send email: {ex.Message}");
+                    //             TempData["SuccessMessage"] =
+                    //                 "Order updated successfully, but failed to send status update email.";
+                    //         }
+                    //     }
+                    //     else
+                    //     {
+                    //         TempData["SuccessMessage"] =
+                    //             "Order updated successfully, but user not found for email notification.";
+                    //     }
+                    // }
+                    // else
+                    // {
+                    //     TempData["SuccessMessage"] = "Order updated successfully!";
+                    // }
 
                     return RedirectToAction(nameof(GetOrders));
                 }

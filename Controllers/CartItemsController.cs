@@ -38,8 +38,6 @@ namespace BookMart.Controllers
             return View(await cartItemsQuery.ToListAsync());
         }
 
-
-        // POST: CartItems/AddToCart
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -55,6 +53,7 @@ namespace BookMart.Controllers
             if (quantity <= 0)
             {
                 quantity = 1;
+                TempData["WarningMessage"] = "Quantity set to 1 as negative or zero quantities are not allowed.";
             }
             else if (quantity > book.Stock)
             {
@@ -69,8 +68,25 @@ namespace BookMart.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            // Calculate the unit price: apply discount if available
-            decimal unitPrice = book.DiscountAmount > 0 ? (decimal)book.Price - book.DiscountAmount : (decimal)book.Price;
+            // Calculate the unit price: apply discount if valid
+            decimal unitPrice;
+            if (book.DiscountAmount > 0 && book.DiscountAmount <= (decimal)book.Price)
+            {
+                unitPrice = (decimal)book.Price - book.DiscountAmount;
+                TempData["SuccessMessage"] = $"Discount of {book.DiscountAmount} Rs applied to {book.BookTitle}.";
+            }
+            else
+            {
+                unitPrice = (decimal)book.Price;
+                if (book.DiscountAmount > (decimal)book.Price)
+                {
+                    TempData["WarningMessage"] = $"Invalid discount for {book.BookTitle}. Discount ignored.";
+                }
+            }
+
+            // Log for debugging
+            Console.WriteLine(
+                $"AddToCart: BookId={id}, Price={book.Price}, DiscountAmount={book.DiscountAmount}, UnitPrice={unitPrice}, Quantity={quantity}");
 
             CartItem cartItem = new CartItem
             {
@@ -84,37 +100,8 @@ namespace BookMart.Controllers
             _context.Add(cartItem);
             await _context.SaveChangesAsync();
 
-            TempData["SuccessMessage"] = "Item added to cart!";
-            return RedirectToAction(nameof(EditCartItem));
-        }
-
-        // GET: CartItems/Details/5
-        public async Task<IActionResult> GetCartDetails(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var cartItem = await _context.CartItem
-                .Include(c => c.User)
-                .Include(c => c.Book)
-                .FirstOrDefaultAsync(m => m.CartItemId == id);
-
-            if (cartItem == null)
-            {
-                return NotFound();
-            }
-
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var isAdmin = User.IsInRole("Admin");
-
-            if (!isAdmin && cartItem.UserId != userId)
-            {
-                return Forbid(); // Or redirect to an error page
-            }
-
-            return View(cartItem);
+            TempData["SuccessMessage"] = TempData["SuccessMessage"] ?? "Item added to cart!";
+            return RedirectToAction("ListCartItems", "CartItems"); // Changed to list cart items
         }
 
 
@@ -134,11 +121,11 @@ namespace BookMart.Controllers
                 .Include(c => c.Book)
                 .Where(c => c.UserId == userId && c.Status == OrderStatus.PENDING)
                 .ToListAsync();
-            
+
 
             return View(cartItems);
         }
-        
+
         // POST: CartItems/UpdateQuantity
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -173,7 +160,7 @@ namespace BookMart.Controllers
                 TempData["SuccessMessage"] = "Item removed from cart.";
                 return RedirectToAction(nameof(EditCartItem));
             }
-            
+
             // Check if quantity exceeds available stock
             if (quantity > cartItem.Book.Stock)
             {
@@ -181,13 +168,14 @@ namespace BookMart.Controllers
                 TempData["ErrorMessage"] = $"Adjusted quantity to available stock ({cartItem.Book.Stock}).";
             }
 
-            
+
             var isAdmin = User.IsInRole("Admin");
 
             if (!isAdmin && cartItem.UserId != userId)
             {
                 return Forbid(); // Or redirect to an error page
             }
+
             // Update the quantity
             cartItem.Quantity = quantity;
             _context.Update(cartItem);
@@ -213,7 +201,7 @@ namespace BookMart.Controllers
             {
                 return NotFound();
             }
-            
+
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var isAdmin = User.IsInRole("Admin");
 

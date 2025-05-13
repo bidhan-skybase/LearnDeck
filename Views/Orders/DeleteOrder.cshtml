@@ -52,14 +52,14 @@
                                     <h5 class="card-title">Financial Details</h5>
                                     <dl class="row mb-0">
                                         <dt class="col-sm-7">Total Amount:</dt>
-                                        <dd class="col-sm-5">@string.Format("{0:C}", Model.TotalAmount)</dd>
+                                        <dd class="col-sm-5">@string.Format("{0:C}", Model.TotalAmount+Model.DiscountApplied)</dd>
                                         
                                         <dt class="col-sm-7">Discount Applied:</dt>
                                         <dd class="col-sm-5">@string.Format("{0:C}", Model.DiscountApplied)</dd>
                                         
                                         <dt class="col-sm-7">Final Amount:</dt>
                                         <dd class="col-sm-5">
-                                            <strong>@string.Format("{0:C}", Model.TotalAmount - Model.DiscountApplied)</strong>
+                                            <strong>@string.Format("{0:C}", Model.TotalAmount)</strong>
                                         </dd>
                                     </dl>
                                 </div>
