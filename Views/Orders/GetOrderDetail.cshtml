@@ -47,9 +47,20 @@
                 </div>
                 <div class="col-md-6">
                     <h5 class="text-muted mb-3">Payment Information</h5>
-                    <p><strong>Total Amount:</strong> $@Model.TotalAmount.ToString("0.00")</p>
-                    <p><strong>Discount Applied:</strong> $@Model.DiscountApplied.ToString()</p>
-                    <p><strong>Final Amount:</strong> $@((Model.TotalAmount - Model.DiscountApplied).ToString())</p>
+                    <p>
+                        <strong>Total Amount:</strong> Rs
+                        @{
+                            decimal totalAmount = Model.OrderItems?.Sum(item => item.Book.Price) ?? 0;
+                        }
+                        @totalAmount
+                    </p>
+                    <p><strong>Discount Applied:</strong> Rs 
+                        @{
+                            decimal discount = Model.OrderItems?.Sum(item => item.Book.DiscountAmount) ?? 0;
+                        }
+                        @discount
+                    </p>
+                    <p><strong>Final Amount:</strong> Rs@((totalAmount - discount).ToString())</p>
                 </div>
             </div>
             
@@ -73,8 +84,8 @@
                                     <div class="fw-bold">@item.Book.BookTitle</div>
                                 </td>
                                 <td>@item.Quantity</td>
-                                <td>$@item.UnitPrice.ToString("0.00")</td>
-                                <td>$@((item.Quantity * item.UnitPrice).ToString("0.00"))</td>
+                                <td>Rs @item.UnitPrice.ToString("0.00")</td>
+                                <td>Rs @((item.Quantity * item.UnitPrice).ToString("0.00"))</td>
                                 <td>
                                     @* <a asp-action="EditOrder" asp-route-id="@item.OrderItemId" class="btn btn-sm btn-primary btn-action"> *@
                                     @*     <i class="bi bi-pencil-square"></i> Edit *@

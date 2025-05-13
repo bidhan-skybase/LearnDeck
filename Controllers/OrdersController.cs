@@ -165,10 +165,10 @@ namespace BookMart.Controllers
                 };
 
                 decimal totalBookPrice = orderItem.Quantity * orderItem.UnitPrice;
-                if (cartItem.Book.Sale)
-                {
-                    totalBookPrice -= cartItem.Book.DiscountAmount * orderItem.Quantity;
-                }
+                // if (cartItem.Book.Sale)
+                // {
+                //     totalBookPrice -= cartItem.Book.DiscountAmount * orderItem.Quantity;
+                // }
 
                 totalAmount += totalBookPrice;
 
@@ -270,7 +270,7 @@ namespace BookMart.Controllers
             {
                 UserId = userId,
                 CreatedDate = DateTime.UtcNow,
-                Status = OrderStatus.PENDING
+                Status = OrderStatus.PENDING,
             };
 
             _context.Add(order);

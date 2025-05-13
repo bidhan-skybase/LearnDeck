@@ -94,123 +94,165 @@
 <script src="~/js/site.js" asp-append-version="true"></script>
 @await RenderSectionAsync("Scripts", required: false)
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-black border-bottom box-shadow mb-3">
-        <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="List">BookMart</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark border-bottom box-shadow mb-3 sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="List">BookMart</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="List">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="" asp-controller="Books" asp-action="ListBooks">Books</a>
+                </li>
+                
+                @if (User.IsInRole("User"))
+                {
                     <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="List">Home</a>
+                        <a class="nav-link text-light" asp-controller="Home" asp-action="About">About</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="" asp-controller="Books" asp-action="ListBooks">Books</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" id="memberDropdown" role="button" 
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Dashboard
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="memberDropdown">
+                            <li><a class="dropdown-item" asp-area="" asp-controller="CartItems" asp-action="ListCartItems">My Cart</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Orders" asp-action="GetOrders">My Orders</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Reviews" asp-action="GetReviews">My Reviews</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Bookmarks" asp-action="ListBookMarks">My Wishlists</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Announcements" asp-action="GetAnnouncements">Announcements</a></li>
+                        </ul>
                     </li>
-                    
-                    @if (User.IsInRole("User"))
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-controller="Home" asp-action="About">About</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-light" href="#" id="memberDropdown" role="button" 
-                               data-bs-toggle="dropdown" aria-expanded="false">
-                                Dashboard
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="memberDropdown">
-                                <li><a class="dropdown-item" asp-area="" asp-controller="CartItems" asp-action="ListCartItems">My Cart</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Orders" asp-action="GetOrders">My Orders</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Reviews" asp-action="GetReviews">My Reviews</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Bookmarks" asp-action="ListBookMarks">My Wishlists</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Announcements" asp-action="GetAnnouncements">Announcements</a></li>
-                            </ul>
-                        </li>
-                    }
-                    
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-light" href="#" id="adminDropdown" role="button" 
-                               data-bs-toggle="dropdown" aria-expanded="false">
-                                Admin
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="adminDropdown">
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Orders" asp-action="GetOrders">Manage orders</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Reviews" asp-action="GetReviews">Manage reviews</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Announcements" asp-action="GetAnnouncements">Manage announcements</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="RoleManager" asp-action="ListRoles">User Roles</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Index">Manage users</a></li>
-                            </ul>
-                        </li>
-                    }
-                </ul>
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <partial name="_LoginPartial.cshtml" />
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <style>
-        .navbar-nav .nav-link {
-            padding: 0.5rem 0.75rem;
-            font-size: 0.95rem;
-        }
-        .navbar-nav .dropdown-menu {
-            min-width: 200px;
-            z-index: 1030;
-        }
-        .navbar-brand {
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
-        @@media (max-width: 991.98px) {
-            .navbar-nav {
-                padding-top: 0.5rem;
-            }
-            .navbar-nav .nav-item {
-                margin-bottom: 0.25rem;
-            }
-            .navbar-nav .dropdown-menu {
-                border: none;
-                background-color: #f8f9fa;
-            }
-        }
-        @@media (min-width: 992px) {
-            .navbar-nav .nav-item {
-                margin-right: 0.5rem;
-            }
-        }
-    </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            try {
-                // Initialize Bootstrap dropdowns
-                function initializeDropdowns() {
-                    const dropdowns = document.querySelectorAll('.dropdown-toggle');
-                    dropdowns.forEach(dropdown => {
-                        if (!dropdown._dropdown) { // Prevent re-initialization
-                            dropdown._dropdown = new bootstrap.Dropdown(dropdown);
-                        }
-                    });
                 }
                 
-                // Initial initialization
-                initializeDropdowns();
-                
-                // Re-initialize after Swiper or DOM changes
-                const observer = new MutationObserver(initializeDropdowns);
-                observer.observe(document.body, { childList: true, subtree: true });
-                
-                // Log success
-                console.log('Dropdowns initialized successfully');
-            } catch (error) {
-                console.error('Error initializing dropdowns:', error);
-            }
-        });
-    </script>
+                @if (User.IsInRole("Admin"))
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" id="adminDropdown" role="button" 
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Admin
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Orders" asp-action="GetOrders">Manage orders</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Reviews" asp-action="GetReviews">Manage reviews</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Announcements" asp-action="GetAnnouncements">Manage announcements</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="RoleManager" asp-action="ListRoles">User Roles</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Index">Manage users</a></li>
+                        </ul>
+                    </li>
+                }
+            </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <partial name="_LoginPartial.cshtml" />
+            </ul>
+        </div>
+    </div>
+</nav>
+<style>
+    .navbar {
+        background: linear-gradient(90deg, #1a1a1a 0%, #2c2c2c 100%);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        padding: 0.75rem 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .navbar.sticky-top {
+        z-index: 1030;
+    }
+
+    .navbar-brand {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #ffffff !important;
+        letter-spacing: 1px;
+        transition: color 0.2s ease;
+    }
+
+    .navbar-brand:hover {
+        color: #f0f0f0 !important;
+    }
+
+    .navbar-nav {
+        align-items: center;
+    }
+
+    .navbar-nav .nav-link {
+        color: #ffffff !important;
+        font-size: 1rem;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .navbar-nav .nav-link:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #e0e0e0 !important;
+    }
+
+    .navbar-nav .dropdown-menu {
+        background-color: #2c2c2c;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        min-width: 220px;
+        margin-top: 0.5rem;
+    }
+
+    .dropdown-item {
+        color: #ffffff;
+        font-size: 0.95rem;
+        padding: 0.5rem 1rem;
+        transition: background-color 0.2s ease;
+    }
+
+    .dropdown-item:hover {
+        background-color: #3c3c3c;
+        color: #f0f0f0;
+    }
+
+    .navbar-toggler {
+        border: none;
+        padding: 0.25rem 0.75rem;
+    }
+
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.95%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    @@media (max-width: 991.98px) {
+        .navbar-nav {
+            padding-top: 1rem;
+            text-align: center;
+        }
+
+        .navbar-nav .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .navbar-nav .dropdown-menu {
+            background-color: #2c2c2c;
+            text-align: center;
+        }
+
+        .navbar-collapse {
+            max-height: 70vh;
+            overflow-y: auto;
+            padding-bottom: 1rem;
+        }
+    }
+
+    @@media (min-width: 992px) {
+        .navbar-nav .nav-item {
+            margin: 0 0.25rem;
+        }
+    }
+</style>
 </header>
 <div class="container">
     <main role="main" class="pb-3">
