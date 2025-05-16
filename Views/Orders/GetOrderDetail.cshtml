@@ -67,7 +67,7 @@
                         <th>Quantity</th>
                         <th>Unit Price</th>
                         <th>Original Total</th>
-                        <th>Action</th>
+                        @* <th>Action</th> *@
                     </tr>
                     </thead>
                     <tbody>
@@ -85,12 +85,12 @@
                                 }
                                 Rs. @itemOriginalTotal.ToString("0.00")
                             </td>
-                            <td>
-                                <a asp-action="DeleteOrder" asp-route-id="@item.OrderItemId"
-                                   class="btn btn-sm btn-danger btn-action">
-                                    <i class="bi bi-trash"></i> Delete
-                                </a>
-                            </td>
+                            @* <td> *@
+                            @*     <a asp-action="DeleteOrder" asp-route-id="@item.OrderItemId" *@
+                            @*        class="btn btn-sm btn-danger btn-action"> *@
+                            @*         <i class="bi bi-trash"></i> Delete *@
+                            @*     </a> *@
+                            @* </td> *@
                         </tr>
                     }
                     </tbody>

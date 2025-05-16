@@ -517,6 +517,8 @@ namespace BookMart.Controllers
         }
 
         // GET: Orders/Delete/5
+        // GET: Orders/Delete/5
+        [Authorize]
         public async Task<IActionResult> DeleteOrder(int? id)
         {
             if (id == null)
@@ -549,16 +551,48 @@ namespace BookMart.Controllers
         [Authorize]
         public async Task<IActionResult> ConfirmOrderDeletion(int id)
         {
-            var order = await _context.Order.FindAsync(id);
+            // Load order and order items separately to avoid Include issue
+            var order = await _context.Order
+                .FirstOrDefaultAsync(o => o.OrderId == id);
+
             if (order == null)
             {
                 TempData["ErrorMessage"] = "Order not found.";
+                return RedirectToAction(nameof(GetOrders));
             }
-            else
+
+            // Load OrderItems explicitly
+            var orderItems = await _context.OrderItem
+                .Where(oi => oi.OrderId == id)
+                .ToListAsync();
+
+            // Use a transaction to ensure atomicity
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try
             {
+                // Increase stock for each order item
+                foreach (var orderItem in orderItems)
+                {
+                    var stockResult = await IncreaseBookStock(orderItem.BookId, orderItem.Quantity);
+                    if (!stockResult.Success)
+                    {
+                        await transaction.RollbackAsync();
+                        TempData["ErrorMessage"] = stockResult.ErrorMessage;
+                        return RedirectToAction(nameof(GetOrders));
+                    }
+                }
+
+                // Delete the order
                 _context.Order.Remove(order);
                 await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
                 TempData["SuccessMessage"] = "Order deleted successfully!";
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                Console.WriteLine($"Error deleting order: {ex.Message}");
+                TempData["ErrorMessage"] = "An error occurred while deleting the order.";
             }
 
             return RedirectToAction(nameof(GetOrders));
@@ -615,7 +649,6 @@ namespace BookMart.Controllers
                     TempData["ErrorMessage"] = "Completed orders cannot be cancelled.";
                     return RedirectToAction(nameof(GetOrders));
                 }
-
                 order.Status = OrderStatus.CANCELLED;
                 _context.Update(order);
                 await _context.SaveChangesAsync();
@@ -650,6 +683,28 @@ namespace BookMart.Controllers
             catch (Exception ex)
             {
                 Console.WriteLine($"Error reducing stock: {ex.Message}");
+                return (false, "An error occurred while updating stock.");
+            }
+        }
+        
+        private async Task<(bool Success, string ErrorMessage)> IncreaseBookStock(int bookId, int quantity)
+        {
+            try
+            {
+                var book = await _context.Book.FindAsync(bookId);
+                if (book == null)
+                {
+                    return (false, "Book not found.");
+                }
+
+                book.Stock += quantity;
+                _context.Book.Update(book);
+                await _context.SaveChangesAsync();
+                return (true, null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error increasing stock: {ex.Message}");
                 return (false, "An error occurred while updating stock.");
             }
         }
