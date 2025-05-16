@@ -177,6 +177,13 @@ namespace BookMart.Controllers
                 _context.CartItem.Update(cartItem);
                 orderItems.Add(orderItem);
                 _context.OrderItem.Add(orderItem);
+                
+                var stockResult = await ReduceBookStock(cartItem.BookId, cartItem.Quantity);
+                if (!stockResult.Success)
+                {
+                    TempData["ErrorMessage"] = stockResult.ErrorMessage;
+                    return RedirectToAction("ListCartItems", "CartItems");
+                }
             }
 
             // Calculate total discount
@@ -328,11 +335,18 @@ namespace BookMart.Controllers
                 $"PercentageDiscount={percentageDiscount}, LoyaltyDiscount={loyaltyDiscount}, " +
                 $"TotalDiscount={order.DiscountApplied}, OriginalTotal={originalTotal}, " +
                 $"FinalTotal={order.TotalAmount}");
-
+            
+            
+            var stockResult = await ReduceBookStock(cartItem.BookId, cartItem.Quantity);
+            if (!stockResult.Success)
+            {
+                TempData["ErrorMessage"] = stockResult.ErrorMessage;
+                return RedirectToAction("ListCartItems", "CartItems");
+            }
+            
+            
             // Update cart item status
             cartItem.Status = OrderStatus.PENDING;
-
-            // Save changes
             _context.Order.Update(order);
             _context.CartItem.Update(cartItem);
             _context.OrderItem.Add(orderItem);
@@ -610,6 +624,36 @@ namespace BookMart.Controllers
 
             return RedirectToAction(nameof(GetOrders));
         }
+        
+        
+        // Helper function to reduce book stock
+        private async Task<(bool Success, string ErrorMessage)> ReduceBookStock(int bookId, int quantity)
+        {
+            try
+            {
+                var book = await _context.Book.FindAsync(bookId);
+                if (book == null)
+                {
+                    return (false, "Book not found.");
+                }
+
+                if (book.Stock < quantity)
+                {
+                    return (false, $"Insufficient stock for {book.BookTitle}. Available: {book.Stock}.");
+                }
+
+                book.Stock -= quantity;
+                _context.Book.Update(book);
+                await _context.SaveChangesAsync();
+                return (true, null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reducing stock: {ex.Message}");
+                return (false, "An error occurred while updating stock.");
+            }
+        }
+
 
         private bool CheckOrderExists(int id)
         {
